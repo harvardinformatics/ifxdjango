@@ -43,13 +43,13 @@ services:
     ports:
       - 8099:8000
     environment:
-      - {{project_name}}_IFX_APP_TOKEN=52b28b781722283740d228ce311a487227ec26a4
-      - {{project_name}}_USERNAME={{project_name}}
-      - {{project_name}}_PASSWORD={{project_name}}
-      - {{project_name}}_DATABASE={{project_name}}
-      - {{project_name}}_HOSTNAME=db
-      - {{project_name}}_LOGLEVEL=DEBUG
-      - {{project_name}}_DEBUG=TRUE
+      - {{project_name|upper}}_IFX_APP_TOKEN=52b28b781722283740d228ce311a487227ec26a4
+      - {{project_name|upper}}_USERNAME={{project_name}}
+      - {{project_name|upper}}_PASSWORD={{project_name}}
+      - {{project_name|upper}}_DATABASE={{project_name}}
+      - {{project_name|upper}}_HOSTNAME=db
+      - {{project_name|upper}}_LOGLEVEL=DEBUG
+      - {{project_name|upper}}_DEBUG=TRUE
       - SMTP_SERVER=testsmtp
 
 volumes:
