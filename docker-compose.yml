@@ -52,6 +52,7 @@ services:
       - {{project_name|upper}}_DEBUG=TRUE
       - {{project_name|upper}}_DJANGO_KEY=akjdkwifheilskeit8n99f0k2nvi02ld0
       - SMTP_SERVER=testsmtp
+      - IFX_REMOTE_USER=veradmin
 
 volumes:
   {{project_name}}-data:
