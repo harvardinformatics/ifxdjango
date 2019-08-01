@@ -19,21 +19,19 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
-APP_NAME = '{{project_name}}'.upper()
-
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('%s_DJANGO_KEY' % APP_NAME)
+SECRET_KEY = os.environ.get('{{project_name|upper}}_DJANGO_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('%s_DEBUG' % APP_NAME, 'FALSE')
+DEBUG = os.environ.get('{{project_name|upper}}_DEBUG', 'FALSE')
 
 ALLOWED_HOSTS = ['*']
 
-DB_USERNAME = os.environ.get('%s_USERNAME' % APP_NAME, '{{project_name}}')
-DB_PASSWORD = os.environ.get('%s_PASSWORD' % APP_NAME, '{{project_name}}')
-DB_DATABASE = os.environ.get('%s_DATABASE' % APP_NAME, '{{project_name}}')
-DB_HOSTNAME = os.environ.get('%s_HOSTNAME' % APP_NAME, '{{project_name}}')
-LOGLEVEL = os.environ.get('%s_LOGLEVEL' % APP_NAME, '{{project_name}}')
+DB_USERNAME = os.environ.get('{{project_name|upper}}_USERNAME', '{{project_name}}')
+DB_PASSWORD = os.environ.get('{{project_name|upper}}_PASSWORD', '{{project_name}}')
+DB_DATABASE = os.environ.get('{{project_name|upper}}_DATABASE', '{{project_name}}')
+DB_HOSTNAME = os.environ.get('{{project_name|upper}}_HOSTNAME', '{{project_name}}')
+LOGLEVEL = os.environ.get('{{project_name|upper}}_LOGLEVEL', '{{project_name}}')
 SMTP_SERVER = os.environ.get('SMTP_SERVER', 'rcsmtp.rc.fas.harvard.edu:25')
 
 if SMTP_SERVER:
@@ -49,7 +47,7 @@ if SMTP_SERVER:
 
 # App name and token
 IFX_APP = {
-    'token' : os.environ.get('%s_IFX_APP_TOKEN' % APP_NAME, 'aslkdfjadfsfsd'),
+    'token' : os.environ.get('{{project_name|upper}}_IFX_APP_TOKEN'),
     'name': '{{project_name}}',
 }
 IFX_AUTH_META_KEY = 'HTTP_HKEY_EDUPERSONPRINCIPALNAME'
