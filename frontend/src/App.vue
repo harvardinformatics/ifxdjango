@@ -108,6 +108,7 @@ export default {
             Home
           </v-list-tile-title>
         </v-list-tile>
+      </v-list>
     </v-navigation-drawer>
 
     <v-toolbar app absolute clipped-left color="primary" ref="toolbar">
