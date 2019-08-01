@@ -229,6 +229,9 @@ LOGGING = {
 }
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+NOSE_ARGS = ['--nocapture',
+             '--nologcapture',]
+
 
 CSRF_USE_SESSIONS = False
 CORS_ORIGIN_ALLOW_ALL = True
@@ -246,9 +249,6 @@ AUTH_USER_MODEL = 'ifxuser.IfxUser'
 # User that will 'author' request state changes that are not done by a person
 DEFAULT_USERNAME = 'veradmin'
 
-NOSE_ARGS = ['--nocapture',
-             '--nologcapture',]
-
 MEDIA_ROOT = '/app/media/'
 MEDIA_URL = '/{{project_name}}/media/'
 
@@ -257,6 +257,5 @@ ADMINS = [
     ('Informatics Software Operations', 'ifx@fas.harvard.edu')
 ]
 
-EMAIL_HOST = 'rcsmtp.rc.fas.harvard.edu'
 SERVER_EMAIL = 'ifx@fas.harvard.edu'
 DEFAULT_EMAIL_FROM_ADDRESS = 'ifx@fas.harvard.edu'

@@ -13,11 +13,12 @@ import os, sys
 import time
 import MySQLdb
 
+APP_NAME = '{{project_name}}'.upper()
 SQL_DSN = {
-    "host"      : os.environ.get("{{project_name}}_HOSTNAME", "{{project_name}}"),
-    "db"        : os.environ.get("{{project_name}}_DATABASE", "{{project_name}}"),
-    "user"      : os.environ.get("{{project_name}}_USERNAME", "{{project_name}}"),
-    "passwd"    : os.environ.get("{{project_name}}_PASSWORD", "{{project_name}}"),
+    "host"      : os.environ.get("%s_HOSTNAME" % APP_NAME, "{{project_name}}"),
+    "db"        : os.environ.get("%s_DATABASE" % APP_NAME, "{{project_name}}"),
+    "user"      : os.environ.get("%s_USERNAME" % APP_NAME, "{{project_name}}"),
+    "passwd"    : os.environ.get("%s_PASSWORD" % APP_NAME, "{{project_name}}"),
     "use_unicode" : True,
 }
 

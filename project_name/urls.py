@@ -15,7 +15,24 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import url, include
+from django.conf.urls.static import static
+from django.views.generic.base import TemplateView
+from rest_framework import routers
+from {{project_name}} import settings
+from {{project_name}}.views import get_remote_user_auth_token
 
-urlpatterns = [
-    path('admin/', admin.site.urls),
+
+# Routers provide an easy way of automatically determining the URL conf.
+router = routers.DefaultRouter()
+
+
+# Wire up our API using automatic URL routing.
+# Additionally, we include login URLs for the browsable API.
+urlpatterns = static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + [
+    path(r'{{project_name}}/djadmin/', admin.site.urls),
+    path(r'{{project_name}}/api/', include(router.urls)),
+    path(r'{{project_name}}/api/djvocab', include('djvocab.urls')),
+    path(r'{{project_name}}/api/obtain-auth-token/', get_remote_user_auth_token),
+    url(r'^{{project_name}}/.*$', TemplateView.as_view(template_name="index.html")),
 ]
