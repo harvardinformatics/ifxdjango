@@ -1,0 +1,56 @@
+version: '3'
+
+services:
+  testsmtp:
+    image: mailhog/mailhog
+    command: ["-smtp-bind-addr", "0.0.0.0:25"]
+    user: root
+    expose:
+      - 25
+      - 8025
+    ports:
+      - 8025:8025
+  db:
+    image: mariadb
+    volumes:
+      - {{project_name}}-data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD={{project_name}}
+      - MYSQL_DATABASE={{project_name}}
+      - MYSQL_USER={{project_name}}
+      - MYSQL_PASSWORD={{project_name}}
+  ui:
+    build:
+      context: .
+      dockerfile: Dockerfile-ui
+    depends_on:
+      - drf
+    volumes:
+      - .:/app
+    ports:
+      - 8080:8080
+  drf:
+    build:
+      context: .
+      dockerfile: Dockerfile-drf
+    depends_on:
+      - db
+    volumes:
+      - .:/app
+    links:
+      - db
+      - testsmtp
+    ports:
+      - 8099:8000
+    environment:
+      - {{project_name}}_IFX_APP_TOKEN=52b28b781722283740d228ce311a487227ec26a4
+      - {{project_name}}_USERNAME={{project_name}}
+      - {{project_name}}_PASSWORD={{project_name}}
+      - {{project_name}}_DATABASE={{project_name}}
+      - {{project_name}}_HOSTNAME=db
+      - {{project_name}}_LOGLEVEL=DEBUG
+      - {{project_name}}_DEBUG=TRUE
+      - SMTP_SERVER=testsmtp
+
+volumes:
+  {{project_name}}-data:
