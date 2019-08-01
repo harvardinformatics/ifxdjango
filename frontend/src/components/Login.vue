@@ -21,13 +21,13 @@ export default {
       .then(function (response) {
         let message;
         if (!response.data || !response.data.token){
-          message = 'You are a known user of project_name, but your user data is malformed.  Please send a note to ???.'
+          message = 'You are a known user of {{project_name}}, but your user data is malformed.  Please send a note to ???.'
           me.showMessage({response, message})
         } else {
           auth.initUser(response.data)
-          if (rt.query.from && rt.query.from != '/project_name/' && rt.query.from != '/project_name'){
+          if (rt.query.from && rt.query.from != '/{{project_name}}/' && rt.query.from != '/{{project_name}}'){
             let path = rt.query.from
-            let prefix = '/project_name/'
+            let prefix = '/{{project_name}}/'
             if (path.startsWith(prefix)) {
               // Have to strip the router base from the path; otherwise it gets added
               path = path.substring(prefix.length)

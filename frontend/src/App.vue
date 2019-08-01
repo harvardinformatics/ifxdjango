@@ -114,7 +114,7 @@ export default {
       <v-toolbar-side-icon v-if="$vuetify.breakpoint.mdAndUp" @click.native="bigMiniToggle = !bigMiniToggle"></v-toolbar-side-icon>
       <v-toolbar-side-icon v-if="$vuetify.breakpoint.smAndDown" @click.native="smallMiniToggle = !smallMiniToggle"></v-toolbar-side-icon>
       <v-toolbar-title>
-        <span class="title ml-3 mr-5">project_name</span>
+        <span class="title ml-3 mr-5">{{project_name}}</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn v-if="name" flat color="white">

@@ -8,7 +8,7 @@ import auth from '@/auth'
 Vue.use(Router)
 
 const router = new Router({
-  base: '/project_name/',
+  base: '/{{project_name}}/',
   mode: 'history',
   routes: [
     {

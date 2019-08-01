@@ -19,7 +19,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
-APP_NAME = 'project_name'.upper()
+APP_NAME = '{{project_name}}'.upper()
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('%s_DJANGO_KEY' % APP_NAME)
@@ -29,11 +29,11 @@ DEBUG = os.environ.get('%s_DEBUG' % APP_NAME, 'FALSE')
 
 ALLOWED_HOSTS = ['*']
 
-DB_USERNAME = os.environ.get('%s_USERNAME' % APP_NAME, 'project_name')
-DB_PASSWORD = os.environ.get('%s_PASSWORD' % APP_NAME, 'project_name')
-DB_DATABASE = os.environ.get('%s_DATABASE' % APP_NAME, 'project_name')
-DB_HOSTNAME = os.environ.get('%s_HOSTNAME' % APP_NAME, 'project_name')
-LOGLEVEL = os.environ.get('%s_LOGLEVEL' % APP_NAME, 'project_name')
+DB_USERNAME = os.environ.get('%s_USERNAME' % APP_NAME, '{{project_name}}')
+DB_PASSWORD = os.environ.get('%s_PASSWORD' % APP_NAME, '{{project_name}}')
+DB_DATABASE = os.environ.get('%s_DATABASE' % APP_NAME, '{{project_name}}')
+DB_HOSTNAME = os.environ.get('%s_HOSTNAME' % APP_NAME, '{{project_name}}')
+LOGLEVEL = os.environ.get('%s_LOGLEVEL' % APP_NAME, '{{project_name}}')
 SMTP_SERVER = os.environ.get('SMTP_SERVER', 'rcsmtp.rc.fas.harvard.edu:25')
 
 if SMTP_SERVER:
@@ -50,7 +50,7 @@ if SMTP_SERVER:
 # App name and token
 IFX_APP = {
     'token' : os.environ.get('%s_IFX_APP_TOKEN' % APP_NAME, 'aslkdfjadfsfsd'),
-    'name': 'project_name',
+    'name': '{{project_name}}',
 }
 IFX_AUTH_META_KEY = 'HTTP_HKEY_EDUPERSONPRINCIPALNAME'
 
@@ -71,7 +71,7 @@ INSTALLED_APPS = [
     'djvocab',
     'ifxauth',
     'author',
-    'project_name',
+    '{{project_name}}',
 ]
 
 MIDDLEWARE = [
@@ -90,7 +90,7 @@ AUTHENTICATION_BACKENDS = [
     'ifxauth.auth.IfxRemoteUserBackend',
 ]
 
-ROOT_URLCONF = 'project_name.urls'
+ROOT_URLCONF = '{{project_name}}.urls'
 
 TEMPLATES = [
     {
@@ -164,7 +164,7 @@ UNICODE_JSON = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_URL = '/project_name/static/'
+STATIC_URL = '/{{project_name}}/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'frontend', 'public')
@@ -215,7 +215,7 @@ LOGGING = {
             'level': 'INFO',
             'propagate': False,
         },
-        'project_name': {
+        '{{project_name}}': {
             'handlers': ['console'],
             'level': LOGLEVEL,
             'propagate': False,
@@ -250,7 +250,7 @@ NOSE_ARGS = ['--nocapture',
              '--nologcapture',]
 
 MEDIA_ROOT = '/app/media/'
-MEDIA_URL = '/project_name/media/'
+MEDIA_URL = '/{{project_name}}/media/'
 
 
 ADMINS = [

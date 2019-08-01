@@ -14,10 +14,10 @@ import time
 import MySQLdb
 
 SQL_DSN = {
-    "host"      : os.environ.get("project_name_HOSTNAME", "project_name"),
-    "db"        : os.environ.get("project_name_DATABASE", "project_name"),
-    "user"      : os.environ.get("project_name_USERNAME", "project_name"),
-    "passwd"    : os.environ.get("project_name_PASSWORD", "project_name"),
+    "host"      : os.environ.get("{{project_name}}_HOSTNAME", "{{project_name}}"),
+    "db"        : os.environ.get("{{project_name}}_DATABASE", "{{project_name}}"),
+    "user"      : os.environ.get("{{project_name}}_USERNAME", "{{project_name}}"),
+    "passwd"    : os.environ.get("{{project_name}}_PASSWORD", "{{project_name}}"),
     "use_unicode" : True,
 }
 
