@@ -1,0 +1,19 @@
+.DS_Store
+node_modules/
+/dist/
+static/*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+__pycache__
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sqlite3
+docs/src/_build/
+docs/build/
+docker-compose-local.yml

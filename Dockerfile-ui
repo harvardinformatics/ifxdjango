@@ -1,0 +1,12 @@
+FROM python:3
+
+EXPOSE 8080
+RUN apt-get update -y && apt-get install -y \
+    curl
+
+RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && apt-get install -y nodejs
+RUN npm install npm@latest -g
+
+WORKDIR /app/frontend
+CMD ["/usr/bin/npm", "run-script", "serve"]
+
