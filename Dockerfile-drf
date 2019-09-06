@@ -1,4 +1,4 @@
-FROM python:3
+FROM python:3.6
 
 EXPOSE 8000
 RUN apt-get update -y
@@ -10,7 +10,7 @@ COPY requirements.txt /app
 RUN pip install --upgrade pip && \
     pip install git+https://github.com/harvardinformatics/djvocab.git@a0cfeba93ea805d3861e97e9c38fd27447e5b58a && \
     pip install git+https://github.com/harvardinformatics/ifxurls.git@72f75b3fcc9446fc5095ad747b3ed53d05bc4799 && \
-    pip install git+https://github.com/harvardinformatics/ifxuser.git@6e54fdc6bba0d76c717d79484209872e7db2b059 && \
+    pip install git+https://github.com/harvardinformatics/ifxuser.git@701eec94d06e83fcb42416b9fb07255569c4c2c4 && \
     pip install git+https://github.com/harvardinformatics/ifxauth.git@afcaad2b05f5dd90e86e53b2de864bef04c91898 && \
     pip install git+https://github.com/harvardinformatics/ifxmail.client.git@b649c6ed9edfa7cae5a402485e689fcaf1e3dc86 && \
     pip install -r requirements.txt
