@@ -21,14 +21,7 @@ const router = new Router({
       path: '/',
       name: 'Home',
       component: Home,
-      pathToRegexpOptions: {strict: true},
-      beforeEnter: (to, from, next) => {
-        if (auth.isAuthenticated()) {
-          next()
-          return
-        }
-        next({name: 'Login', query: {from: window.location.pathname}})
-      }
+      pathToRegexpOptions: {strict: true}
     },
     {
       path: '/404',
@@ -41,5 +34,16 @@ const router = new Router({
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+    if (to.name != 'Login') {
+        if (auth.isAuthenticated()) {
+            next()
+            return
+        }
+    } else {
+        next()
+    }
+});
 
 export default router
