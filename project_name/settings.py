@@ -31,7 +31,7 @@ DB_USERNAME = os.environ.get('{{project_name|upper}}_USERNAME', '{{project_name}
 DB_PASSWORD = os.environ.get('{{project_name|upper}}_PASSWORD', '{{project_name}}')
 DB_DATABASE = os.environ.get('{{project_name|upper}}_DATABASE', '{{project_name}}')
 DB_HOSTNAME = os.environ.get('{{project_name|upper}}_HOSTNAME', '{{project_name}}')
-LOGLEVEL = os.environ.get('{{project_name|upper}}_LOGLEVEL', '{{project_name}}')
+LOGLEVEL = os.environ.get('{{project_name|upper}}_LOGLEVEL', 'INFO')
 SMTP_SERVER = os.environ.get('SMTP_SERVER', 'rcsmtp.rc.fas.harvard.edu:25')
 
 if SMTP_SERVER:
