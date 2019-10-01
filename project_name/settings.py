@@ -230,7 +230,7 @@ TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 NOSE_ARGS = ['--nocapture',
              '--nologcapture',]
 
-
+CSRF_COOKIE_NAME = '{{project_name}}-csrf-token'
 CSRF_USE_SESSIONS = False
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_METHODS = (
