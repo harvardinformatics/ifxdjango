@@ -25,6 +25,14 @@ class TokenAuth {
     sessionStorage.setItem(this.lastNameKey, userinfo.last_name)
     this.setAuthToken(userinfo.token)
   }
+  destroyUser () {
+    sessionStorage.removeItem(this.isAdminKey)
+    sessionStorage.removeItem(this.usernameKey)
+    sessionStorage.removeItem(this.groupsKey)
+    sessionStorage.removeItem(this.firstNameKey)
+    sessionStorage.removeItem(this.lastNameKey)
+    this.setAuthToken()
+  }
   setAuthToken (token) {
     /*
       Sets the authentication token in sessionStorage.  If token is null
@@ -52,9 +60,7 @@ class TokenAuth {
     if (token) {
       return token
     } else {
-      this.fetchToken().then((token) => {
-        return token
-      })
+      return null
     }
   }
   setAuthHeaderValue () {
@@ -82,7 +88,7 @@ class TokenAuth {
     return `${sessionStorage.getItem(this.firstNameKey)} ${sessionStorage.getItem(this.lastNameKey)}`
   }
   logout () {
-    this.setAuthToken()
+    this.destroyUser()
   }
   getUsername () {
     return sessionStorage.getItem(this.usernameKey)

@@ -13,12 +13,12 @@ services:
   db:
     image: mariadb
     volumes:
-      - {{project_name}}-data:/var/lib/mysql
+      - ifxtest-data:/var/lib/mysql
     environment:
-      - MYSQL_ROOT_PASSWORD={{project_name}}
-      - MYSQL_DATABASE={{project_name}}
-      - MYSQL_USER={{project_name}}
-      - MYSQL_PASSWORD={{project_name}}
+      - MYSQL_ROOT_PASSWORD=ifxtest
+      - MYSQL_DATABASE=ifxtest
+      - MYSQL_USER=ifxtest
+      - MYSQL_PASSWORD=ifxtest
   ui:
     build:
       context: .
@@ -43,16 +43,16 @@ services:
     ports:
       - 8099:8000
     environment:
-      - {{project_name|upper}}_IFX_APP_TOKEN=52b28b781722283740d228ce311a487227ec26a4
-      - {{project_name|upper}}_USERNAME={{project_name}}
-      - {{project_name|upper}}_PASSWORD={{project_name}}
-      - {{project_name|upper}}_DATABASE={{project_name}}
-      - {{project_name|upper}}_HOSTNAME=db
-      - {{project_name|upper}}_LOGLEVEL=DEBUG
-      - {{project_name|upper}}_DEBUG=TRUE
-      - {{project_name|upper}}_DJANGO_KEY=akjdkwifheilskeit8n99f0k2nvi02ld0
+      - IFXTEST_IFX_APP_TOKEN=52b28b781722283740d228ce311a487227ec26a4
+      - IFXTEST_USERNAME=ifxtest
+      - IFXTEST_PASSWORD=ifxtest
+      - IFXTEST_DATABASE=ifxtest
+      - IFXTEST_HOSTNAME=db
+      - IFXTEST_LOGLEVEL=DEBUG
+      - IFXTEST_DEBUG=TRUE
+      - IFXTEST_DJANGO_KEY=akjdkwifheilskeit8n99f0k2nvi02ld0
       - SMTP_SERVER=testsmtp
       - IFX_REMOTE_USER=veradmin
 
 volumes:
-  {{project_name}}-data:
+  ifxtest-data:

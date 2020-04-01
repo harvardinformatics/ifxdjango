@@ -17,7 +17,7 @@ RUN pip install --upgrade pip && \
 
 # Set Django setting DEBUG to True
 ENV PYTHONPATH /app
-ENV DJANGO_SETTINGS_MODULE {{project_name}}.settings
+ENV DJANGO_SETTINGS_MODULE ifxtest.settings
 
 CMD ./wait4db.py && \
     ./manage.py collectstatic --noinput && \

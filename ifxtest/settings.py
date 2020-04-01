@@ -20,18 +20,18 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('{{project_name|upper}}_DJANGO_KEY')
+SECRET_KEY = os.environ.get('IFXTEST_DJANGO_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('{{project_name|upper}}_DEBUG', 'FALSE')
+DEBUG = os.environ.get('IFXTEST_DEBUG', 'FALSE')
 
 ALLOWED_HOSTS = ['*']
 
-DB_USERNAME = os.environ.get('{{project_name|upper}}_USERNAME', '{{project_name}}')
-DB_PASSWORD = os.environ.get('{{project_name|upper}}_PASSWORD', '{{project_name}}')
-DB_DATABASE = os.environ.get('{{project_name|upper}}_DATABASE', '{{project_name}}')
-DB_HOSTNAME = os.environ.get('{{project_name|upper}}_HOSTNAME', '{{project_name}}')
-LOGLEVEL = os.environ.get('{{project_name|upper}}_LOGLEVEL', 'INFO')
+DB_USERNAME = os.environ.get('IFXTEST_USERNAME', 'ifxtest')
+DB_PASSWORD = os.environ.get('IFXTEST_PASSWORD', 'ifxtest')
+DB_DATABASE = os.environ.get('IFXTEST_DATABASE', 'ifxtest')
+DB_HOSTNAME = os.environ.get('IFXTEST_HOSTNAME', 'ifxtest')
+LOGLEVEL = os.environ.get('IFXTEST_LOGLEVEL', 'INFO')
 SMTP_SERVER = os.environ.get('SMTP_SERVER', 'rcsmtp.rc.fas.harvard.edu:25')
 
 if SMTP_SERVER:
@@ -47,8 +47,8 @@ if SMTP_SERVER:
 
 # App name and token
 IFX_APP = {
-    'token' : os.environ.get('{{project_name|upper}}_IFX_APP_TOKEN'),
-    'name': '{{project_name}}',
+    'token' : os.environ.get('IFXTEST_IFX_APP_TOKEN'),
+    'name': 'ifxtest',
 }
 IFX_AUTH_META_KEY = 'HTTP_HKEY_EDUPERSONPRINCIPALNAME'
 
@@ -69,7 +69,7 @@ INSTALLED_APPS = [
     'djvocab',
     'ifxauth',
     'author',
-    '{{project_name}}',
+    'ifxtest',
 ]
 
 MIDDLEWARE = [
@@ -88,7 +88,7 @@ AUTHENTICATION_BACKENDS = [
     'ifxauth.auth.IfxRemoteUserBackend',
 ]
 
-ROOT_URLCONF = '{{project_name}}.urls'
+ROOT_URLCONF = 'ifxtest.urls'
 
 TEMPLATES = [
     {
@@ -162,7 +162,7 @@ UNICODE_JSON = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_URL = '/{{project_name}}/static/'
+STATIC_URL = '/ifxtest/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'frontend', 'public')
@@ -213,7 +213,7 @@ LOGGING = {
             'level': 'INFO',
             'propagate': False,
         },
-        '{{project_name}}': {
+        'ifxtest': {
             'handlers': ['console'],
             'level': LOGLEVEL,
             'propagate': False,
@@ -230,7 +230,7 @@ TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 NOSE_ARGS = ['--nocapture',
              '--nologcapture',]
 
-CSRF_COOKIE_NAME = '{{project_name}}-csrf-token'
+CSRF_COOKIE_NAME = 'ifxtest-csrf-token'
 CSRF_USE_SESSIONS = False
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_METHODS = (
@@ -248,7 +248,7 @@ AUTH_USER_MODEL = 'ifxuser.IfxUser'
 DEFAULT_USERNAME = 'veradmin'
 
 MEDIA_ROOT = '/app/media/'
-MEDIA_URL = '/{{project_name}}/media/'
+MEDIA_URL = '/ifxtest/media/'
 
 
 ADMINS = [
