@@ -43,10 +43,11 @@ export default {
       return this.$vuetify.breakpoint.xs
     },
     mini: function() {
+      // If user sets a drawerMini preference, this takes priority
       if (this.drawerMiniPref !== null) {
         return this.drawerMiniPref
       }
-
+      // Otherwise, navigation drawer is minified on smaller screens only
       if (this.$vuetify.breakpoint.lgAndUp) {
         return false
       } else {
