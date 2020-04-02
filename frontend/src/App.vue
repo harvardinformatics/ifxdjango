@@ -82,13 +82,13 @@ export default {
       app
     >
       <v-list>
-        <v-list-item :to="{name: 'Home'}">
+        <v-list-item :to="{path: '/'}">
           <v-list-item-action>
             <v-icon>home</v-icon>
           </v-list-item-action>
           <v-list-item-title>Home</v-list-item-title>
         </v-list-item>
-        <v-list-item :to="{name: 'Demo'}">
+        <v-list-item :to="{path: '/demo'}">
           <v-list-item-action>
             <v-icon>assignment</v-icon>
           </v-list-item-action>
@@ -97,13 +97,13 @@ export default {
       </v-list>
       <template v-slot:append>
         <v-list>
-          <v-list-item v-if="authenticated" :to="{name: 'Logout'}">
+          <v-list-item v-if="authenticated" :to="{path: '/logout'}">
             <v-list-item-action>
               <v-icon>person</v-icon>
             </v-list-item-action>
             <v-list-item-title>Login</v-list-item-title>
           </v-list-item>
-          <v-list-item v-else :to="{name: 'Login'}">
+          <v-list-item v-else :to="{path: '/login'}">
             <v-list-item-action>
               <v-icon>person</v-icon>
             </v-list-item-action>

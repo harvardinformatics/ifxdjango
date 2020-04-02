@@ -15,7 +15,7 @@ const router = new Router({
   mode: 'history',
   routes: [
     {
-      path: '/login/',
+      path: '/login',
       name: 'Login',
       component: Login,
       pathToRegexpOptions: {strict: true},
@@ -28,7 +28,7 @@ const router = new Router({
       }
     },
     {
-      path: '/logout/',
+      path: '/logout',
       name: 'Logout',
       component: Logout,
       pathToRegexpOptions: {strict: true},
