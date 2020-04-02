@@ -10,7 +10,8 @@ export default {
   name: "App",
   data: function() {
     return {
-      drawer: true,
+      isDrawerOpenMobile: false,
+      drawerMiniPref: null,
       bigMiniToggle: false,
       smallMiniToggle: true,
       isLoggedIn: false
@@ -23,37 +24,36 @@ export default {
     ]),
     sleep(ms) {
       return new Promise(resolve => setTimeout(resolve, ms))
+    },
+    toggleDrawerOpenMobile() {
+      this.isDrawerOpenMobile = !this.isDrawerOpenMobile
+    },
+    toggleDrawerPref() {
+      if (this.drawerMiniPref === null) {
+        this.drawerMiniPref = !this.mini
+      } else if (this.drawerMiniPref === false) {
+        this.drawerMiniPref = true
+      } else {
+        this.drawerMiniPref = false
+      }
     }
   },
   computed: {
     loginLogout: function() {
       return this.isAuthenticated ? 'Logout' : 'Login'
     },
-    mini: {
-      get: function() {
-        return this.$vuetify.breakpoint.lgAndUp
-          ? this.bigMiniToggle
-          : this.smallMiniToggle
-      },
-      // By default the sidebar is full size for big screens
-      // and mini for smaller ones.  The two values are separately managed.
-      // If you toggle big on a small screen, the assumption is that you'll
-      // want it big on a big screen.  If you toggle it small on a big
-      // screen, you probably want it small on a small screen as well.
-      set: function() {
-        if (this.$vuetify.breakpoint.lgAndUp) {
-          if (this.bigMiniToggle) {
-            // eslint-disable-next-line
-            this.smallMiniToggle = true
-          }
-          return this.bigMiniToggle
-        } else {
-          if (!this.smallMiniToggle) {
-            // eslint-disable-next-line
-            this.bigMiniToggle = false
-          }
-          return this.smallMiniToggle
-        }
+    mobile: function() {
+      return this.$vuetify.breakpoint.xs
+    },
+    mini: function() {
+      if (this.drawerMiniPref !== null) {
+        return this.drawerMiniPref
+      }
+
+      if (this.$vuetify.breakpoint.lgAndUp) {
+        return false
+      } else {
+        return true
       }
     },
     isAuthenticated: function() {
@@ -73,6 +73,7 @@ export default {
   mounted: function() {
     let me = this
     this.eventHub.$on('isLoggedIn', bool => {
+      console.log(`isLoggedIn: ${bool}`)
       me.isLoggedIn = bool
     })
   }
@@ -83,16 +84,16 @@ export default {
   <v-app>
     <Message></Message>
     <v-navigation-drawer
-      v-model="drawer"
-      :mini-variant.sync="mini"
+      :value="mobile ? isDrawerOpenMobile : true"
+      :mini-variant="mini"
       clipped
-      :mobile-break-point="400"
+      :mobile-break-point="200"
       app
     >
       <v-list>
         <v-tooltip right>
           <template v-slot:activator="{ on }">
-            <v-list-item v-on="on" :to="{path: '/'}">
+            <v-list-item v-on="mini ? on : false" :to="{path: '/'}">
               <v-list-item-action>
                 <v-icon>home</v-icon>
               </v-list-item-action>
@@ -103,7 +104,7 @@ export default {
         </v-tooltip>
         <v-tooltip right>
           <template v-slot:activator="{ on }">
-            <v-list-item v-on="on" :to="{path: '/demo'}">
+            <v-list-item v-on="mini ? on : false" :to="{path: '/demo'}">
               <v-list-item-action>
                 <v-icon>assignment</v-icon>
               </v-list-item-action>
@@ -117,7 +118,7 @@ export default {
         <v-list>
           <v-tooltip right>
             <template v-slot:activator="{ on }">
-            <v-list-item v-on="on" :to="{path: `/${loginLogout.toLowerCase()}`}">
+            <v-list-item v-on="mini ? on : false" :to="{path: `/${loginLogout.toLowerCase()}`}">
               <v-list-item-action>
                 <v-icon>person</v-icon>
               </v-list-item-action>
@@ -134,19 +135,12 @@ export default {
       app
       clipped-left
       id="app-bar"
-      ref="appBar"
       color="primary"
     >
-      <v-app-bar-nav-icon
-        v-if="$vuetify.breakpoint.mdAndUp"
-        @click.native="bigMiniToggle = !bigMiniToggle"
-      >
+      <v-app-bar-nav-icon v-if="mobile" @click.native="() => toggleDrawerOpenMobile()">
         <v-icon>menu</v-icon>
       </v-app-bar-nav-icon>
-      <v-app-bar-nav-icon
-        v-if="$vuetify.breakpoint.smAndDown"
-        @click.native="smallMiniToggle = !smallMiniToggle"
-      >
+      <v-app-bar-nav-icon v-else @click.native="() => toggleDrawerPref()">
         <v-icon>menu</v-icon>
       </v-app-bar-nav-icon>
       <v-toolbar-title>
@@ -188,10 +182,6 @@ html {
 
 .admin-group {
   background-color: rgb(250, 238, 238);
-}
-
-#app-bar {
-  max-height: 64px;
 }
 
 .app-title {
