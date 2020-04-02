@@ -33,7 +33,7 @@ export default {
         .then(res => {
           if (!res.data || !res.data.token){
             me.failure = true
-            me.message = 'You are a known user of ifxtest, but your user data is malformed.'
+            me.message = 'You are a known user of {{project_name}}, but your user data is malformed.'
           } else {
             me.success = true
             auth.initUser(res.data)

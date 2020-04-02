@@ -11,7 +11,7 @@ import auth from '@/auth'
 Vue.use(Router)
 
 const router = new Router({
-  base: '/ifxtest/',
+  base: '/{{project_name}}/',
   mode: 'history',
   routes: [
     {
