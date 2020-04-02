@@ -7,7 +7,7 @@ Apply the dev data from initDev to the database
 from io import StringIO
 from django.core.management.base import BaseCommand
 from django.core.management import call_command
-from nanites.initDev import main
+from {{project_name}}.initDev import main
 
 
 class Command(BaseCommand):
