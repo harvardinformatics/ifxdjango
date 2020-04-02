@@ -21,9 +21,9 @@ export default {
     async execute() {
       await this.sleep(1000)
       this.login()
-      await this.sleep(100)
+      await this.sleep(50)
       this.eventHub.$emit('isLoggedIn', this.success);
-      await this.sleep(2000)
+      await this.sleep(1000)
       this.rtr.push(this.routeInfo)
     },
     login() {

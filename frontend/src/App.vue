@@ -26,6 +26,9 @@ export default {
     }
   },
   computed: {
+    loginLogout: function() {
+      return this.isAuthenticated ? 'Logout' : 'Login'
+    },
     mini: {
       get: function() {
         return this.$vuetify.breakpoint.lgAndUp
@@ -88,33 +91,42 @@ export default {
       app
     >
       <v-list>
-        <v-list-item :to="{path: '/'}">
-          <v-list-item-action>
-            <v-icon>home</v-icon>
-          </v-list-item-action>
-          <v-list-item-title>Home</v-list-item-title>
-        </v-list-item>
-        <v-list-item :to="{path: '/demo'}">
-          <v-list-item-action>
-            <v-icon>assignment</v-icon>
-          </v-list-item-action>
-          <v-list-item-title>Demo</v-list-item-title>
-        </v-list-item>
+        <v-tooltip right>
+          <template v-slot:activator="{ on }">
+            <v-list-item v-on="on" :to="{path: '/'}">
+              <v-list-item-action>
+                <v-icon>home</v-icon>
+              </v-list-item-action>
+              <v-list-item-title>Home</v-list-item-title>
+            </v-list-item>
+          </template>
+          <span>Home</span>
+        </v-tooltip>
+        <v-tooltip right>
+          <template v-slot:activator="{ on }">
+            <v-list-item v-on="on" :to="{path: '/demo'}">
+              <v-list-item-action>
+                <v-icon>assignment</v-icon>
+              </v-list-item-action>
+              <v-list-item-title>Demo</v-list-item-title>
+            </v-list-item>
+          </template>
+          <span>Demo</span>
+        </v-tooltip>
       </v-list>
       <template v-slot:append>
         <v-list>
-          <v-list-item v-if="isAuthenticated" :to="{path: '/logout'}">
-            <v-list-item-action>
-              <v-icon>person</v-icon>
-            </v-list-item-action>
-            <v-list-item-title>Logout</v-list-item-title>
-          </v-list-item>
-          <v-list-item v-else :to="{path: '/login'}">
-            <v-list-item-action>
-              <v-icon>person</v-icon>
-            </v-list-item-action>
-            <v-list-item-title>Login</v-list-item-title>
-          </v-list-item>
+          <v-tooltip right>
+            <template v-slot:activator="{ on }">
+            <v-list-item v-on="on" :to="{path: `/${loginLogout.toLowerCase()}`}">
+              <v-list-item-action>
+                <v-icon>person</v-icon>
+              </v-list-item-action>
+              <v-list-item-title>{{loginLogout}}</v-list-item-title>
+            </v-list-item>
+            </template>
+            <span>{{loginLogout}}</span>
+          </v-tooltip>
         </v-list>
       </template>
     </v-navigation-drawer>
