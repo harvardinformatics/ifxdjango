@@ -55,7 +55,7 @@ const router = new Router({
         if (auth.isAuthenticated()) {
           next()
         } else {
-          next({ name: 'Login', query: { from: window.location.pathname } })
+          next({ name: 'Login', query: { to: to } })
         }
       }
     },

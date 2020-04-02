@@ -35,13 +35,8 @@ export default {
           } else {
             me.success = true
             auth.initUser(response.data)
-            if (me.rt.query.from && me.rt.query.from != '/ifxtest/' && me.rt.query.from != '/ifxtest') {
-              let path = rt.query.from
-              let prefix = '/ifxtest/'
-              if (path.startsWith(prefix)) {
-                // Have to strip the router base from the path; otherwise it gets added
-                path = path.substring(prefix.length)
-              }
+            if (me.rt.query.hasOwnProperty('to')) {
+              const path = me.rt.query.to.path
               me.routeInfo = {path: path}
             }
           }
@@ -71,7 +66,7 @@ export default {
 
 <template>
   <v-container fluid>
-    <v-row class="login-row" align="center" justify="center">
+    <v-row align="center" justify="center">
         <v-col v-if="success">
           <h1>Login Successful</h1>
           <p>You are being routed...</p>
@@ -91,7 +86,4 @@ export default {
 </template>
 
 <style>
-  .login-row {
-    height: 500px;
-  }
 </style>

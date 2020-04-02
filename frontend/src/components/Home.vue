@@ -12,16 +12,12 @@ export default {
 </script>
 
 <template>
-    <v-container grid-list-sm>
-      <v-layout column justify-center xs12>
-        <v-flex>
-          <v-layout row>
-            <v-flex>
-              Home
-            </v-flex>
-          </v-layout>
-          <v-divider class="my-3"></v-divider>
-        </v-flex>
-      </v-layout>
+    <v-container fluid>
+      <v-row>
+        <v-col>
+          <h1>Home</h1>
+          <p>This is the home page.</p>
+        </v-col>
+      </v-row>
     </v-container>
  </template>
