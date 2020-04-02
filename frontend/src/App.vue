@@ -13,27 +13,16 @@ export default {
       drawer: true,
       bigMiniToggle: false,
       smallMiniToggle: true,
-      authenticated: false,
-      name: null
     }
   },
   methods: {
-    ...mapActions(["showMessage", "toggleDialog"]),
-    async init() {
-      await this.sleep(100)
-      if (auth.isAuthenticated()) {
-        this.authenticated = true
-        this.name = auth.getFirstName()
-          ? auth.getFirstName()
-          : auth.getUsername()
-      }
-    },
+    ...mapActions([
+      "showMessage",
+      "toggleDialog"
+    ]),
     sleep(ms) {
       return new Promise(resolve => setTimeout(resolve, ms))
     }
-  },
-  mounted: function() {
-    this.init()
   },
   computed: {
     mini: {
@@ -63,16 +52,19 @@ export default {
         }
       }
     },
-    auth: function() {
-      // Make auth available to the template
-      return auth
+    authenticated: function() {
+      return auth.isAuthenticated()
+    },
+    name: function() {
+      const firstName = auth.getFirstName()
+      return firstName ? firstName : auth.getUsername()
     }
   }
 }
 </script>
 
 <template>
-  <v-app id="inspire">
+  <v-app>
     <Message></Message>
     <v-navigation-drawer
       v-model="drawer"
@@ -101,7 +93,7 @@ export default {
             <v-list-item-action>
               <v-icon>person</v-icon>
             </v-list-item-action>
-            <v-list-item-title>Login</v-list-item-title>
+            <v-list-item-title>Logout</v-list-item-title>
           </v-list-item>
           <v-list-item v-else :to="{path: '/login'}">
             <v-list-item-action>
@@ -135,7 +127,7 @@ export default {
         <span class="app-title">IFXTEST</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-chip v-if="name" color="white">
+      <v-chip v-if="name && authenticated" color="white">
         Welcome,
         <span class="username">{{name}}</span>
       </v-chip>
@@ -146,7 +138,7 @@ export default {
     </v-content>
 
     <v-footer color="secondary" id="footer" app>
-      <span class="white--text">2020 The Presidents and Fellows of Harvard College.</span>
+      <span class="white--text">2020 The Presidents and Fellows of Harvard College</span>
     </v-footer>
   </v-app>
 </template>
@@ -162,10 +154,6 @@ html {
 
 .v-list {
   padding: 0 !important;
-}
-
-.login-btn-wrapper {
-  /* margin: 1rem; */
 }
 
 .login-btn-text {
