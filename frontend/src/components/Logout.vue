@@ -21,6 +21,8 @@ export default {
     async execute() {
       await this.sleep(1000)
       this.logout()
+      await this.sleep(100)
+      this.eventHub.$emit('isLoggedIn', false);
       await this.sleep(2000)
       this.rtr.push(this.routeInfo)
     },
@@ -48,7 +50,7 @@ export default {
 
 <template>
   <v-container fluid>
-    <v-row class="logout-row" align="center" justify="center">
+    <v-row align="center" justify="center">
         <v-col v-if="success">
           <h1>Logout Successful</h1>
           <p>You are being routed...</p>
@@ -66,9 +68,3 @@ export default {
     </v-row>
   </v-container>
 </template>
-
-<style>
-  .logout-row {
-    height: 500px;
-  }
-</style>

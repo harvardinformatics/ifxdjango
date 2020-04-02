@@ -13,6 +13,7 @@ export default {
       drawer: true,
       bigMiniToggle: false,
       smallMiniToggle: true,
+      isLoggedIn: false
     }
   },
   methods: {
@@ -52,13 +53,26 @@ export default {
         }
       }
     },
-    authenticated: function() {
+    isAuthenticated: function() {
+      if (!this.isLoggedIn) {
+        return false
+      }
       return auth.isAuthenticated()
     },
     name: function() {
+      if (!this.isLoggedIn) {
+        return ""
+      }
       const firstName = auth.getFirstName()
       return firstName ? firstName : auth.getUsername()
     }
+  },
+  mounted: function() {
+    let me = this
+    this.eventHub.$on('isLoggedIn', bool => {
+      console.log(`isLoggedIn: ${bool}`)
+      me.isLoggedIn = bool
+    })
   }
 }
 </script>
@@ -89,7 +103,7 @@ export default {
       </v-list>
       <template v-slot:append>
         <v-list>
-          <v-list-item v-if="authenticated" :to="{path: '/logout'}">
+          <v-list-item v-if="isAuthenticated" :to="{path: '/logout'}">
             <v-list-item-action>
               <v-icon>person</v-icon>
             </v-list-item-action>
@@ -109,6 +123,7 @@ export default {
       app
       clipped-left
       id="app-bar"
+      ref="appBar"
       color="primary"
     >
       <v-app-bar-nav-icon
@@ -127,7 +142,7 @@ export default {
         <span class="app-title">IFXTEST</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-chip v-if="name && authenticated" color="white">
+      <v-chip v-if="isAuthenticated" color="white">
         Welcome,
         <span class="username">{{name}}</span>
       </v-chip>

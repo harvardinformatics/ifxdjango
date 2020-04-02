@@ -34,6 +34,16 @@ Vue.filter('emailDisplay', function (value) {
   return emailstr
 })
 
+const eventHub = new Vue()
+
+Vue.mixin({
+  data: function () {
+    return {
+      eventHub: eventHub
+    }
+  }
+})
+
 // Every component used by the ifxvue plugin must be globally registered
 
 

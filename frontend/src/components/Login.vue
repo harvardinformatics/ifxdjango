@@ -21,6 +21,8 @@ export default {
     async execute() {
       await this.sleep(1000)
       this.login()
+      await this.sleep(100)
+      this.eventHub.$emit('isLoggedIn', this.success);
       await this.sleep(2000)
       this.rtr.push(this.routeInfo)
     },
@@ -28,13 +30,13 @@ export default {
       // Get the token, set the value and redirect
       var me = this
       axios.get(LOGIN_URL)
-        .then(function (response) {
-          if (!response.data || !response.data.token){
+        .then(res => {
+          if (!res.data || !res.data.token){
             me.failure = true
             me.message = 'You are a known user of ifxtest, but your user data is malformed.'
           } else {
             me.success = true
-            auth.initUser(response.data)
+            auth.initUser(res.data)
             if (me.rt.query.hasOwnProperty('to')) {
               const path = me.rt.query.to.path
               me.routeInfo = {path: path}
@@ -84,6 +86,3 @@ export default {
     </v-row>
   </v-container>
 </template>
-
-<style>
-</style>
