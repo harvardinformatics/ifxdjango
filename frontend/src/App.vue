@@ -73,7 +73,6 @@ export default {
   mounted: function() {
     let me = this
     this.eventHub.$on('isLoggedIn', bool => {
-      console.log(`isLoggedIn: ${bool}`)
       me.isLoggedIn = bool
     })
   }
@@ -90,7 +89,7 @@ export default {
       :mobile-break-point="200"
       app
     >
-      <v-list>
+      <v-list class="pt-0">
         <v-tooltip right>
           <template v-slot:activator="{ on }">
             <v-list-item v-on="mini ? on : false" :to="{path: '/'}">
@@ -115,7 +114,6 @@ export default {
         </v-tooltip>
       </v-list>
       <template v-slot:append>
-        <v-list>
           <v-tooltip right>
             <template v-slot:activator="{ on }">
             <v-list-item v-on="mini ? on : false" :to="{path: `/${loginLogout.toLowerCase()}`}">
@@ -127,7 +125,6 @@ export default {
             </template>
             <span>{{loginLogout}}</span>
           </v-tooltip>
-        </v-list>
       </template>
     </v-navigation-drawer>
 
@@ -143,8 +140,8 @@ export default {
       <v-app-bar-nav-icon v-else @click.native="() => toggleDrawerPref()">
         <v-icon>menu</v-icon>
       </v-app-bar-nav-icon>
-      <v-toolbar-title>
-        <span class="app-title">IFXTEST</span>
+      <v-toolbar-title class="app-title">
+        <span class="app-title-text">IFXTEST</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-chip v-if="isAuthenticated" color="white">
@@ -172,10 +169,6 @@ html {
   margin-left: 0.3rem;
 }
 
-.v-list {
-  padding: 0 !important;
-}
-
 .login-btn-text {
   margin-left: .5rem;
 }
@@ -184,9 +177,9 @@ html {
   background-color: rgb(250, 238, 238);
 }
 
-.app-title {
+.app-title-text {
   color: white;
-  margin: 0 5rem 0 3rem;
+  padding-left: 0;
 }
 
 #footer {
