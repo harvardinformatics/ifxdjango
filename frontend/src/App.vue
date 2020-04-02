@@ -18,10 +18,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions([
-      "showMessage",
-      "toggleDialog"
-    ]),
+    ...mapActions(["showMessage", "toggleDialog"]),
     sleep(ms) {
       return new Promise(resolve => setTimeout(resolve, ms))
     },
@@ -40,7 +37,7 @@ export default {
   },
   computed: {
     loginLogout: function() {
-      return this.isAuthenticated ? 'Logout' : 'Login'
+      return this.isAuthenticated ? "Logout" : "Login"
     },
     mobile: function() {
       return this.$vuetify.breakpoint.xs
@@ -72,7 +69,7 @@ export default {
   },
   mounted: function() {
     let me = this
-    this.eventHub.$on('isLoggedIn', bool => {
+    this.eventHub.$on("isLoggedIn", bool => {
       me.isLoggedIn = bool
     })
   }
@@ -114,26 +111,21 @@ export default {
         </v-tooltip>
       </v-list>
       <template v-slot:append>
-          <v-tooltip right>
-            <template v-slot:activator="{ on }">
+        <v-tooltip right>
+          <template v-slot:activator="{ on }">
             <v-list-item v-on="mini ? on : false" :to="{path: `/${loginLogout.toLowerCase()}`}">
               <v-list-item-action>
                 <v-icon>person</v-icon>
               </v-list-item-action>
               <v-list-item-title>{{loginLogout}}</v-list-item-title>
             </v-list-item>
-            </template>
-            <span>{{loginLogout}}</span>
-          </v-tooltip>
+          </template>
+          <span>{{loginLogout}}</span>
+        </v-tooltip>
       </template>
     </v-navigation-drawer>
 
-    <v-app-bar
-      app
-      clipped-left
-      id="app-bar"
-      color="primary"
-    >
+    <v-app-bar app clipped-left id="app-bar" color="primary">
       <v-app-bar-nav-icon v-if="mobile" @click.native="() => toggleDrawerOpenMobile()">
         <v-icon>menu</v-icon>
       </v-app-bar-nav-icon>
@@ -160,32 +152,32 @@ export default {
   </v-app>
 </template>
 <style lang="css">
-html {
-  overflow-y: auto !important;
-}
+  html {
+    overflow-y: auto !important;
+  }
 
-.username {
-  font-weight: 700;
-  margin-left: 0.3rem;
-}
+  .username {
+    font-weight: 700;
+    margin-left: 0.3rem;
+  }
 
-.login-btn-text {
-  margin-left: .5rem;
-}
+  .login-btn-text {
+    margin-left: 0.5rem;
+  }
 
-.admin-group {
-  background-color: rgb(250, 238, 238);
-}
+  .admin-group {
+    background-color: rgb(250, 238, 238);
+  }
 
-.app-title-text {
-  color: white;
-  padding-left: 0;
-}
+  .app-title-text {
+    color: white;
+    padding-left: 0;
+  }
 
-#footer {
-  padding: 12px;
-}
-.required label::after {
-  content: " *";
-}
+  #footer {
+    padding: 12px;
+  }
+  .required label::after {
+    content: " *";
+  }
 </style>

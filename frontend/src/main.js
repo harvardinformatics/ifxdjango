@@ -16,9 +16,6 @@ Vue.use(VueCookie)
 Vue.config.productionTip = false
 Vue.use(ifxvue, {store})
 
-Vue.filter('yesno', function (value) {
-  return value ? 'Yes' : 'No';
-})
 Vue.filter('humanDatetime', function (value) {
   let datestr = ''
   if (value) {
@@ -34,8 +31,9 @@ Vue.filter('emailDisplay', function (value) {
   return emailstr
 })
 
+// An eventhub is needed to emit and register events in sibling components instantaneously
+// Instantiate and add as global mixin
 const eventHub = new Vue()
-
 Vue.mixin({
   data: function () {
     return {
