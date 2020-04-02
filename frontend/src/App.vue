@@ -73,7 +73,6 @@ export default {
   mounted: function() {
     let me = this
     this.eventHub.$on('isLoggedIn', bool => {
-      console.log(`isLoggedIn: ${bool}`)
       me.isLoggedIn = bool
     })
   }

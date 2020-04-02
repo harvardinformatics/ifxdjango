@@ -23,7 +23,7 @@ export default {
       this.logout()
       await this.sleep(50)
       this.eventHub.$emit('isLoggedIn', false);
-      await this.sleep(100)
+      await this.sleep(1000)
       this.rtr.push(this.routeInfo)
     },
     logout() {
