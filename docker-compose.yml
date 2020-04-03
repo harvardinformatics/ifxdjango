@@ -50,7 +50,7 @@ services:
       - {{project_name|upper}}_HOSTNAME=db
       - {{project_name|upper}}_LOGLEVEL=DEBUG
       - {{project_name|upper}}_DEBUG=TRUE
-      - {{project_name|upper}}_DJANGO_KEY={{secret_key}}
+      - {{project_name|upper}}_DJANGO_KEY=anweijfnvwoejvniejnvfwvijnf
       - SMTP_SERVER=testsmtp
       - IFX_REMOTE_USER=veradmin
 
