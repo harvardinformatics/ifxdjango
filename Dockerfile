@@ -21,6 +21,7 @@ COPY requirements.txt /app
 
 RUN pip install --upgrade pip && \
     pip install gunicorn && \
+    pip install Django>2.2,<3 && \
     pip install git+https://github.com/harvardinformatics/djvocab.git@a0cfeba93ea805d3861e97e9c38fd27447e5b58a && \
     pip install git+https://github.com/harvardinformatics/ifxurls.git@72f75b3fcc9446fc5095ad747b3ed53d05bc4799 && \
     pip install git+https://github.com/harvardinformatics/ifxuser.git@701eec94d06e83fcb42416b9fb07255569c4c2c4 && \
