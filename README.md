@@ -9,7 +9,7 @@ processed (project_name substituted) are listed by name and extension:
 
     > mkdir ifxtest
     > cd ifxtest
-    > django-admin startproject --template=https://github.com/harvardinformatics/ifxdjango/archive/v1.0.zip -e py,html,vue,js,conf -n .env.development,.env.production,Dockerfile-drf,docker-compose.yml ifxtest .
+    > django-admin startproject --template=https://github.com/harvardinformatics/ifxdjango/archive/v1.1.zip -e py,html,vue,js,conf -n .env.development,.env.production,Dockerfile-drf,docker-compose.yml ifxtest .
 
 Once the project has been created, build the necessary containers and install the Javascript libraries
 

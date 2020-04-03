@@ -52,6 +52,9 @@ IFX_APP = {
 }
 IFX_AUTH_META_KEY = 'HTTP_HKEY_EDUPERSONPRINCIPALNAME'
 
+if IFX_APP['token'] == 'FIXME':
+    print('HEY!!!!!  Set the IFX_APP_TOKEN in docker-compose!')
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -245,7 +248,7 @@ CORS_ALLOW_METHODS = (
 AUTH_USER_MODEL = 'ifxuser.IfxUser'
 
 # User that will 'author' request state changes that are not done by a person
-DEFAULT_USERNAME = 'veradmin'
+DEFAULT_USERNAME = '{{project_name}}'
 
 MEDIA_ROOT = '/app/media/'
 MEDIA_URL = '/{{project_name}}/media/'
