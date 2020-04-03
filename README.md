@@ -11,6 +11,12 @@ processed (project_name substituted) are listed by name and extension:
     > cd ifxtest
     > django-admin startproject --template=https://github.com/harvardinformatics/ifxdjango/archive/v1.1.zip -e py,html,vue,js,conf -n .env.development,.env.production,Dockerfile-drf,docker-compose.yml ifxtest .
 
+Add a 40 character REST application token to the docker-compose file at the *IFX_APP_TOKEN environment variable of the drf
+section.  This will allow the application to interact with other systems.  Make sure this is different from other applications in the development environment (nanites/initDev.py has a pretty good list).  You may want to add this to the set of application
+users setup in the nanites/initDev.py file.
+
+It goes without saying that you do not want to use the production token here.
+
 Once the project has been created, build the necessary containers and install the Javascript libraries
 
     > docker-compose build
