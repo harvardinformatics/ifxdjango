@@ -15,6 +15,6 @@ export default {
           The item you're looking for does not exist.
         </v-card-text>
       </v-card>
-    <v-row>
+    </v-row>
   </v-container>
 </template>
