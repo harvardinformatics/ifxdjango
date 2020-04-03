@@ -12,18 +12,18 @@ BUILDDIR      = docs/build
 
 
 help:
-        @$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
 .PHONY: test Makefile docs
 
 test:
-        docker-compose run drf ./manage.py test -v 2; docker-compose down
+	docker-compose run drf ./manage.py test -v 2; docker-compose down
 
 docs:
-        docker-compose run drf make html; docker-compose down
+	docker-compose run drf make html; docker-compose down
 
 # Catch-all target: route all unknown targets to Sphinx using the new
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
 %: Makefile
-        @$(SPHINXAPIDOC) -e -M --force -o "$(SOURCEDIR)" {{project_name}}
-        @$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+	@$(SPHINXAPIDOC) -e -M --force -o "$(SOURCEDIR)" {{project_name}}
+	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
