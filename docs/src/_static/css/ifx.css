@@ -1,0 +1,46 @@
+div.document {
+    max-width: 1400px;
+    width: unset;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+  div.body {
+    max-width: 1200px;
+  }
+  div.body p {
+    margin-left: 0.5em;
+  }
+  div.body dl {
+    margin-left: 0.5em;
+  }
+  div.body h2 {
+    font-size: 140%;
+  }
+  div.body h3 {
+    font-size: 120%;
+    font-style: italic;
+  }
+  div.body h4 {
+    font-size: 100%;
+    font-style: italic;
+  }
+  .std, .std-ref {
+    text-decoration: none;
+  }
+  a {
+    text-decoration: none;
+  }
+  dl.field-list > dt {
+    font-size: 14px;
+    padding: 5px;
+    margin-top: 3px;
+    flex-basis: 30%;
+  }
+  dl.field-list > dd {
+    font-size: 14px;
+    padding: 5px;
+    flex-basis: 65%;
+  }
+  .field-odd {
+    background-color: #EFEFEF;
+  }

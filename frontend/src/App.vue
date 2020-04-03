@@ -1,189 +1,184 @@
 <script>
-import auth from '@/auth'
-import { DJANGO_ADMIN_ROOT } from '@/urls'
-import { mapActions, mapGetters } from 'vuex'
-import {APIService} from './api'
+import auth from "@/auth"
+import { DJANGO_ADMIN_ROOT } from "@/urls"
+import { mapActions, mapGetters } from "vuex"
+import { APIService } from "./api"
 
 const api = new APIService()
 
 export default {
-  name: 'App',
-  data: function () {
+  name: "App",
+  data: function() {
     return {
-      drawer: true,
+      isDrawerOpenMobile: false,
+      drawerMiniPref: null,
       bigMiniToggle: false,
       smallMiniToggle: true,
-      msgText: '',
-      authenticated: false,
-      name: null,
-      toolbarStyle: {
-        'margin-top': '50px'
-      }
+      isLoggedIn: false
     }
   },
   methods: {
-    setNavbarMargin() {
-      this.$set(this.toolbarStyle, 'margin-top', this.$refs.toolbar.computedHeight + 'px');
+    ...mapActions(["showMessage", "toggleDialog"]),
+    sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms))
     },
-    updateNavbarMargin(offset) {
-      this.$set(this.toolbarStyle, 'margin-top', offset + 'px');
+    toggleDrawerOpenMobile() {
+      this.isDrawerOpenMobile = !this.isDrawerOpenMobile
     },
-    handleScroll() {
-      let offset = window.scrollY - this.$refs.toolbar.computedHeight;
-      if (offset < 0) {
-        this.updateNavbarMargin(Math.abs(offset));
+    toggleDrawerPref() {
+      if (this.drawerMiniPref === null) {
+        this.drawerMiniPref = !this.mini
+      } else if (this.drawerMiniPref === false) {
+        this.drawerMiniPref = true
+      } else {
+        this.drawerMiniPref = false
       }
-    },
-    ...mapActions([
-      'showMessage',
-      'toggleDialog'
-    ]),
-  },
-  created () {
-    window.addEventListener('scroll', this.handleScroll);
-  },
-  destroyed () {
-    window.removeEventListener('scroll', this.handleScroll);
-  },
-  mounted: function () {
-    setTimeout(()=> {
-      if (auth.isAuthenticated) {
-        this.authenticated = true
-        this.authenticated = auth.isAuthenticated()
-        this.name = auth.getFirstName() ? auth.getFirstName() : auth.getUsername()
-      }
-    }, 1000)
-    this.setNavbarMargin();
-  },
-  computed: {
-    mini: {
-      get: function() {
-        return this.$vuetify.breakpoint.lgAndUp ? this.bigMiniToggle : this.smallMiniToggle
-      },
-      // By default the sidebar is full size for big screens
-      // and mini for smaller ones.  The two values are separately managed.
-      // If you toggle big on a small screen, the assumption is that you'll
-      // want it big on a big screen.  If you toggle it small on a big
-      // screen, you probably want it small on a small screen as well.
-      set: function() {
-        if (this.$vuetify.breakpoint.lgAndUp) {
-          if (this.bigMiniToggle) {
-            // eslint-disable-next-line
-            this.smallMiniToggle = true
-          }
-        return this.bigMiniToggle
-        } else {
-          if (!this.smallMiniToggle) {
-            // eslint-disable-next-line
-            this.bigMiniToggle = false
-          }
-        return this.smallMiniToggle
-        }
-      }
-    },
-    auth: function () {
-      // Make auth available to the template
-      return auth
     }
   },
+  computed: {
+    loginLogout: function() {
+      return this.isAuthenticated ? "Logout" : "Login"
+    },
+    mobile: function() {
+      return this.$vuetify.breakpoint.xs
+    },
+    mini: function() {
+      // If user sets a drawerMini preference, this takes priority
+      if (this.drawerMiniPref !== null) {
+        return this.drawerMiniPref
+      }
+      // Otherwise, navigation drawer is minified on smaller screens only
+      if (this.$vuetify.breakpoint.lgAndUp) {
+        return false
+      } else {
+        return true
+      }
+    },
+    isAuthenticated: function() {
+      if (!this.isLoggedIn) {
+        return false
+      }
+      return auth.isAuthenticated()
+    },
+    name: function() {
+      if (!this.isLoggedIn) {
+        return ""
+      }
+      const firstName = auth.getFirstName()
+      return firstName ? firstName : auth.getUsername()
+    }
+  },
+  mounted: function() {
+    let me = this
+    this.eventHub.$on("isLoggedIn", bool => {
+      me.isLoggedIn = bool
+    })
+  }
 }
 </script>
 
 <template>
-  <v-app id="inspire">
+  <v-app>
     <Message></Message>
     <v-navigation-drawer
-      v-model="drawer"
-      :mini-variant.sync="mini"
-      :clipped="false"
-      :mobile-break-point="400"
+      :value="mobile ? isDrawerOpenMobile : true"
+      :mini-variant="mini"
+      clipped
+      :mobile-break-point="200"
       app
     >
-      <v-list :style="this.toolbarStyle">
-        <v-list-tile :to="{name: 'Home'}">
-          <v-list-tile-action>
-            <v-icon>home</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-title>
-            Home
-          </v-list-tile-title>
-        </v-list-tile>
+      <v-list class="pt-0">
+        <v-tooltip right>
+          <template v-slot:activator="{ on }">
+            <v-list-item v-on="mini ? on : false" :to="{path: '/'}">
+              <v-list-item-action>
+                <v-icon>home</v-icon>
+              </v-list-item-action>
+              <v-list-item-title>Home</v-list-item-title>
+            </v-list-item>
+          </template>
+          <span>Home</span>
+        </v-tooltip>
+        <v-tooltip right>
+          <template v-slot:activator="{ on }">
+            <v-list-item v-on="mini ? on : false" :to="{path: '/demo'}">
+              <v-list-item-action>
+                <v-icon>assignment</v-icon>
+              </v-list-item-action>
+              <v-list-item-title>Demo</v-list-item-title>
+            </v-list-item>
+          </template>
+          <span>Demo</span>
+        </v-tooltip>
       </v-list>
+      <template v-slot:append>
+        <v-tooltip right>
+          <template v-slot:activator="{ on }">
+            <v-list-item v-on="mini ? on : false" :to="{path: `/${loginLogout.toLowerCase()}`}">
+              <v-list-item-action>
+                <v-icon>person</v-icon>
+              </v-list-item-action>
+              <v-list-item-title>{{loginLogout}}</v-list-item-title>
+            </v-list-item>
+          </template>
+          <span>{{loginLogout}}</span>
+        </v-tooltip>
+      </template>
     </v-navigation-drawer>
 
-    <v-toolbar app absolute clipped-left color="primary" ref="toolbar">
-      <v-toolbar-side-icon v-if="$vuetify.breakpoint.mdAndUp" @click.native="bigMiniToggle = !bigMiniToggle"></v-toolbar-side-icon>
-      <v-toolbar-side-icon v-if="$vuetify.breakpoint.smAndDown" @click.native="smallMiniToggle = !smallMiniToggle"></v-toolbar-side-icon>
-      <v-toolbar-title>
-        <span class="title ml-3 mr-5">{{project_name}}</span>
+    <v-app-bar app clipped-left id="app-bar" color="primary">
+      <v-app-bar-nav-icon v-if="mobile" @click.native="() => toggleDrawerOpenMobile()">
+        <v-icon>menu</v-icon>
+      </v-app-bar-nav-icon>
+      <v-app-bar-nav-icon v-else @click.native="() => toggleDrawerPref()">
+        <v-icon>menu</v-icon>
+      </v-app-bar-nav-icon>
+      <v-toolbar-title class="app-title">
+        <span class="app-title-text">{{project_name|upper}}</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn v-if="name" flat color="white">
-        Welcome, {{name}}
-      </v-btn>
-    </v-toolbar>
+      <v-chip v-if="isAuthenticated" color="white">
+        Welcome,
+        <span class="username">{{name}}</span>
+      </v-chip>
+    </v-app-bar>
 
     <v-content>
       <router-view :key="$route.fullPath"></router-view>
     </v-content>
 
-    <v-footer color="secondary" app>
-        <span class="white--text"> 2019 The Presidents and Fellows of Harvard College.</span>
+    <v-footer color="secondary" id="footer" app>
+      <span class="white--text">2020 The Presidents and Fellows of Harvard College</span>
     </v-footer>
   </v-app>
 </template>
-<style lang="scss">
+<style lang="css">
+  html {
+    overflow-y: auto !important;
+  }
+
+  .username {
+    font-weight: 700;
+    margin-left: 0.3rem;
+  }
+
+  .login-btn-text {
+    margin-left: 0.5rem;
+  }
 
   .admin-group {
     background-color: rgb(250, 238, 238);
   }
-  .v-toolbar .title {
+
+  .app-title-text {
     color: white;
+    padding-left: 0;
   }
-  .v-footer {
-    padding: 20px;
-  }
-  .v-navigation-drawer--open {
-    width: 200px;
+
+  #footer {
+    padding: 12px;
   }
   .required label::after {
-      content: " *";
-  }
-  .no_decoration {
-    text-decoration: none;
-  }
-  .v-input {
-    font-size: 16px;
-  }
-  .v-label {
-    font-size: 18px;
-  }
-  .v-expansion-panel__header {
-    padding: 12px;
-    font-weight: bold;
-    font-size: 16px;
-  }
-  .v-list__tile__title {
-    font-size: 12px;
-  }
-  .v-list__tile__content {
-    font-size: 12px;
-  }
-  table.v-table tbody td, table.v-table tbody th {
-    padding: 4px;
-    height: 20px;
-  }
-  .v-btn--floating.v-btn--small {
-      height: 30px;
-      width: 30px;
-  }
-  .input-group--selection-controls__ripple {
-    border-radius: 0 !important;
-  }
-  .v-card__title {
-    border-bottom: 1px solid #ccc;
-  }
-  .v-card {
-    padding: 20px;
+    content: " *";
   }
 </style>

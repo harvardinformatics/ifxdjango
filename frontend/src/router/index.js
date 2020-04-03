@@ -1,8 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/components/Login'
+import Logout from '@/components/Logout'
 import Home from '@/components/Home'
+import Demo from '@/components/Demo'
 import NotFound from '@/components/NotFound'
+
 import auth from '@/auth'
 
 Vue.use(Router)
@@ -12,10 +15,30 @@ const router = new Router({
   mode: 'history',
   routes: [
     {
-      path: '/login/',
+      path: '/login',
       name: 'Login',
       component: Login,
-      pathToRegexpOptions: {strict: true}
+      pathToRegexpOptions: {strict: true},
+      beforeEnter: (to, from, next) => {
+        if (!auth.isAuthenticated()) {
+          next()
+        } else {
+          next({ name: 'Home' })
+        }
+      }
+    },
+    {
+      path: '/logout',
+      name: 'Logout',
+      component: Logout,
+      pathToRegexpOptions: {strict: true},
+      beforeEnter: (to, from, next) => {
+        if (auth.isAuthenticated()) {
+          next()
+        } else {
+          next({ name: 'Home' })
+        }
+      }
     },
     {
       path: '/',
@@ -24,26 +47,28 @@ const router = new Router({
       pathToRegexpOptions: {strict: true}
     },
     {
+      path: '/demo',
+      name: 'Demo',
+      component: Demo,
+      pathToRegexpOptions: {strict: true},
+      beforeEnter: (to, from, next) => {
+        if (auth.isAuthenticated()) {
+          next()
+        } else {
+          next({ name: 'Login', query: { to: to } })
+        }
+      }
+    },
+    {
       path: '/404',
       name: 'NotFound',
       component: NotFound
     },
     {
-        path: '*',
-        redirect: '/404'
+      path: '*',
+      redirect: '/404'
     }
   ]
 })
-
-router.beforeEach((to, from, next) => {
-    if (to.name != 'Login') {
-        if (auth.isAuthenticated()) {
-            next()
-            return
-        }
-    } else {
-        next()
-    }
-});
 
 export default router

@@ -9,8 +9,9 @@ RUN apt-get update -y && apt-get install -y \
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 COPY etc/nginx.conf /etc/nginx/sites-available/default
 COPY etc/supervisor.conf /etc/supervisor/conf.d/app.conf
+COPY etc/logging.ini /etc/logging.ini
 
-RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && apt-get install -y nodejs
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - && apt-get install -y nodejs
 RUN apt-get install npm -y
 RUN npm install npm@latest -g
 
@@ -31,9 +32,9 @@ ADD . /app
 
 ENV PYTHONPATH /app
 
-RUN rm -rf /app/frontend/dist/* && rm -rf /app/static/* && rm -rf /app/frontend/node_modules/* && (cd frontend && npm install . && npm run-script build)
+RUN rm -rf /app/frontend/dist/* && rm -rf /static/* && rm -rf /app/frontend/node_modules/* && (cd frontend && npm install . && npm run-script build)
 RUN mkdir -p /app/frontend/dist/static && ./manage.py collectstatic --noinput
-RUN cp -r /app/frontend/dist/* /app/static
+RUN cp -r /app/frontend/dist/* /static
 
 CMD ./manage.py makemigrations && ./manage.py migrate && /usr/bin/supervisord -n
 

@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import logging.config
+import signal
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -51,6 +53,9 @@ IFX_APP = {
     'name': '{{project_name}}',
 }
 IFX_AUTH_META_KEY = 'HTTP_HKEY_EDUPERSONPRINCIPALNAME'
+
+if IFX_APP['token'] == 'FIXME':
+    print('HEY!!!!!  Set the IFX_APP_TOKEN in docker-compose!')
 
 # Application definition
 
@@ -163,7 +168,7 @@ UNICODE_JSON = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/{{project_name}}/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+STATIC_ROOT = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'frontend', 'public')
 ]
@@ -180,51 +185,19 @@ REST_FRAMEWORK = {
 }
 
 
-# Logging setup.  Meant to log everything to stderrr
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': True,
-    'filters': {
-        'require_debug_false': {
-            '()': 'django.utils.log.RequireDebugFalse'
-        }
-    },
-    'formatters': {
-        'console': {
-            'format': '%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
-        },
-    },
-    'handlers': {
-        'mail_admins': {
-            'level': 'ERROR',
-            'filters': ['require_debug_false'],
-            'class': 'django.utils.log.AdminEmailHandler',
-        },
-        'console': {
-            'class': 'logging.StreamHandler',
-            'filters': ['require_debug_false'],
-            'formatter': 'console',
-            'level': LOGLEVEL,
-        }
-    },
-    'loggers': {
-        '': {
-            'handlers': ['console'],
-            'level': 'INFO',
-            'propagate': False,
-        },
-        '{{project_name}}': {
-            'handlers': ['console'],
-            'level': LOGLEVEL,
-            'propagate': False,
-        },
-        'ifxauth': {
-            'handlers': ['console'],
-            'level': LOGLEVEL,
-            'propagate': False,
-        },
-    },
-}
+## Logging setup
+## Remove Django setup and use a file instead
+# Add signal handler for reloading with SIGUSR1
+# $ killall -SIGUSR1 python
+
+LOGGING_CONFIG = None
+logging.config.fileConfig('/etc/logging.ini', {'filters': {'require_debug_false': {'()': 'django.utils.log.RequireDebugFalse'}}})
+
+def reloadLoggingConfig(signalNo, frame):
+    if signalNo == signal.SIGUSR1:
+        logging.config.fileConfig('/etc/logging.ini')
+
+signal.signal(signal.SIGUSR1, reloadLoggingConfig)
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 NOSE_ARGS = ['--nocapture',
@@ -245,7 +218,7 @@ CORS_ALLOW_METHODS = (
 AUTH_USER_MODEL = 'ifxuser.IfxUser'
 
 # User that will 'author' request state changes that are not done by a person
-DEFAULT_USERNAME = 'veradmin'
+DEFAULT_USERNAME = '{{project_name}}'
 
 MEDIA_ROOT = '/app/media/'
 MEDIA_URL = '/{{project_name}}/media/'

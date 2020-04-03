@@ -2,26 +2,17 @@
 import auth from '@/auth'
 
 export default {
-  name: 'home',
-  data: function () {
-    return {
-      csrfToken: this.$cookie.get('csrftoken'),
-    }
-  }
+  name: 'Home',
 }
 </script>
 
 <template>
-    <v-container grid-list-sm>
-      <v-layout column justify-center xs12>
-        <v-flex>
-          <v-layout row>
-            <v-flex>
-              Home
-            </v-flex>
-          </v-layout>
-          <v-divider class="my-3"></v-divider>
-        </v-flex>
-      </v-layout>
+    <v-container fluid>
+      <v-row align="center" justify="center">
+        <v-col>
+          <h1>Home</h1>
+          <p>This is the home page.</p>
+        </v-col>
+      </v-row>
     </v-container>
  </template>

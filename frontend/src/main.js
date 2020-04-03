@@ -1,7 +1,7 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
-import './plugins/vuetify'
+import vuetify from './plugins/vuetify';
 import App from './App.vue'
 import router from './router'
 import 'vuetify/dist/vuetify.min.css'
@@ -16,9 +16,6 @@ Vue.use(VueCookie)
 Vue.config.productionTip = false
 Vue.use(ifxvue, {store})
 
-Vue.filter('yesno', function (value) {
-  return value ? 'Yes' : 'No';
-})
 Vue.filter('humanDatetime', function (value) {
   let datestr = ''
   if (value) {
@@ -34,11 +31,23 @@ Vue.filter('emailDisplay', function (value) {
   return emailstr
 })
 
+// An eventhub is needed to emit and register events in sibling components instantaneously
+// Instantiate and add as global mixin
+const eventHub = new Vue()
+Vue.mixin({
+  data: function () {
+    return {
+      eventHub: eventHub
+    }
+  }
+})
+
 // Every component used by the ifxvue plugin must be globally registered
 
 
 /* eslint-disable no-new */
 new Vue({
+  vuetify,
   el: '#app',
   store,
   router,
