@@ -166,7 +166,7 @@ UNICODE_JSON = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/{{project_name}}/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+STATIC_ROOT = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'frontend', 'public')
 ]
@@ -183,51 +183,19 @@ REST_FRAMEWORK = {
 }
 
 
-# Logging setup.  Meant to log everything to stderrr
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': True,
-    'filters': {
-        'require_debug_false': {
-            '()': 'django.utils.log.RequireDebugFalse'
-        }
-    },
-    'formatters': {
-        'console': {
-            'format': '%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
-        },
-    },
-    'handlers': {
-        'mail_admins': {
-            'level': 'ERROR',
-            'filters': ['require_debug_false'],
-            'class': 'django.utils.log.AdminEmailHandler',
-        },
-        'console': {
-            'class': 'logging.StreamHandler',
-            'filters': ['require_debug_false'],
-            'formatter': 'console',
-            'level': LOGLEVEL,
-        }
-    },
-    'loggers': {
-        '': {
-            'handlers': ['console'],
-            'level': 'INFO',
-            'propagate': False,
-        },
-        '{{project_name}}': {
-            'handlers': ['console'],
-            'level': LOGLEVEL,
-            'propagate': False,
-        },
-        'ifxauth': {
-            'handlers': ['console'],
-            'level': LOGLEVEL,
-            'propagate': False,
-        },
-    },
-}
+## Logging setup
+## Remove Django setup and use a file instead
+# Add signal handler for reloading with SIGUSR1
+# $ killall -SIGUSR1 python
+
+LOGGING_CONFIG = None
+logging.config.fileConfig('/etc/logging.ini', {'filters': {'require_debug_false': {'()': 'django.utils.log.RequireDebugFalse'}}})
+
+def reloadLoggingConfig(signalNo, frame):
+    if signalNo == signal.SIGUSR1:
+        logging.config.fileConfig('/etc/logging.ini')
+
+signal.signal(signal.SIGUSR1, reloadLoggingConfig)
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 NOSE_ARGS = ['--nocapture',
