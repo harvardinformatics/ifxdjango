@@ -9,7 +9,7 @@ processed (project_name substituted) are listed by name and extension:
 
     > mkdir ifxtest
     > cd ifxtest
-    > django-admin startproject --template=https://github.com/harvardinformatics/ifxdjango/archive/v1.1.zip -e py,html,vue,js,conf -n .env.development,.env.production,Dockerfile-drf,docker-compose.yml ifxtest .
+    > django-admin startproject --template=https://github.com/harvardinformatics/ifxdjango/archive/v1.1.zip -e py,html,vue,js,conf -n .env.development,.env.production,Dockerfile-drf,docker-compose.yml,Makefile ifxtest .
 
 Add a 40 character REST application token to the docker-compose file at the *IFX_APP_TOKEN environment variable of the drf
 section.  This will allow the application to interact with other systems.  Make sure this is different from other applications in the development environment (nanites/initDev.py has a pretty good list).  You may want to add this to the set of application
