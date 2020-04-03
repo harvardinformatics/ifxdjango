@@ -1,6 +1,6 @@
 FROM python:3.6
 
-EXPOSE 8000
+EXPOSE 80
 RUN apt-get update -y
 
 WORKDIR /app
@@ -19,10 +19,9 @@ RUN pip install --upgrade pip && \
 ENV PYTHONPATH /app
 ENV DJANGO_SETTINGS_MODULE {{project_name}}.settings
 
-CMD ./wait4db.py && \
-    ./manage.py collectstatic --noinput && \
+CMD ./wait-for-it.sh -t 60 db:3306 && \
+    ./manage.py collectstatic --no-input && \
     ./manage.py makemigrations && \
     ./manage.py migrate && \
-    ./manage.py loaddata ifxuser && \
-    ./manage.py runserver 0.0.0.0:8000
+    ./manage.py runserver 0.0.0.0:80 --insecure
 

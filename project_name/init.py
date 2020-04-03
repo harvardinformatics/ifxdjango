@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 
 '''
-nanites init
+{{project_name}} init
 
 Initializes data for a new system.  To be used in both prod and dev.
 
-Uses get_or_create so that it can be run when partial data exists
+Uses get_or_create so that it can be run when partial data exists.
+For user creation, this code uses get_user_model and the app name / model
+in USER_APP_MODEL.  You should just have to change the latter if the user model
+is different and ifxuser.IfxUser
 
 Created on  2019-12-23
 
@@ -14,172 +17,50 @@ Created on  2019-12-23
 All rights reserved.
 @license: GPL v2.0
 '''
+from django.contrib.auth import get_user_model
+from collections import OrderedDict
 
-# from collections import OrderedDict
+USER_APP_MODEL = 'ifxuser.IfxUser'
 
+def migrate(apps, schema_editor):
+    '''
+    Set data via migration
+    '''
+    user_app_name, model_name = USER_APP_MODEL.split('.')
+    initUsers(apps.get_model(user_app_name, model_name))
 
-# def migrate(apps, schema_editor):
-#     '''
-#     Set data via migration
-#     '''
-#     initIfxId(apps.get_model('nanites', 'IfxId'))
-#     initSources(apps.get_model('nanites', 'Source'))
-#     initApplications(apps.get_model('nanites', 'Application'))
-#     initUsers(apps.get_model('auth', 'User'))
+def main():
+    '''
+    If called directly, rather than as a migration
+    '''
+    from {{project_name}} import models
 
-# def main():
-#     '''
-#     If called directly, rather than as a migration
-#     '''
-#     from nanites import models
-#     from django.contrib.auth.models import User
-#     initIfxId(models.IfxId)
+    modelsForFixture = OrderedDict()
+    modelsForFixture[USER_APP_MODEL] = initUsers(get_user_model())
 
-#     modelsForFixture = OrderedDict()
-#     modelsForFixture['nanites.Source'] = initSources(models.Source)
-#     modelsForFixture['nanites.Application'] = initApplications(models.Application)
-#     modelsForFixture['auth.User'] = initUsers(User)
-
-#     return modelsForFixture
+    return modelsForFixture
 
 
-# def initIfxId(cls):
-#     '''
-#     Initialize the ifxid counter if it doesn't have any records yet
-#     '''
-#     if not cls.objects.all():
-#         ifxid = cls(nextval='0000000000')
-#         ifxid.save()
+def initUsers(cls):
+    '''
+    Initialize application users.  Do NOT set tokens here.
+    '''
+    pks = []
+    # users = [
+    #     {
+    #         'username': 'nice',
+    #         'first_name': 'NICE',
+    #         'last_name': 'Application',
+    #         'is_active': True,
+    #         'is_superuser': True,
+    #     },
+    # ]
 
-# def initSources(cls):
-#     '''
-#     Initialize Person Sources
-#     '''
-#     pks = []
-#     sources = [
-#         {
-#             'name': 'Manual Entry',
-#             'description': 'Manually entered data',
-#         }
-#     ]
-#     for sourcedata in sources:
-#         (obj, created) = cls.objects.get_or_create(**sourcedata)
-#         pks.append(obj.pk)
+    # for userdata in users:
+    #     (obj, created) = cls.objects.get_or_create(**userdata)
+    #     pks.append(obj.pk)
 
-#     return pks
+    return pks
 
-
-# def initApplications(cls):
-#     '''
-#     Initialize the Application instances
-#     '''
-#     pks = []
-#     applications = [
-#         {
-#             'name': 'CNS Admin Intranet',
-#             'fields': '__all__',
-#             'auth': 'CNS Staff',
-#         },
-#         {
-#             'name': 'CNS User Portal',
-#             'fields': '__all__',
-#             'auth': 'CNS User',
-#         },
-#         {
-#             'name': 'CNS User Admin Intranet',
-#             'fields': 'first_name,last_name,full_name,ifxid,primary_email,primary_affiliation',
-#             'auth': 'CNS User Admin',
-#         },
-#         {
-#             'name': 'Harvard Key',
-#             'fields': 'None',
-#             'auth': 'Harvard Key'
-#         },
-#         {
-#             'name': 'nice',
-#             'auth': 'Harvard Key',
-#             'fields': '__all__',
-#         },
-#         {
-#             'name': 'p3',
-#             'auth': 'RC',
-#             'fields': '__all__',
-#         },
-#         {
-#             'name': 'Research Computing AD',
-#             'auth': 'RC',
-#             'fields': '__all__',
-#         }
-#     ]
-#     for appdata in applications:
-#         (obj, created) = cls.objects.get_or_create(**appdata)
-#         pks.append(obj.pk)
-
-#     return pks
-
-
-# def initUsers(cls):
-#     '''
-#     Initialize application users.  Do NOT set tokens here.
-#     '''
-#     pks = []
-#     users = [
-#         {
-#             'username': 'nice',
-#             'first_name': 'NICE',
-#             'last_name': 'Application',
-#             'is_active': True,
-#             'is_superuser': True,
-#         },
-#         {
-#             'username': 'p3',
-#             'first_name': 'p3',
-#             'last_name': 'Application',
-#             'is_active': True,
-#             'is_superuser': True,
-#         },
-#         {
-#             'username': 'cns',
-#             'first_name': 'CNS',
-#             'last_name': 'Application',
-#             'is_active': True,
-#             'is_superuser': True,
-#         },
-#         {
-#             'username': 'cas',
-#             'first_name': 'CAS',
-#             'last_name': 'Application',
-#             'is_active': True,
-#             'is_superuser': True,
-#         },
-#         {
-#             'username': 'pubs',
-#             'first_name': 'PUBS',
-#             'last_name': 'Application',
-#             'is_active': True,
-#             'is_superuser': True,
-#         },
-#         {
-#             'username': 'ifxonboard',
-#             'first_name': 'IfxOnboard',
-#             'last_name': 'Application',
-#             'is_active': True,
-#             'is_superuser': True,
-#         },
-#         {
-#             'username': 'portal',
-#             'first_name': 'Portal',
-#             'last_name': 'Application',
-#             'is_active': True,
-#             'is_superuser': True,
-#         },
-#     ]
-
-#     for userdata in users:
-#         (obj, created) = cls.objects.get_or_create(**userdata)
-#         pks.append(obj.pk)
-
-#     return pks
-
-# if __name__ == '__main__':
-#     main()
+if __name__ == '__main__':
+    main()
