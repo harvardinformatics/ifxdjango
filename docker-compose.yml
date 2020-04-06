@@ -41,7 +41,7 @@ services:
       - db
       - testsmtp
     ports:
-      - 8099:8000
+      - 8099:80
     environment:
       - {{project_name|upper}}_IFX_APP_TOKEN=FIXME
       - {{project_name|upper}}_USERNAME={{project_name}}
