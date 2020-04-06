@@ -20,7 +20,7 @@ It goes without saying that you do not want to use the production token here.
 Once the project has been created, build the necessary containers and install the Javascript libraries
 
     > make build
-    > docker-compose run ifxtest-ui yarn 
+    > docker-compose run ifxtest-ui yarn
 
 After several minutes of this, you should be able to start up the application
 
@@ -30,6 +30,6 @@ Before logging in or attempting to access the authenticated "Demo" page (which a
 
     > docker-compose run drf ./manage.py applyDevData
 
-UserSerializer and UserViewSet classes will need to be created in serializers.py.  They are not created beforehand 
+UserSerializer and UserViewSet classes will need to be created in serializers.py.  They are not created beforehand
 so that the proper local IfxUser subclass can be specified
 
