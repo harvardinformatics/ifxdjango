@@ -28,5 +28,5 @@ After several minutes of this, you should be able to start up the application
 
 Before attempting to access the authenticated "Demo" page, run the applyDevData management command to ensure that the test user is properly setup.
 
-    > docker-compose exec drf ./manage.py applyDevData
+    > docker-compose run drf ./manage.py applyDevData
 
