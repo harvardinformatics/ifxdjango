@@ -129,7 +129,7 @@ export default {
         <v-icon>menu</v-icon>
       </v-app-bar-nav-icon>
       <v-toolbar-title class="app-title">
-        <span class="app-title-text">{{project_name|upper}}</span>
+        <span class="app-title-text">Project Name</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-chip v-if="isAuthenticated()" color="white">

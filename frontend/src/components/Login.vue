@@ -32,7 +32,7 @@ export default {
         .then(res => {
           if (!res.data || !res.data.token) {
             me.failure = true
-            me.message = "You are a known user of {{project_name}}, but your user data is malformed."
+            me.message = "You are a known user of this application, but your user data is malformed."
           } else {
             // If response has data and token, then it is successful
             me.success = true
