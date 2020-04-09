@@ -1,13 +1,7 @@
-FROM python:3.6
+FROM node:11.15
 
 EXPOSE 8080
-RUN apt-get update -y && apt-get install -y \
-    curl
-
-RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - && apt-get install -y nodejs
-RUN apt-get install npm -y
-RUN npm install npm@latest -g
 
 WORKDIR /app/frontend
-CMD /usr/bin/npm run-script serve
 
+CMD npm run-script serve

@@ -22,6 +22,13 @@ export default {
     sleep(ms) {
       return new Promise(resolve => setTimeout(resolve, ms))
     },
+    isAuthenticated() {
+      return auth.isAuthenticated() || this.isLoggedIn
+    },
+    getLoginLogoutString(lower) {
+      const string = this.isAuthenticated() ? "Logout" : "Login"
+      return lower ? string.toLowerCase() : string
+    },
     toggleDrawerOpenMobile() {
       this.isDrawerOpenMobile = !this.isDrawerOpenMobile
     },
@@ -36,9 +43,6 @@ export default {
     }
   },
   computed: {
-    loginLogout: function() {
-      return this.isAuthenticated ? "Logout" : "Login"
-    },
     mobile: function() {
       return this.$vuetify.breakpoint.xs
     },
@@ -54,21 +58,12 @@ export default {
         return true
       }
     },
-    isAuthenticated: function() {
-      if (!this.isLoggedIn) {
-        return false
-      }
-      return auth.isAuthenticated()
-    },
     name: function() {
-      if (!this.isLoggedIn) {
-        return ""
-      }
       const firstName = auth.getFirstName()
       return firstName ? firstName : auth.getUsername()
     }
   },
-  mounted: function() {
+  created: function() {
     let me = this
     this.eventHub.$on("isLoggedIn", bool => {
       me.isLoggedIn = bool
@@ -114,14 +109,14 @@ export default {
       <template v-slot:append>
         <v-tooltip right>
           <template v-slot:activator="{ on }">
-            <v-list-item v-on="mini ? on : false" :to="{path: `/${loginLogout.toLowerCase()}`}">
+            <v-list-item v-on="mini ? on : false" :to="{path: `/${getLoginLogoutString('lower')}`}">
               <v-list-item-action>
                 <v-icon>person</v-icon>
               </v-list-item-action>
-              <v-list-item-title>{{loginLogout}}</v-list-item-title>
+              <v-list-item-title>{{getLoginLogoutString()}}</v-list-item-title>
             </v-list-item>
           </template>
-          <span>{{loginLogout}}</span>
+          <span>{{getLoginLogoutString()}}</span>
         </v-tooltip>
       </template>
     </v-navigation-drawer>
@@ -134,10 +129,10 @@ export default {
         <v-icon>menu</v-icon>
       </v-app-bar-nav-icon>
       <v-toolbar-title class="app-title">
-        <span class="app-title-text">{{project_name|upper}}</span>
+        <span class="app-title-text">Project Name</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-chip v-if="isAuthenticated" color="white">
+      <v-chip v-if="isAuthenticated()" color="white">
         Welcome,
         <span class="username">{{name}}</span>
       </v-chip>

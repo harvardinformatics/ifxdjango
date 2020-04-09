@@ -33,7 +33,7 @@ def main():
     '''
     If called directly, rather than as a migration
     '''
-    from {{project_name}} import models
+    # from {{project_name}} import models
 
     modelsForFixture = OrderedDict()
     modelsForFixture[USER_APP_MODEL] = initUsers(get_user_model())
