@@ -113,10 +113,10 @@ export default {
               <v-list-item-action>
                 <v-icon>person</v-icon>
               </v-list-item-action>
-              <v-list-item-title>{{getLoginLogoutString()}}</v-list-item-title>
+              <v-list-item-title>{% verbatim %}{{getLoginLogoutString()}}{% endverbatim %}</v-list-item-title>
             </v-list-item>
           </template>
-          <span>{{getLoginLogoutString()}}</span>
+          <span>{% verbatim %}{{getLoginLogoutString()}}{% endverbatim %}</span>
         </v-tooltip>
       </template>
     </v-navigation-drawer>
@@ -134,7 +134,7 @@ export default {
       <v-spacer></v-spacer>
       <v-chip v-if="isAuthenticated()" color="white">
         Welcome,
-        <span class="username">{{name}}</span>
+        <span class="username">{% verbatim %}{{name}}{% endverbatim %}</span>
       </v-chip>
     </v-app-bar>
 
