@@ -9,7 +9,7 @@ processed (project_name substituted) are listed by name and extension:
 
     > mkdir ifxtest
     > cd ifxtest
-    > django-admin startproject --template=https://github.com/harvardinformatics/ifxdjango/archive/v1.1.zip -e py,html,js,conf,ini -n .env.development,.env.production,Dockerfile-drf,docker-compose.yml,Makefile ifxtest .
+    > django-admin startproject --template=https://github.com/harvardinformatics/ifxdjango/archive/v1.1.zip -e py,html,js,conf,ini,vue -n .env.development,.env.production,Dockerfile-drf,docker-compose.yml,Makefile ifxtest .
 
 Add a 40 character REST application token to the docker-compose file at the *IFX_APP_TOKEN environment variable of the drf
 section.  This will allow the application to interact with other systems.  Make sure this is different from other applications in the development environment (nanites/initDev.py has a pretty good list).  You may want to add this to the set of application
@@ -26,7 +26,7 @@ After several minutes of this, you should be able to start up the application
 
     > docker-compose up
 
-Before attempting to access the authenticated "Demo" page, run the applyDevData management command to ensure that the test user is properly setup.
+Before logging in or attempting to access the authenticated "Demo" page (which automatically attemps to log you in), run the applyDevData management command to ensure that the test user is properly set up.
 
     > docker-compose run drf ./manage.py applyDevData
 
