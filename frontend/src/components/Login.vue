@@ -78,7 +78,11 @@ export default {
       <v-col v-else-if="failure">
         <h1>Login Unsucessful</h1>
         <p>An error occurred while attempting to log you in. Here is the error message:</p>
-        <p>{% verbatim %}{{message}}{% endverbatim %}</p>
+        <p>
+          {% verbatim %}
+            {{message}}
+          {% endverbatim %}
+        </p>
         <p>
           For more information, please contact
           <a href="mailto:informatics@rc.fas.harvard.edu">.</a>
