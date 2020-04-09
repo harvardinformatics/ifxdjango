@@ -15,7 +15,10 @@ export default {
       <v-col>
         <h1>Demo Page</h1>
         <p>This is a description of the demo page.</p>
-        <p>{% verbatim %}{{message}}{% endverbatim %}</p>
+        <p>
+          {% verbatim %}
+            {{message}}
+          {% endverbatim %}</p>
       </v-col>
     </v-row>
   </v-container>

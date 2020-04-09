@@ -169,10 +169,18 @@ export default {
               <v-list-item-action>
                 <v-icon>person</v-icon>
               </v-list-item-action>
-              <v-list-item-title>{% verbatim %}{{getLoginLogoutString()}}{% endverbatim %}</v-list-item-title>
+              <v-list-item-title>
+                {% verbatim %}
+                  {{ getLoginLogoutString() }}
+                {% endverbatim %}
+              </v-list-item-title>
             </v-list-item>
           </template>
-          <span>{% verbatim %}{{getLoginLogoutString()}}{% endverbatim %}</span>
+          <span>
+            {% verbatim %}
+              {{ getLoginLogoutString() }}
+            {% endverbatim %}
+          </span>
         </v-tooltip>
       </template>
     </v-navigation-drawer>
