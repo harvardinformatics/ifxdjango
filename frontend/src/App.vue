@@ -17,21 +17,7 @@ export default {
     }
   },
   methods: {
-<<<<<<< HEAD
     ...mapActions(['showMessage', 'toggleDialog']),
-=======
-    ...mapActions(["showMessage", "toggleDialog"]),
-    sleep(ms) {
-      return new Promise(resolve => setTimeout(resolve, ms))
-    },
-    isAuthenticated() {
-      return auth.isAuthenticated() || this.isLoggedIn
-    },
-    getLoginLogoutString(lower) {
-      const string = this.isAuthenticated() ? "Logout" : "Login"
-      return lower ? string.toLowerCase() : string
-    },
->>>>>>> update authenticated logic in app component
     toggleDrawerOpenMobile() {
       this.isDrawerOpenMobile = !this.isDrawerOpenMobile
     },
@@ -65,11 +51,7 @@ export default {
     }
   },
   computed: {
-<<<<<<< HEAD
     mobile() {
-=======
-    mobile: function() {
->>>>>>> update authenticated logic in app component
       return this.$vuetify.breakpoint.xs
     },
     mini() {
@@ -83,7 +65,6 @@ export default {
       }
       return true
     },
-<<<<<<< HEAD
     displayName() {
       // return this.firstName ? this.firstName : this.username
       const firstName = this.$api.authUser.firstName
@@ -114,18 +95,6 @@ export default {
   mounted() {
     // Is the test failing because it's loading too fast before the data can return?
     this.$nextTick(() => this.loading = false)
-=======
-    name: function() {
-      const firstName = auth.getFirstName()
-      return firstName ? firstName : auth.getUsername()
-    }
-  },
-  created: function() {
-    let me = this
-    this.eventHub.$on("isLoggedIn", bool => {
-      me.isLoggedIn = bool
-    })
->>>>>>> update authenticated logic in app component
   }
 }
 </script>
@@ -221,11 +190,7 @@ export default {
         </v-toolbar-title>
       </router-link>
       <v-spacer></v-spacer>
-<<<<<<< HEAD
       <v-chip v-if="$api.auth.isAuthenticated" color="white">
-=======
-      <v-chip v-if="isAuthenticated()" color="white">
->>>>>>> update authenticated logic in app component
         Welcome,
         <span data-test='username' class="username">{% verbatim %}{{displayName}}{% endverbatim %}</span>
       </v-chip>
