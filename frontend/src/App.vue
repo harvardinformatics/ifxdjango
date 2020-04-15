@@ -96,7 +96,7 @@ export default {
         </v-tooltip>
         <v-tooltip right>
           <template v-slot:activator="{ on }">
-            <v-list-item v-on="mini ? on : false" :to="{path: '/demo'}">
+            <v-list-item v-on="mini ? on : false" :to="{path: '/demo/'}">
               <v-list-item-action>
                 <v-icon>assignment</v-icon>
               </v-list-item-action>
@@ -109,7 +109,7 @@ export default {
       <template v-slot:append>
         <v-tooltip right>
           <template v-slot:activator="{ on }">
-            <v-list-item v-on="mini ? on : false" :to="{path: `/${getLoginLogoutString('lower')}`}">
+            <v-list-item v-on="mini ? on : false" :to="{path: `/${getLoginLogoutString('lower')}/`}">
               <v-list-item-action>
                 <v-icon>person</v-icon>
               </v-list-item-action>
