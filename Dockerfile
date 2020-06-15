@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:experimental
 FROM python:3.6
 
 EXPOSE 80
@@ -5,6 +6,7 @@ RUN apt-get update -y && apt-get install -y \
     nginx \
     supervisor \
     curl
+RUN mkdir ~/.ssh && echo "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 COPY etc/nginx.conf /etc/nginx/sites-available/default
@@ -17,16 +19,24 @@ RUN npm install npm@latest -g
 
 WORKDIR /app
 
+ARG DJVOCAB_COMMIT=ad47dcbe7a75e9c3b70c4dec4c56399fd55de514
+ARG IFXURLS_COMMIT=6ce5e88f22dddd66d4468205777f28a7b31dd5ed
+ARG NANITES_CLIENT_COMMIT=108a713886c6f01b714f1c1c2c695c05b692ead5
+ARG IFXUSER_COMMIT=66f1c296e9fc370616104ce4bf09cbd8d65836b4
+ARG IFXAUTH_COMMIT=9bffad89afa07395e237567fd61e9919b0cc905c
+ARG IFXMAIL_CLIENT_COMMIT=ac1e4dadfa12509a97c3a4bb9c76f1d93350ed02
+
 COPY requirements.txt /app
 
-RUN pip install --upgrade pip && \
+RUN --mount=type=ssh pip install --upgrade pip && \
     pip install gunicorn && \
     pip install 'Django>2.2,<3' && \
-    pip install git+https://github.com/harvardinformatics/djvocab.git@a0cfeba93ea805d3861e97e9c38fd27447e5b58a && \
-    pip install git+https://github.com/harvardinformatics/ifxurls.git@72f75b3fcc9446fc5095ad747b3ed53d05bc4799 && \
-    pip install git+https://github.com/harvardinformatics/ifxuser.git@701eec94d06e83fcb42416b9fb07255569c4c2c4 && \
-    pip install git+https://github.com/harvardinformatics/ifxauth.git@3c81a098f5a099e2d0d4baea00d80cc0ed0e834a && \
-    pip install git+https://github.com/harvardinformatics/ifxmail.client.git@b649c6ed9edfa7cae5a402485e689fcaf1e3dc86 && \
+    pip install git+ssh://git@github.com/harvardinformatics/djvocab.git@${DJVOCAB_COMMIT} && \
+    pip install git+ssh://git@github.com/harvardinformatics/ifxurls.git@${IFXURLS_COMMIT} && \
+    pip install git+ssh://git@github.com/harvardinformatics/nanites.client.git@${NANITES_CLIENT_COMMIT} && \
+    pip install git+ssh://git@github.com/harvardinformatics/ifxuser.git@${IFXUSER_COMMIT} && \
+    pip install git+ssh://git@github.com/harvardinformatics/ifxauth.git@${IFXAUTH_COMMIT} && \
+    pip install git+ssh://git@github.com/harvardinformatics/ifxmail.client.git@${IFXMAIL_CLIENT_COMMIT} && \
     pip install -r requirements.txt
 
 ADD . /app
