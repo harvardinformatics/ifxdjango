@@ -19,7 +19,7 @@ It goes without saying that you do not want to use the production token here.
 
 Once the project has been created, build the necessary containers and install the Javascript libraries
 
-    > docker-compose build
+    > docker build -t drf --ssh default . && docker-compose build
     > docker-compose run ui npm install .
 
 After several minutes of this, you should be able to start up the application
