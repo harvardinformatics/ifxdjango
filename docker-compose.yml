@@ -68,6 +68,37 @@ services:
       - testsmtp
     networks:
       main:
+  nanites-db:
+    image: mariadb
+    volumes:
+      - nanites-data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=nanites
+      - MYSQL_DATABASE=nanites
+      - MYSQL_USER=nanites
+      - MYSQL_PASSWORD=nanites
+    command: '--character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci'
+    networks:
+      main:
+  nanites:
+    image: nanites
+    volumes:
+      - ../nanites:/app
+    environment:
+      - NANITES_USERNAME=nanites
+      - NANITES_PASSWORD=nanites
+      - NANITES_HOSTNAME=nanites-db
+      - NANITES_DATABASE=nanites
+      - IFX_REMOTE_USER=veradmin
+      - NANITES_DEBUG=TRUE
+    links:
+      - nanites-db
+    depends_on:
+      - nanites-db
+    ports:
+      - 8765:80
+    networks:
+      main:
   {{project_name}}-db:
     image: mariadb
     volumes:
