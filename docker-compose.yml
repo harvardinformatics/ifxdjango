@@ -10,7 +10,65 @@ services:
       - 8025
     ports:
       - 8025:8025
-  db:
+    networks:
+      main:
+  ifxmail-db:
+    image: mariadb
+    volumes:
+      - ifxmail-data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=ifxmail
+      - MYSQL_DATABASE=ifxmail
+      - MYSQL_USER=ifxmail
+      - MYSQL_PASSWORD=ifxmail
+      - TZ=America/New_York
+    command: '--character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci'
+    networks:
+      main:
+  ifxmail:
+    image: ifxmail
+    volumes:
+      - ../ifxmail:/app
+    environment:
+      - IFXMAIL_USERNAME=ifxmail
+      - IFXMAIL_PASSWORD=ifxmail
+      - IFXMAIL_HOSTNAME=ifxmail-db
+      - IFXMAIL_DATABASE=ifxmail
+      - IFX_REMOTE_USER=veradmin
+      - IFXMAIL_SMTP_SERVER=testsmtp:25
+      - IFXMAIL_LOGLEVEL=INFO
+      - IFXMAIL_DEBUG=TRUE
+      - PYTHONUNBUFFERED=1
+    links:
+      - ifxmail-db
+    depends_on:
+      - ifxmail-db
+    ports:
+      - 6969:80
+    networks:
+      main:
+  ifxmail-runner:
+    image: ifxmail
+    command: ./wait-for-it.sh -t 60 ifxmail-db:3306 ./manage.py processQueue testsmtp
+    volumes:
+      - ../ifxmail:/app
+    environment:
+      - IFXMAIL_USERNAME=ifxmail
+      - IFXMAIL_PASSWORD=ifxmail
+      - IFXMAIL_HOSTNAME=ifxmail-db
+      - IFXMAIL_DATABASE=ifxmail
+      - IFX_REMOTE_USER=veradmin
+      - IFXMAIL_SMTP_SERVER=testsmtp
+      - IFXMAIL_LOGLEVEL=INFO
+    links:
+      - ifxmail-db
+      - testsmtp
+    depends_on:
+      - ifxmail-db
+      - testsmtp
+    networks:
+      main:
+  {{project_name}}-db:
     image: mariadb
     volumes:
       - {{project_name}}-data:/var/lib/mysql
@@ -19,26 +77,30 @@ services:
       - MYSQL_DATABASE={{project_name}}
       - MYSQL_USER={{project_name}}
       - MYSQL_PASSWORD={{project_name}}
-  ui:
+    networks:
+      main:
+  {{project_name}}-ui:
     build:
       context: .
       dockerfile: Dockerfile-ui
     depends_on:
-      - drf
+      - {{project_name}}-drf
     volumes:
       - .:/app
     ports:
       - 8080:8080
-  drf:
+    networks:
+      main:
+  {{project_name}}-drf:
     build:
       context: .
       dockerfile: Dockerfile-drf
     depends_on:
-      - db
+      - {{project_name}}-db
     volumes:
       - .:/app
     links:
-      - db
+      - {{project_name}}-db
       - testsmtp
     ports:
       - 8099:80
@@ -53,6 +115,13 @@ services:
       - {{project_name|upper}}_DJANGO_KEY=anweijfnvwoejvniejnvfwvijnf
       - SMTP_SERVER=testsmtp
       - IFX_REMOTE_USER=veradmin
+    networks:
+      main:
 
 volumes:
   {{project_name}}-data:
+
+
+networks:
+  main:
+
