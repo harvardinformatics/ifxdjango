@@ -3,34 +3,38 @@ FROM python:3.6
 
 EXPOSE 80
 RUN apt-get update -y
-RUN mkdir ~/.ssh && echo "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+RUN mkdir ~/.ssh && echo "Host git*\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 
 WORKDIR /app
 
-ARG DJVOCAB_COMMIT=ad47dcbe7a75e9c3b70c4dec4c56399fd55de514
+ARG DJVOCAB_COMMIT=a0cfeba93ea805d3861e97e9c38fd27447e5b58a
 ARG IFXURLS_COMMIT=b9109ab326393be2b216600ff114e98b2a826422
-ARG NANITES_CLIENT_COMMIT=daba110412cb8f6017f59cf45890fa2827048065
-ARG IFXUSER_COMMIT=d47cbb18ab83542c8b11b7b22aeff336ccc934c4
-ARG IFXAUTH_COMMIT=9bffad89afa07395e237567fd61e9919b0cc905c
-ARG IFXMAIL_CLIENT_COMMIT=ac1e4dadfa12509a97c3a4bb9c76f1d93350ed02
+ARG NANITES_CLIENT_COMMIT=a11ff96ccb2c888d0d07ac97f27de1153463bf59
+ARG IFXUSER_COMMIT=3f93352e96dad0f345b221512d316e9e6922e7c0
+ARG IFXAUTH_COMMIT=afcaad2b05f5dd90e86e53b2de864bef04c91898
+ARG IFXMAIL_CLIENT_COMMIT=5fc6d834c76c0f66d823ff0b5d384ab7b30009b0
+ARG IFXSEMANTICDATA_COMMIT=4c5271fac3ec43b694c04e01e865ad636f81d494
+ARG IFXREQUEST_COMMIT=9aa45ce73b8fe98905dcadc57856b7c1e93fa6e1
+ARG IFXBILLING_COMMIT=0a0d74edc1c7998585efd91f4152377478323f4f
 
 COPY requirements.txt /app
 
 RUN --mount=type=ssh pip install --upgrade pip && \
-    pip install 'Django>2.1,<3' && \
+    pip install 'Django>2.2,<3' && \
     pip install git+ssh://git@github.com/harvardinformatics/djvocab.git@${DJVOCAB_COMMIT} && \
     pip install git+ssh://git@github.com/harvardinformatics/ifxurls.git@${IFXURLS_COMMIT} && \
     pip install git+ssh://git@github.com/harvardinformatics/nanites.client.git@${NANITES_CLIENT_COMMIT} && \
     pip install git+ssh://git@github.com/harvardinformatics/ifxuser.git@${IFXUSER_COMMIT} && \
     pip install git+ssh://git@github.com/harvardinformatics/ifxauth.git@${IFXAUTH_COMMIT} && \
     pip install git+ssh://git@github.com/harvardinformatics/ifxmail.client.git@${IFXMAIL_CLIENT_COMMIT} && \
+    pip install git+ssh://git@github.com/harvardinformatics/ifxrequest.git@${IFXREQUEST_COMMIT} && \
+    pip install git+ssh://git@gitlab-int.rc.fas.harvard.edu/informatics/ifxbilling.git@${IFXBILLING_COMMIT} && \
     pip install -r requirements.txt
 
-COPY etc/logging.ini /etc/logging.ini
 ENV PYTHONPATH /app
 ENV DJANGO_SETTINGS_MODULE {{project_name}}.settings
 
-CMD ./wait-for-it.sh -t 60 db:3306 && \
+CMD ./wait-for-it.sh -t 60 {{project_name}}-db:3306 && \
     ./manage.py collectstatic --no-input && \
     ./manage.py makemigrations && \
     ./manage.py migrate && \
