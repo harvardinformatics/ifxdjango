@@ -1,0 +1,8 @@
+{
+    "supportFile": "test/e2e/support/index.js",
+    "integrationFolder": "test/e2e/specs",
+    "screenshotsFolder": "test/e2e/media/screenshots",
+    "videosFolder": "test/e2e/media/videos",
+    "fixturesFolder": "test/e2e/fixtures",
+    "pluginsFile": "test/e2e/plugins/index.js"
+  }
