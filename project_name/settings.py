@@ -11,8 +11,6 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-import logging.config
-import signal
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -57,8 +55,10 @@ IFX_AUTH_META_KEY = 'HTTP_HKEY_EDUPERSONPRINCIPALNAME'
 if IFX_APP['token'] == 'FIXME':
     print('HEY!!!!!  Set the IFX_APP_TOKEN in docker-compose!')
 
-# Application definition
+# Erroneous error for json field with mariadb
+SILENCED_SYSTEM_CHECKS = ['django_mysql.E016']
 
+# Application definition
 INSTALLED_APPS = [
     'ifxuser',
     'django.contrib.admin',
@@ -74,6 +74,7 @@ INSTALLED_APPS = [
     'djvocab',
     'ifxauth',
     'author',
+    'ifxrequest',
     '{{project_name}}',
 ]
 
@@ -277,3 +278,29 @@ ADMINS = [
 
 SERVER_EMAIL = 'ifx@fas.harvard.edu'
 DEFAULT_EMAIL_FROM_ADDRESS = 'ifx@fas.harvard.edu'
+
+class EMAILS():
+    '''
+    Email addresses
+    '''
+    DEFAULT_EMAIL_FROM_ADDRESS = DEFAULT_EMAIL_FROM_ADDRESS
+
+class GROUPS():
+    '''
+    Group names
+    '''
+    ADMIN_GROUP_NAME = 'Admin'
+    ACCOUNT_REQUEST_COMPLETED_NOTIFICATION_GROUP = 'Admin'
+    REQUEST_APPROVERS_GROUP_NAME = 'Admin'
+
+
+class IFXMESSAGES():
+    '''
+    ifxmail message names
+    '''
+    ACCOUNT_REQUEST_REJECTION_MESSAGE_NAME = '{{project_name}}_account_request_rejection_message'
+    ACCOUNT_REQUEST_MODIFICATION_NOTIFICATION_MESSAGE = '{{project_name}}_account_request_modification_notification_message'
+    ACCOUNT_REQUEST_USER_UPDATE_NOTIFICATION_MESSAGE = '{{project_name}}_account_request_user_update_notification_message'
+    ACCOUNT_REQUEST_APPROVER_NOTIFICATION_MESSAGE = '{{project_name}}_account_request_approver_notification_message'
+    ACCOUNT_REQUEST_COMPLETED_MESSAGE = '{{project_name}}_account_request_completed_message'
+    ACCOUNT_REQUEST_COMPLETED_USER_NOTIFICATION_MESSAGE = '{{project_name}}_account_request_completed_user_notification_message'

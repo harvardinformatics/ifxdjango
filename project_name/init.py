@@ -17,8 +17,8 @@ Created on  2019-12-23
 All rights reserved.
 @license: GPL v2.0
 '''
-from django.contrib.auth import get_user_model
 from collections import OrderedDict
+from django.contrib.auth import get_user_model
 
 USER_APP_MODEL = 'ifxuser.IfxUser'
 

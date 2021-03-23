@@ -111,9 +111,7 @@ services:
     networks:
       main:
   {{project_name}}-ui:
-    build:
-      context: .
-      dockerfile: Dockerfile-ui
+    image: {{project_name}}-ui
     depends_on:
       - {{project_name}}-drf
     volumes:
@@ -123,9 +121,7 @@ services:
     networks:
       main:
   {{project_name}}-drf:
-    build:
-      context: .
-      dockerfile: Dockerfile-drf
+    image: {{project_name}}-drf
     depends_on:
       - {{project_name}}-db
     volumes:
@@ -140,7 +136,7 @@ services:
       - {{project_name|upper}}_USERNAME={{project_name}}
       - {{project_name|upper}}_PASSWORD={{project_name}}
       - {{project_name|upper}}_DATABASE={{project_name}}
-      - {{project_name|upper}}_HOSTNAME=db
+      - {{project_name|upper}}_HOSTNAME={{project_name}}-db
       - {{project_name|upper}}_LOGLEVEL=DEBUG
       - {{project_name|upper}}_DEBUG=TRUE
       - {{project_name|upper}}_DJANGO_KEY=anweijfnvwoejvniejnvfwvijnf
@@ -151,7 +147,8 @@ services:
 
 volumes:
   {{project_name}}-data:
-
+  ifxmail-data:
+  nanites-data:
 
 networks:
   main:
