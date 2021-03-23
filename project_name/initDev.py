@@ -14,6 +14,8 @@ All rights reserved.
 @license: GPL v2.0
 '''
 from django.contrib.auth import get_user_model
+from django.contrib.auth.models import Group
+from django.conf import settings
 from rest_framework.authtoken.models import Token
 from {{project_name}}.init import main as init_production
 from {{project_name}}.init import USER_APP_MODEL
@@ -42,10 +44,15 @@ def initUsers():
             'is_active': True,
             'is_superuser': True,
             'is_staff': True,
+            'groups': [settings.GROUPS.ADMIN_GROUP_NAME]
         },
     ]
     for userdata in users:
+        group_names = userdata.pop('groups', [])
         (obj, created) = get_user_model().objects.get_or_create(**userdata)
+        for group_name in group_names:
+            group = Group.objects.get(name=group_name)
+            obj.groups.add(group)
         pks.append(obj.pk)
 
     return pks
