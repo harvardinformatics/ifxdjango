@@ -18,9 +18,9 @@ module.exports = {
 }
 
 // if (process.env.NODE_ENV === 'development') {
-//   // To allow cypress server to access hers through docker-compose network
+//   // To allow cypress server to access {{project_name}} through docker-compose network
 //   // TODO: can this be added to production?
-//   // module.exports.devServer.public = 'hers-ui'
+//   // module.exports.devServer.public = '{{project_name}}-ui'
 // }
 
 if (process.env.NODE_ENV !== 'development') {

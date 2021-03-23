@@ -1,59 +1,69 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
+/* eslint-disable brace-style, no-else-return, import/no-unresolved */
 import Vue from 'vue'
-import vuetify from './plugins/vuetify';
-import App from './App.vue'
-import router from './router'
-import 'vuetify/dist/vuetify.min.css'
-import axios from 'axios'
-import VueCookie from 'vue-cookie'
-import auth from './auth'
-import moment from 'moment'
-import store from './store'
+import APIService from '@/API/API'
 import ifxvue from 'ifxvue'
+import { IFXRequestAPI } from '@/API/IFXRequestAPI'
+import APIStore from '@/API/APIStore'
+import vuexStore from '@/store'
+import App from '@/App'
+import router from '@/router'
+import vuetify from '@/plugins/vuetify';
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
+import 'vuetify/dist/vuetify.min.css'
+import 'ifxvue/dist/ifxvue.css'
+import '@mdi/font/css/materialdesignicons.css'
+import JsonCSV from 'vue-json-csv'
 
-Vue.use(VueCookie)
+Vue.component('downloadCsv', JsonCSV)
+
 Vue.config.productionTip = false
-Vue.use(ifxvue, {store})
+// Register ifxvue module
+// Pass in vuexStore to register incoming vuex modules
+// Pass in APIStore so ifxvue has access to application config data
+Vue.use(ifxvue, { vuexStore, APIStore })
 
-Vue.filter('humanDatetime', function (value) {
-  let datestr = ''
-  if (value) {
-    datestr = moment(String(value)).format('M/DD/YYYY h:mm A')
-  }
-  return datestr
-})
-Vue.filter('emailDisplay', function (value) {
-  let emailstr = ''
-  if (value) {
-    emailstr = value.replace('@', ' at ')
-  }
-  return emailstr
-})
+const api = new APIService(APIStore)
+Vue.prototype.$api = Vue.observable(api)
+api.auth.initAuthUser()
 
-// An eventhub is needed to emit and register events in sibling components instantaneously
-// Instantiate and add as global mixin
-const eventHub = new Vue()
-Vue.mixin({
-  data: function () {
-    return {
-      eventHub: eventHub
+// api.loadUserFromStorage()
+
+const requestApi = new IFXRequestAPI(api, 'default-approver')
+Vue.prototype.$requestApi = requestApi
+
+// Loop through routes, set options for all paths and admin routes
+// To make route admin only, go to router index and add isAdminRoute:true to specific route
+router.options.routes.forEach(route => {
+  route.pathToRegexpOptions = { strict: true }
+  if (route.isAdminRoute) {
+    route.beforeEnter = (to, from, next) => {
+      if (api.authUser.isAdmin) {
+        // TODO: add message
+        next()
+      } else {
+        next({ name: 'Forbidden' })
+      }
     }
   }
 })
 
-// Every component used by the ifxvue plugin must be globally registered
-
+// Disable routes by unathenticated users
+router.beforeEach((to, from, next) => {
+  if (to.name !== 'Home' && !api.auth.isAuthenticated) {
+    api.auth.login()
+      .then(() => next())
+      .catch(() => next({ name: 'Home' }))
+  } else {
+    next()
+  }
+})
 
 /* eslint-disable no-new */
 new Vue({
   vuetify,
   el: '#app',
-  store,
+  store: vuexStore,
   router,
-  axios,
   components: { App },
   render: h => h(App)
 })
-
-auth.checkAuthentication()
