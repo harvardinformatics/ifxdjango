@@ -30,3 +30,6 @@ Before logging in or attempting to access the authenticated "Demo" page (which a
 
     > docker-compose run drf ./manage.py applyDevData
 
+UserSerializer and UserViewSet classes will need to be created in serializers.py.  They are not created beforehand 
+so that the proper local IfxUser subclass can be specified
+
