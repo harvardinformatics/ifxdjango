@@ -59,4 +59,4 @@ html_static_path = ['_static']
 
 # -- Extension configuration -------------------------------------------------
 def setup(app):
-    app.add_stylesheet('css/ifx.css')
+    app.add_css_file('css/ifx.css')
