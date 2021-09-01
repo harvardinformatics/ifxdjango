@@ -16,7 +16,7 @@ RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - && apt-get install -
 RUN apt-get install npm -y
 RUN npm install npm@6.14.11 -g
 # Forcing install of these versions.  Goes haywire otherwise
-RUN npm install -g @vue/cli@4.5.9 @vue/cli-service@4.5.9 eslint@7.9.0 n@7.0.0 node-gyp@7.1.2 npm@6.14.10 yarn@1.22.10
+RUN npm install -g @vue/cli@4.5.9 @vue/cli-service@4.5.9 eslint@7.9.0 n@7.0.0 node-gyp@7.1.2 npm@6.14.10 yarn@1.22.10 prettier@2.3.2
 
 WORKDIR /app
 

@@ -2,7 +2,7 @@
 FROM python:3.6
 
 EXPOSE 80
-RUN apt-get update -y
+RUN apt-get update -y && apt-get install -y vim
 RUN mkdir ~/.ssh && echo "Host git*\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 
 WORKDIR /app
