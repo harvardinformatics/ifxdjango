@@ -1,17 +1,16 @@
 """
-DewarRequestProcessor, processes helium dewar requests.
+processor class
 
-@author: Meghan Correa
+Created on  {% now "Y-m-d" %}
+
 @copyright: 2020 The Presidents and Fellows of Harvard College. All rights reserved.
 @license: GPL v2.0
-@contact: mportermahoney@g.harvard.edu
 """
 import logging
 from collections import OrderedDict
 from django.contrib.auth.models import Group
 from django.conf import settings
-from ifxrequest.processor import BaseAccountRequestProcessor
-
+from ifxrequest.processor import Processor, BaseAccountRequestProcessor
 
 logger = logging.getLogger(__name__)
 

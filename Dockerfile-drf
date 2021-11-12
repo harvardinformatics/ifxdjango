@@ -15,7 +15,9 @@ ARG IFXAUTH_COMMIT=82e0b691633ba79fcb6dd69bb4a29fb0207f7a9a
 ARG IFXMAIL_CLIENT_COMMIT=cc1a9f9cc6cdb951828b6b912bc830c0172785f1
 ARG IFXSEMANTICDATA_COMMIT=4c5271fac3ec43b694c04e01e865ad636f81d494
 ARG IFXREQUEST_COMMIT=bae5ed1b87ac6ab146e855501c3b17236729d3eb
+ARG FIINE_CLIENT_COMMIT=e79f569aa22b43876945bfb75cf169b11a555138
 ARG IFXBILLING_COMMIT=f6c30fbda9586410802daae498e5c67f47fdb030
+ARG IFXVALIDCODE_COMMIT=4dd332c5a8e13d904a90da014094406a81b617e6
 
 COPY requirements.txt /app
 
@@ -28,15 +30,19 @@ RUN --mount=type=ssh pip install --upgrade pip && \
     pip install git+ssh://git@github.com/harvardinformatics/ifxauth.git@${IFXAUTH_COMMIT} && \
     pip install git+ssh://git@github.com/harvardinformatics/ifxmail.client.git@${IFXMAIL_CLIENT_COMMIT} && \
     pip install git+ssh://git@github.com/harvardinformatics/ifxrequest.git@${IFXREQUEST_COMMIT} && \
+    pip install git+ssh://git@gitlab-int.rc.fas.harvard.edu/informatics/fiine.client.git@${FIINE_CLIENT_COMMIT} && \
     pip install git+ssh://git@gitlab-int.rc.fas.harvard.edu/informatics/ifxbilling.git@${IFXBILLING_COMMIT} && \
+    pip install git+ssh://git@gitlab-int.rc.fas.harvard.edu/informatics/ifxvalidcode.git@${IFXVALIDCODE_COMMIT} && \
     pip install -r requirements.txt
 
+COPY etc/logging.ini /etc/logging.ini
 ENV PYTHONPATH /app
 ENV DJANGO_SETTINGS_MODULE {{project_name}}.settings
 
-CMD ./wait-for-it.sh -t 60 {{project_name}}-db:3306 && \
+CMD ./wait-for-it.sh -t 120 {{project_name}}-db:3306 && \
     ./manage.py collectstatic --no-input && \
     ./manage.py makemigrations && \
     ./manage.py migrate && \
+    ./manage.py applyDevData && \
     ./manage.py runserver 0.0.0.0:80 --insecure
 

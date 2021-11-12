@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 '''
-views for {{project_name}}.request
+views for hers.request
 
-Created on  2020-09-20
+Created on  {% now "Y-m-d" %}
 
-@author: Aaron Kitzmiller <aaron_kitzmiller@harvard.edu>
 @copyright: 2020 The Presidents and Fellows of Harvard College.
 All rights reserved.
 @license: GPL v2.0
