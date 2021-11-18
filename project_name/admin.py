@@ -1,5 +1,5 @@
 """
-Django admin for hers
+Django admin for {{project_name}}
 
 Created on  {% now "Y-m-d" %}
 """
@@ -51,7 +51,7 @@ class UserAffiliationInlineAdmin(admin.TabularInline):
 
 class UserAdmin(admin.ModelAdmin, ExportCsvMixin):
     '''
-    IfxUser admin, includes HeRS-specific fields
+    IfxUser admin, includes {{project_name}}-specific fields
     '''
     fields = ('ifxid', 'username', 'email', 'first_name', 'last_name', 'full_name', 'primary_affiliation', 'is_staff', 'is_active', 'is_superuser', 'date_joined', 'last_update')
     list_display = ('id', 'ifxid', 'username', 'email', 'full_name', 'primary_affiliation', 'date_joined', 'last_update', 'get_token', 'is_staff', 'is_active', 'is_superuser')
@@ -73,4 +73,4 @@ class UserAdmin(admin.ModelAdmin, ExportCsvMixin):
     get_token.short_description = 'Token'
 
 
-admin.site.register(models.HersUser, UserAdmin)
+admin.site.register(models.{{project_name|title}}User, UserAdmin)

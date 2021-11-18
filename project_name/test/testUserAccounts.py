@@ -18,7 +18,7 @@ from rest_framework.reverse import reverse
 from rest_framework import status
 from ifxuser.models import IfxUser
 from ifxbilling.models import UserProductAccount, Account, Product
-from hers.test import data
+from {{project_name}}.test import data
 
 class TestUserAccounts(APITestCase):
     '''

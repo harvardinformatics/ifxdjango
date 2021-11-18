@@ -75,7 +75,7 @@ def clearTestData():
             pass
 
     try:
-        IfxUser.objects.filter(username='hers').delete()
+        IfxUser.objects.filter(username='{{project_name}}').delete()
         Product.objects.all().delete()
         Account.objects.all().delete()
         Facility.objects.all().delete()

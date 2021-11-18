@@ -51,8 +51,8 @@ run: drf
 test-drf: drf
 	docker-compose run $(DRFIMAGE) ./manage.py test -v 2; docker-compose down
 test-ui: ui
-	docker volume rm hers_hers-data
-	docker-compose run $(UIIMAGE) ../wait-for-it.sh -s -t 120 hers-drf:80 -- npm run-script test:e2e; docker-compose down
+	docker volume rm {{project_name}}_{{project_name}}-data
+	docker-compose run $(UIIMAGE) ../wait-for-it.sh -s -t 120 {{project_name}}-drf:80 -- npm run-script test:e2e; docker-compose down
 test: test-drf test-ui
 docs:
 	docker-compose run $(DRFIMAGE) make html; docker-compose down

@@ -48,6 +48,6 @@ class {{project_name|title}}UserViewSetPermissions(UserViewSetPermissions):
     '''
     def user_is_admin(self, user):
         '''
-        How HeRS determins admin
+        How admin is determined
         '''
         return Roles.userIsAdmin(user)

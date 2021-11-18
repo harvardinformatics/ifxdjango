@@ -5,7 +5,7 @@ serializers.py
 
 Created on  {% now "Y-m-d" %}
 
-Serializers and ViewSets for hers
+Serializers and ViewSets for {{project_name}}
 '''
 import logging
 from django.contrib.auth import get_user_model
@@ -160,7 +160,7 @@ class UserViewSet(viewsets.ModelViewSet):
     ViewSet for users
     '''
     serializer_class = UserSerializer
-    permission_classes = [permissions.HersUserViewSetPermissions]
+    permission_classes = [permissions.{{project_name|title}}UserViewSetPermissions]
 
     def get_queryset(self):
         if Roles.userIsAdmin(self.request.user):

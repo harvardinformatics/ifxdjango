@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 '''
-views for hers.request
+views for {{project_name}}.request
 
 Created on  {% now "Y-m-d" %}
 
