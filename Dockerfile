@@ -11,7 +11,6 @@ RUN mkdir ~/.ssh && echo "Host git*\n\tStrictHostKeyChecking no\n" >> ~/.ssh/con
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 COPY etc/nginx.conf /etc/nginx/sites-available/default
 COPY etc/supervisor.conf /etc/supervisor/conf.d/app.conf
-COPY etc/logging.ini /etc/logging.ini
 
 RUN curl -ksL https://deb.nodesource.com/setup_14.x | bash - && apt-get install -y nodejs
 RUN curl -L https://www.npmjs.com/install.sh | bash

@@ -310,3 +310,15 @@ class IFXMESSAGES():
     ACCOUNT_REQUEST_COMPLETED_MESSAGE = '{{project_name}}_account_request_completed_message'
     ACCOUNT_REQUEST_COMPLETED_USER_NOTIFICATION_MESSAGE = '{{project_name}}_account_request_completed_user_notification_message'
 
+
+# Assuming ifxbilling is installed, these models should be ignored by the django-author pre-save
+# so that author values can be directly set
+AUTHOR_IGNORE_MODELS = [
+    'ifxbilling.BillingRecord',
+    'ifxbilling.Transaction',
+]
+
+AUTHOR_IGNORE_MODELS = [
+    'ifxbilling.BillingRecord',
+    'ifxbilling.Transaction',
+]

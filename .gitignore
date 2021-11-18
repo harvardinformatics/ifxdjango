@@ -20,7 +20,7 @@ docs/src/_build/
 docs/build/
 docker-compose-local.yml
 *.swp
-yarm.lock
+yarn.lock
 
 # Python
 __pycache__/

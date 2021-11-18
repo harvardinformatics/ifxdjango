@@ -28,8 +28,8 @@ from ifxuser.views import get_ifxapp_nanite_login as ifxuser_get_ifxapp_nanite_l
 from ifxuser.views import get_location_info as ifxuser_get_location_info
 from ifxuser.views import get_contact_list as ifxuser_get_contact_list
 from nanites.client import API as NanitesAPI
-from hers.permissions import AdminOrOwner, AdminPermission
-from hers import roles as Roles
+from {{project_name}}.permissions import AdminOrOwner, AdminPermission
+from {{project_name}} import roles as Roles
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST, HTTP_500_INTERNAL_SERVER_ERROR
 
 # Import views from ifxmail.client after aaron pushes the changes
