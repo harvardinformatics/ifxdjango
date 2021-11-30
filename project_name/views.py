@@ -52,6 +52,7 @@ def get_remote_user_auth_token(request):
         return JsonResponse({'error': 'User is inactive.'}, status=401)
 
     return JsonResponse({
+        'id': request.user.id,
         'token': str(token),
         'is_staff': request.user.is_staff is True,
         'username': request.user.username,

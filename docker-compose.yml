@@ -130,7 +130,7 @@ services:
       - {{project_name}}-db
       - testsmtp
     ports:
-      - 8098:80
+      - 8099:80
     environment:
       - {{project_name|upper}}_IFX_APP_TOKEN=FIXME
       - {{project_name|upper}}_USERNAME=root
