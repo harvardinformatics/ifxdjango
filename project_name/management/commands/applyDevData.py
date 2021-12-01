@@ -10,6 +10,7 @@ from django.core.management import call_command
 FIXTURES = [
     'ifxuser',
     'authtoken',
+    'authgroup'
 ]
 
 
