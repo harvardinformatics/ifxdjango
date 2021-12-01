@@ -10,7 +10,7 @@
     "inspect": "vue-cli-service inspect",
     "cypress:open": "cypress open --env {{project_name|upper}}_DRF=localhost:8098",
     "cypress:run": "NODE_ENV='test' cypress run -- --headless",
-    "cypress:8111": "cypress open --config baseUrl=http://localhost:8111/{{project_name}} --env {{project_name|upper}}_DRF=localhost:8098"
+    "cypress:8080": "cypress open --config baseUrl=http://localhost:8080/{{project_name}} --env {{project_name|upper}}_DRF=localhost:8098"
   },
   "dependencies": {
     "coa": "2.0.2",
