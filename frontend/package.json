@@ -8,9 +8,9 @@
     "test:e2e": "vue-cli-service test:e2e --headless --mode test",
     "lint": "vue-cli-service lint",
     "inspect": "vue-cli-service inspect",
-    "cypress:open": "cypress open --env {{project_name|upper}}_DRF=localhost:8098",
+    "cypress:open": "cypress open --env {{project_name|upper}}_DRF=localhost:8099",
     "cypress:run": "NODE_ENV='test' cypress run -- --headless",
-    "cypress:8080": "cypress open --config baseUrl=http://localhost:8080/{{project_name}} --env {{project_name|upper}}_DRF=localhost:8098"
+    "cypress:8080": "cypress open --config baseUrl=http://localhost:8080/{{project_name}} --env {{project_name|upper}}_DRF=localhost:8099"
   },
   "dependencies": {
     "coa": "2.0.2",
@@ -34,17 +34,14 @@
   },
   "devDependencies": {
     "@babel/core": "7.12.3",
-    "@cypress/webpack-preprocessor": "^5.5.0",
     "@vue/cli": "4.5.9",
     "@vue/cli-plugin-babel": "4.5.8",
-    "@vue/cli-plugin-e2e-cypress": "^4.5.9",
     "@vue/cli-plugin-eslint": "4.5.8",
     "@vue/cli-service": "^4.5.9",
     "@vue/compiler-sfc": "3.0.2",
     "@vue/eslint-config-airbnb": "5.1.0",
     "babel-eslint": "10.1.0",
     "braces": "2.3.2",
-    "cypress": "^8.2.0",
     "eslint": "7.32.0",
     "eslint-import-resolver-webpack": "0.13.0",
     "eslint-plugin-import": "2.22.1",
