@@ -11,7 +11,7 @@ Vue.component('v-text-field', VTextField)
 export default new Vuetify({
   dark: false,
   icons: {
-    iconfont: 'mdi'
+    iconfont: 'mdi',
   },
   themes: {
     light: {
@@ -21,7 +21,7 @@ export default new Vuetify({
       error: '#db564c',
       warning: '#fcf3a1',
       info: '#2196f3',
-      success: '#4caf50'
+      success: '#4caf50',
     },
     dark: {
       primary: '#C62828',
@@ -30,7 +30,7 @@ export default new Vuetify({
       error: '#db564c',
       warning: '#fcf3a1',
       info: '#2196f3',
-      success: '#4caf50'
-    }
-  }
+      success: '#4caf50',
+    },
+  },
 })
