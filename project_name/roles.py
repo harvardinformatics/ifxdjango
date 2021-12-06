@@ -3,9 +3,8 @@
 '''
 roles for {{project_name}}
 
-Created on  2020-09-16
+Created on  {% now "Y-m-d" %}
 
-@author: Aaron Kitzmiller <aaron_kitzmiller@harvard.edu>
 @copyright: 2020 The Presidents and Fellows of Harvard College.
 All rights reserved.
 @license: GPL v2.0

@@ -34,20 +34,37 @@ export default {
       const string = this.$api.authUser.isAuthenticated ? 'Logout' : 'Login'
       return lower ? string.toLowerCase() : string
     },
+    // eslint-disable-next-line consistent-return
     loginLogout() {
       if (this.$api.authUser.isAuthenticated) {
         return this.$api.auth.logout()
           .then((res) => this.showMessage(res))
           .then(() => {
-            if (this.rt.name !== 'Home') {
-              this.rtr.push({ name: 'Home' })
+            // const url = `${RC_AUTH_URL}/logout?all=1&service=https://portal.rc.fas.harvard.edu${this.$router.resolve({ name: 'BuildList' }).href}`
+            if (this.$cookie) {
+              this.$cookie.delete('MOD_AUTH_CAS_S')
+              // window.location.replace(url)
             }
           })
           .catch(error => this.showMessage(error))
       }
-      return this.$api.auth.login()
-        .then(res => this.showMessage(res))
-        .catch(error => this.showMessage(error))
+      const url = this.$router.resolve({ name: 'Login', query: { from: this.$route.fullPath } }).href
+      window.location.replace(url)
+    },
+    isAuthenticated() {
+      return this.$api.auth.isAuthenticated
+    },
+    isDjangoStaff() {
+      return this.$api.auth.can('access-django-admin')
+    },
+    getAdminUrl() {
+      return this.$api.urls.DJANGO_ADMIN_ROOT;
+    },
+    goToUserDetailPage() {
+      this.$router.push({ name: 'UserDetail', params: { id: this.$api.authUser.id } })
+    },
+    handleLogin() {
+      console.log('handle login')
     }
   },
   computed: {
@@ -158,25 +175,6 @@ export default {
           </v-tooltip>
         </v-list-group>
       </v-list>
-      <template v-slot:append>
-        <v-tooltip right>
-          <template v-slot:activator="{ on }">
-            <v-list-item
-              v-on="mini ? on : false"
-              data-test='loginLogoutBtn'
-              @click.prevent="loginLogout"
-            >
-              <v-list-item-action>
-                <v-icon>person</v-icon>
-              </v-list-item-action>
-              <v-list-item-title>{% verbatim %}{{getLoginLogoutString()}}{% endverbatim %}
-              </v-list-item-title>
-            </v-list-item>
-          </template>
-          <span>{% verbatim %}{{getLoginLogoutString()}}{% endverbatim %}
-          </span>
-        </v-tooltip>
-      </template>
     </v-navigation-drawer>
 
     <v-app-bar app clipped-left id="app-bar" color="primary">
@@ -188,24 +186,73 @@ export default {
       </v-app-bar-nav-icon>
       <router-link to="/">
         <v-toolbar-title class="app-title">
-          <span class="app-title-text">{{project_name}}</span>
+          <span class="app-title-text">{% verbatim %}{{project_name}}{% endverbatim %}</span>
         </v-toolbar-title>
       </router-link>
       <v-spacer></v-spacer>
-      <v-chip v-if="$api.auth.isAuthenticated" color="white">
-        Welcome,
-        <span data-test='username' class="username">{% verbatim %}{{displayName}}{% endverbatim %}</span>
-      </v-chip>
+      <v-menu
+        v-if="isAuthenticated()"
+        bottom
+        :offset-y="true"
+      >
+        <template v-slot:activator="{ on, attrs }">
+          <v-chip
+            v-bind="attrs"
+            v-on="on"
+            dark
+          >
+            <span class="username">Welcome, {% verbatim %}{{displayName}}{% endverbatim %}</span>
+          </v-chip>
+        </template>
+
+        <v-list dense nav>
+          <v-list-item-group
+            color="primary"
+          >
+            <v-list-item
+              @click="goToUserDetailPage()"
+            >
+              <v-list-item-icon>
+                <v-icon>person</v-icon>
+              </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-title>User Profile</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+            <v-list-item @click="loginLogout">
+              <v-list-item-icon>
+                <v-icon>mdi-exit-to-app</v-icon>
+              </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-title>Logout</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list-item-group>
+        </v-list>
+      </v-menu>
+      <span v-else>
+        <v-btn @click="loginLogout" text>
+          Login
+        </v-btn>
+      </span>
+      <v-tooltip bottom v-if="isDjangoStaff()" >
+        <template v-slot:activator="{ on }">
+          <v-btn text icon :href="getAdminUrl()" v-on="on">
+            <v-icon color="yellow">vpn_key</v-icon>
+          </v-btn>
+        </template>
+        <span>Django admin panel</span>
+      </v-tooltip>
     </v-app-bar>
 
     <v-main class="app-content" v-if="fullPageComponents.includes($route.name)">
-      <router-view :key="$route.fullPath"></router-view>
+      <router-view @loginSuccessful="handleLogin" :key="$route.fullPath"></router-view>
     </v-main>
     <v-main v-else class="app-content app-background">
       <v-container>
         <v-col>
           <v-card class="component-card">
-            <router-view :key="$route.fullPath"></router-view>
+            <router-view @loginSuccessful="handleLogin" :key="$route.fullPath"></router-view>
           </v-card>
         </v-col>
       </v-container>

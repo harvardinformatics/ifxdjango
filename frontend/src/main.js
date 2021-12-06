@@ -34,8 +34,10 @@ Vue.prototype.$requestApi = requestApi
 // Loop through routes, set options for all paths and admin routes
 // To make route admin only, go to router index and add isAdminRoute:true to specific route
 router.options.routes.forEach(route => {
+  // eslint-disable-next-line no-param-reassign
   route.pathToRegexpOptions = { strict: true }
   if (route.isAdminRoute) {
+    // eslint-disable-next-line no-param-reassign
     route.beforeEnter = (to, from, next) => {
       if (api.authUser.isAdmin) {
         // TODO: add message

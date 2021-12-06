@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:experimental
-FROM python:3.6
+FROM python:3.6.15-buster
 
 EXPOSE 80
 RUN apt-get update -y && apt-get install -y \
@@ -12,23 +12,25 @@ RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 COPY etc/nginx.conf /etc/nginx/sites-available/default
 COPY etc/supervisor.conf /etc/supervisor/conf.d/app.conf
 
-RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - && apt-get install -y nodejs
-RUN apt-get install npm -y
+RUN curl -ksL https://deb.nodesource.com/setup_14.x | bash - && apt-get install -y nodejs
+RUN curl -L https://www.npmjs.com/install.sh | bash
 RUN npm install npm@6.14.11 -g
 # Forcing install of these versions.  Goes haywire otherwise
-RUN npm install -g @vue/cli@4.5.9 @vue/cli-service@4.5.9 eslint@7.9.0 n@7.0.0 node-gyp@7.1.2 npm@6.14.10 yarn@1.22.10 prettier@2.3.2
+RUN npm install -g @vue/cli@4.5.9 @vue/cli-service@4.5.9 eslint@7.32.0 n@7.0.0 node-gyp@7.1.2 npm@6.14.10 yarn@1.22.10 prettier@2.3.2
 
 WORKDIR /app
 
-ARG DJVOCAB_COMMIT=a0cfeba93ea805d3861e97e9c38fd27447e5b58a
-ARG IFXURLS_COMMIT=b9109ab326393be2b216600ff114e98b2a826422
-ARG NANITES_CLIENT_COMMIT=a11ff96ccb2c888d0d07ac97f27de1153463bf59
-ARG IFXUSER_COMMIT=909b88fbf35f7d3000398ff211a5361921df32d7
-ARG IFXAUTH_COMMIT=afcaad2b05f5dd90e86e53b2de864bef04c91898
-ARG IFXMAIL_CLIENT_COMMIT=5fc6d834c76c0f66d823ff0b5d384ab7b30009b0
+ARG DJVOCAB_COMMIT=ad47dcbe7a75e9c3b70c4dec4c56399fd55de514
+ARG IFXURLS_COMMIT=92c683c46683e71cd1259a60cca8ed5db104b1d7
+ARG NANITES_CLIENT_COMMIT=8eebbe1536fc21f8c7baf362194a8dd90b4f0663
+ARG IFXUSER_COMMIT=eecc611fa78f0c2ebf5f476ecff2cd5cabe80467
+ARG IFXAUTH_COMMIT=82e0b691633ba79fcb6dd69bb4a29fb0207f7a9a
+ARG IFXMAIL_CLIENT_COMMIT=cc1a9f9cc6cdb951828b6b912bc830c0172785f1
 ARG IFXSEMANTICDATA_COMMIT=4c5271fac3ec43b694c04e01e865ad636f81d494
-ARG IFXREQUEST_COMMIT=9aa45ce73b8fe98905dcadc57856b7c1e93fa6e1
-ARG IFXBILLING_COMMIT=0a0d74edc1c7998585efd91f4152377478323f4f
+ARG IFXREQUEST_COMMIT=03077a8208adffac8dbd2f8226facd0e66ec886f
+ARG FIINE_CLIENT_COMMIT=e79f569aa22b43876945bfb75cf169b11a555138
+ARG IFXBILLING_COMMIT=f6c30fbda9586410802daae498e5c67f47fdb030
+ARG IFXVALIDCODE_COMMIT=4dd332c5a8e13d904a90da014094406a81b617e6
 
 COPY requirements.txt /app
 
@@ -43,7 +45,9 @@ RUN --mount=type=ssh pip install --upgrade pip && \
     pip install git+ssh://git@github.com/harvardinformatics/ifxmail.client.git@${IFXMAIL_CLIENT_COMMIT} && \
     pip install git+ssh://git@github.com/harvardinformatics/ifxsemanticdata.git@${IFXSEMANTICDATA_COMMIT} && \
     pip install git+ssh://git@github.com/harvardinformatics/ifxrequest.git@${IFXREQUEST_COMMIT} && \
+    pip install git+ssh://git@gitlab-int.rc.fas.harvard.edu/informatics/fiine.client.git@${FIINE_CLIENT_COMMIT} && \
     pip install git+ssh://git@gitlab-int.rc.fas.harvard.edu/informatics/ifxbilling.git@${IFXBILLING_COMMIT} && \
+    pip install git+ssh://git@gitlab-int.rc.fas.harvard.edu/informatics/ifxvalidcode.git@${IFXVALIDCODE_COMMIT} && \
     pip install -r requirements.txt
 
 ADD . /app

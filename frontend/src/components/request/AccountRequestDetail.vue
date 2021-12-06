@@ -9,7 +9,7 @@ export default {
     return {
       tracks: {
         general: 'General Information',
-        {{project_name}}_user: '{{project_name}} User'
+        {{project_name}}_user: '{{project_name|title}} User'
       }
     }
   }

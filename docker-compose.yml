@@ -133,7 +133,7 @@ services:
       - 8099:80
     environment:
       - {{project_name|upper}}_IFX_APP_TOKEN=FIXME
-      - {{project_name|upper}}_USERNAME={{project_name}}
+      - {{project_name|upper}}_USERNAME=root
       - {{project_name|upper}}_PASSWORD={{project_name}}
       - {{project_name|upper}}_DATABASE={{project_name}}
       - {{project_name|upper}}_HOSTNAME={{project_name}}-db
@@ -142,6 +142,7 @@ services:
       - {{project_name|upper}}_DJANGO_KEY=anweijfnvwoejvniejnvfwvijnf
       - SMTP_SERVER=testsmtp
       - IFX_REMOTE_USER=veradmin
+      - NANITES_API_BASE=http://nanites/nanites/api
     networks:
       main:
 

@@ -1,5 +1,5 @@
 <script>
-
+/* eslint-disable vue/no-mutating-props */
 // const STEP_DISPLAY_NAMES = {
 //   'welcome': 'Welcome',
 //   'existing_email_checked': 'Existing email checked',

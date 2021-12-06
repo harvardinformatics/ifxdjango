@@ -1,8 +1,13 @@
 {
-    "supportFile": "test/e2e/support/index.js",
-    "integrationFolder": "test/e2e/specs",
-    "screenshotsFolder": "test/e2e/media/screenshots",
-    "videosFolder": "test/e2e/media/videos",
-    "fixturesFolder": "test/e2e/fixtures",
-    "pluginsFile": "test/e2e/plugins/index.js"
+  "numTestsKeptInMemory": 5,
+  "supportFile": "tests/e2e/support/index.js",
+  "integrationFolder": "tests/e2e/specs",
+  "screenshotsFolder": "tests/e2e/media/screenshots",
+  "videosFolder": "tests/e2e/media/videos",
+  "fixturesFolder": "tests/e2e/fixtures",
+  "pluginsFile": "tests/e2e/plugins/index.js",
+  "baseUrl": "http://localhost:8080/{{project_name}}",
+  "env": {
+    "{{project_name|upper}}_DRF": "{{project_name}}-drf"
   }
+}
