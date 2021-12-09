@@ -20,8 +20,8 @@ django.setup()
 # -- Project information -----------------------------------------------------
 
 project = '{{project_name}}'
-copyright = '2020, Aaron Kitzmiller, Andy Bryant, Meghan Correa'
-author = 'Aaron Kitzmiller, Andy Bryant, Meghan Correa'
+copyright = '2021, Aaron Kitzmiller, Andy Bryant, Meghan Correa, David D\'Antonio'
+author = 'Aaron Kitzmiller, Andy Bryant, Meghan Correa, David D\'Antonio'
 
 
 # -- General configuration ---------------------------------------------------

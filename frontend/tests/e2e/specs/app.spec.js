@@ -29,7 +29,7 @@ describe('App Home', () => {
     cy.wrap(navItems).each((ni) => cy.contains('.v-list-item__title', ni))
   })
   it('Has proper footer text', () => {
-    const footerText = '2021 The Presidents and Fellows of Harvard College'
+    const footerText = '2021 The President and Fellows of Harvard College'
     cy.contains('span', footerText)
   })
 })

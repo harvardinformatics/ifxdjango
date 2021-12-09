@@ -4,7 +4,7 @@ views for {{project_name}}.request
 
 Created on  {% now "Y-m-d" %}
 
-@copyright: 2020 The Presidents and Fellows of Harvard College.
+@copyright: 2021 The President and Fellows of Harvard College.
 All rights reserved.
 @license: GPL v2.0
 '''

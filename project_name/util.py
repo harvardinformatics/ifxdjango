@@ -6,7 +6,7 @@ utility functions (used by calculator classes)
 Created on  2021-10-01
 
 @author: Meghan Correa <mportermahoney@g.harvard.edu>
-@copyright: 2021 The Presidents and Fellows of Harvard College.
+@copyright: 2021 The President and Fellows of Harvard College.
 All rights reserved.
 @license: GPL v2.0
 '''
