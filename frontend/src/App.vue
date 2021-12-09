@@ -259,7 +259,7 @@ export default {
     </v-main>
 
     <v-footer color="secondary" id="footer" app>
-      <span class="white--text">2021 The Presidents and Fellows of Harvard College</span>
+      <span class="white--text">2021 The President and Fellows of Harvard College</span>
     </v-footer>
   </v-app>
 </template>
