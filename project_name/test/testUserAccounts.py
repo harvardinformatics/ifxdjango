@@ -5,7 +5,7 @@ Ensure that product_accounts are returned from UserViewSet
 
 Created on  {% now "Y-m-d" %}
 
-@copyright: 2021 The Presidents and Fellows of Harvard College.
+@copyright: 2021 The President and Fellows of Harvard College.
 All rights reserved.
 @license: GPL v2.0
 '''
