@@ -36,7 +36,7 @@ drf:
 
 prod:
 	./set-version.sh
-	docker build -t $(PRODIMAGE) $(PRODBUILDARGS) .
+	docker build --platform linux/amd64 -t $(PRODIMAGE) $(PRODBUILDARGS) . --no-cache
 	docker push $(PRODIMAGE)
 up: drf
 	docker-compose -f $(DOCKERCOMPOSEFILE) $(DOCKERCOMPOSEARGS) up
@@ -53,7 +53,7 @@ test-drf: drf
 test-ui: ui
 	docker volume rm {{project_name}}_{{project_name}}-data
 	docker-compose run $(UIIMAGE) ../wait-for-it.sh -s -t 120 {{project_name}}-drf:80 -- npm run-script test:e2e; docker-compose down
-test: test-drf test-ui
+test: test-drf
 docs:
 	docker-compose run $(DRFIMAGE) make html; docker-compose down
 

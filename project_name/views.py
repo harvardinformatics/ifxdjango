@@ -173,14 +173,14 @@ def update_person(request):
         person_data = NanitesAPI.readPerson(ifxid=data['ifxid']).to_dict()
 
         fieldlist = USER_EDITABLE_PERSON_FIELDS
-        if Roles.userIsAdmin(request.user):
+        if Roles.has_role(request.user, settings.GROUPS.ADMIN_GROUP_NAME):
             fieldlist = ADMIN_EDITABLE_PERSON_FIELDS
 
         for field in fieldlist:
             person_data[field] = data[field]
 
         # Catch changes to is_active as a modification to the login
-        if Roles.userIsAdmin(request.user):
+        if Roles.has_role(request.user, settings.GROUPS.ADMIN_GROUP_NAME):
             for i, login in enumerate(person_data['logins']):
                 if login['application'] == settings.IFX_APP['name']:
                     if is_active is not None and login['is_enabled'] != is_active:
@@ -239,3 +239,18 @@ def get_contact_list(request):
     Contact list
     '''
     return ifxuser_get_contact_list(request)
+
+@permission_classes((AdminPermission, ))
+def get_contactables(request):
+    '''
+    ifxuser get_contactables with admin permission
+    '''
+    return ifxuser_get_contactables(request)
+
+
+@permission_classes((AdminPermission, ))
+def update_user_accounts_view(request):
+    '''
+    Update one or more user accounts / user product accounts from fiine
+    '''
+    return ifxbilling_views.update_user_accounts_view(request)

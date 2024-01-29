@@ -143,6 +143,7 @@ services:
       - SMTP_SERVER=testsmtp
       - IFX_REMOTE_USER=veradmin
       - NANITES_API_BASE=http://nanites/nanites/api
+      - IFXMAIL_API_BASE=http://ifxmail/ifxmail/api
     networks:
       main:
 

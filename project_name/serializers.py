@@ -163,7 +163,7 @@ class UserViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.{{project_name|title}}UserViewSetPermissions]
 
     def get_queryset(self):
-        if Roles.userIsAdmin(self.request.user):
+        if Roles.has_role(request.user, settings.GROUPS.ADMIN_GROUP_NAME):
             groupstr = self.request.query_params.get('groups')
             username = self.request.query_params.get('username')
             search = self.request.query_params.get('search')

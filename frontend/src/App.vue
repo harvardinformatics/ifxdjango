@@ -37,7 +37,8 @@ export default {
     // eslint-disable-next-line consistent-return
     loginLogout() {
       if (this.$api.authUser.isAuthenticated) {
-        return this.$api.auth.logout()
+        return this.$api.auth
+          .logout()
           .then((res) => this.showMessage(res))
           .then(() => {
             // const url = `${RC_AUTH_URL}/logout?all=1&service=https://portal.rc.fas.harvard.edu${this.$router.resolve({ name: 'BuildList' }).href}`
@@ -46,7 +47,7 @@ export default {
               // window.location.replace(url)
             }
           })
-          .catch(error => this.showMessage(error))
+          .catch((error) => this.showMessage(error))
       }
       const url = this.$router.resolve({ name: 'Login', query: { from: this.$route.fullPath } }).href
       window.location.replace(url)
@@ -55,16 +56,16 @@ export default {
       return this.$api.auth.isAuthenticated
     },
     isDjangoStaff() {
-      return this.$api.auth.can('access-django-admin')
+      return this.$api.auth.can('access-django-admin', this.$api.authUser)
     },
     getAdminUrl() {
-      return this.$api.urls.DJANGO_ADMIN_ROOT;
+      return this.$api.urls.DJANGO_ADMIN_ROOT
     },
     goToUserDetailPage() {
       this.$router.push({ name: 'UserDetail', params: { id: this.$api.authUser.id } })
     },
-    handleLogin() {
-      console.log('handle login')
+    startsCollapsed(group) {
+      return !group.collapsed
     }
   },
   computed: {
@@ -77,7 +78,7 @@ export default {
         return this.drawerMiniPref
       }
       // Otherwise, navigation drawer is minified on smaller screens only
-      if (this.$vuetify.breakpoint.lgAndUp) {
+      if (this.$vuetify.breakpoint.xlAndUp) {
         return false
       }
       return true
@@ -259,7 +260,7 @@ export default {
     </v-main>
 
     <v-footer color="secondary" id="footer" app>
-      <span class="white--text">2021 The President and Fellows of Harvard College</span>
+      <span class="white--text">2024 The President and Fellows of Harvard College</span>
     </v-footer>
   </v-app>
 </template>
@@ -291,7 +292,7 @@ export default {
   }
 
   .nav-link {
-    transition: margin .1s ease-in;
+    transition: margin 0.1s ease-in;
   }
 
   .nav-link-expanded {
@@ -306,7 +307,7 @@ export default {
     padding: 12px;
   }
   .required label::after {
-    content: " *";
+    content: ' *';
   }
 
   .app-content {
@@ -328,5 +329,4 @@ export default {
     -ms-user-select: none;
     user-select: none;
   }
-
 </style>
