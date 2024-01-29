@@ -46,7 +46,7 @@
     "eslint-import-resolver-webpack": "0.13.0",
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-vue": "7.1.0",
-    "node-sass": "4.14.1",
+    "node-sass": "7.0.0",
     "postcss-loader": "4.0.4",
     "raw-loader": "4.0.2",
     "sass": "1.27.1",
