@@ -27,7 +27,7 @@ ARG IFXUSER_COMMIT=eecc611fa78f0c2ebf5f476ecff2cd5cabe80467
 ARG IFXAUTH_COMMIT=82e0b691633ba79fcb6dd69bb4a29fb0207f7a9a
 ARG IFXMAIL_CLIENT_COMMIT=cc1a9f9cc6cdb951828b6b912bc830c0172785f1
 ARG IFXSEMANTICDATA_COMMIT=4c5271fac3ec43b694c04e01e865ad636f81d494
-ARG IFXREQUEST_COMMIT=03077a8208adffac8dbd2f8226facd0e66ec886f
+ARG IFXREQUEST_COMMIT=c858ab872ff0eec55bfef6426c4f282d646d44f2
 ARG FIINE_CLIENT_COMMIT=e79f569aa22b43876945bfb75cf169b11a555138
 ARG IFXBILLING_COMMIT=f6c30fbda9586410802daae498e5c67f47fdb030
 ARG IFXVALIDCODE_COMMIT=4dd332c5a8e13d904a90da014094406a81b617e6
@@ -44,7 +44,7 @@ RUN --mount=type=ssh pip install --upgrade pip && \
     pip install git+ssh://git@github.com/harvardinformatics/ifxauth.git@${IFXAUTH_COMMIT} && \
     pip install git+ssh://git@github.com/harvardinformatics/ifxmail.client.git@${IFXMAIL_CLIENT_COMMIT} && \
     pip install git+ssh://git@github.com/harvardinformatics/ifxsemanticdata.git@${IFXSEMANTICDATA_COMMIT} && \
-    pip install git+ssh://git@github.com/harvardinformatics/ifxrequest.git@${IFXREQUEST_COMMIT} && \
+    pip install git+ssh://git@gitlab-int.rc.fas.harvard.edu/informatics/ifxrequest.git@${IFXREQUEST_COMMIT} && \
     pip install git+ssh://git@gitlab-int.rc.fas.harvard.edu/informatics/fiine.client.git@${FIINE_CLIENT_COMMIT} && \
     pip install git+ssh://git@gitlab-int.rc.fas.harvard.edu/informatics/ifxbilling.git@${IFXBILLING_COMMIT} && \
     pip install git+ssh://git@gitlab-int.rc.fas.harvard.edu/informatics/ifxvalidcode.git@${IFXVALIDCODE_COMMIT} && \
