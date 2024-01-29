@@ -187,7 +187,7 @@ export default {
       </v-app-bar-nav-icon>
       <router-link to="/">
         <v-toolbar-title class="app-title">
-          <span class="app-title-text">{% verbatim %}{{project_name}}{% endverbatim %}</span>
+          <span class="app-title-text">{{project_name}}</span>
         </v-toolbar-title>
       </router-link>
       <v-spacer></v-spacer>
@@ -247,13 +247,13 @@ export default {
     </v-app-bar>
 
     <v-main class="app-content" v-if="fullPageComponents.includes($route.name)">
-      <router-view @loginSuccessful="handleLogin" :key="$route.fullPath"></router-view>
+      <router-view :key="$route.fullPath"></router-view>
     </v-main>
     <v-main v-else class="app-content app-background">
       <v-container>
         <v-col>
           <v-card class="component-card">
-            <router-view @loginSuccessful="handleLogin" :key="$route.fullPath"></router-view>
+            <router-view :key="$route.fullPath"></router-view>
           </v-card>
         </v-col>
       </v-container>

@@ -326,7 +326,7 @@ class ROLES():
     '''
     TEST = 'test'
     MODULES = [
-        'admin',
+        'Admin',
     ]
     PACKAGE_NAME = '{{project_name}}.roles'
 

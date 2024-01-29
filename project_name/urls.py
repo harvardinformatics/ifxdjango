@@ -4,12 +4,12 @@ The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.2/topics/http/urls/
 """
 from django.contrib import admin
-from django.urls import path
-from django.conf.urls import url, include
+from django.urls import path, re_path
+from django.conf.urls import include
 from django.conf.urls.static import static
 from django.views.generic.base import TemplateView
 from rest_framework import routers
-from ifxuser.views import get_org_names
+from ifxuser.views import get_org_names, get_org_list
 from ifxuser import serializers as ifxuser_serializers
 from ifxbilling import serializers as ifxbilling_serializers
 from ifxbilling import views as ifxbilling_views
@@ -66,10 +66,8 @@ urlpatterns = static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + [
     path(r'{{project_name}}/api/get-org-list/', get_org_list),
     path(r'{{project_name}}/api/get-contactables/', views.get_contactables),
     path(r'{{project_name}}/api/billing-records/bulk-update/', ifxbilling_serializers.BillingRecordViewSet.bulk_update),
-    path(r'{{project_name}}/api/billing/calculate-billing-month/<str:invoice_prefix>/<int:year>/<int:month>/', views.calculate_billing_month),
-    path(r'{{project_name}}/api/billing/billing-record-review-notification/<str:invoice_prefix>/<int:year>/<int:month>/', ifxbilling_views.send_billing_record_review_notification, name='billing-record-review-notification'),
     path(r'{{project_name}}/api/billing/update-user-accounts/', views.update_user_accounts_view, name='update-user-accounts'),
     path(r'{{project_name}}/api/run-report/', run_report, name='run-report'),
     path(r'{{project_name}}/api/', include(router.urls)),
-    url(r'^{{project_name}}/.*$', TemplateView.as_view(template_name="index.html")),
+    re_path(r'^{{project_name}}/.*$', TemplateView.as_view(template_name="index.html")),
 ]

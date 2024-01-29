@@ -10,7 +10,7 @@ import json
 import logging
 from rest_framework import permissions
 from ifxuser.permissions import UserViewSetPermissions
-from {{project_name}} import roles as Roles
+from ifxuser import roles as Roles
 
 logger = logging.getLogger(__name__)
 
@@ -19,7 +19,7 @@ class AdminPermission(permissions.IsAuthenticated):
     User must be an admin
     '''
     def has_permission(self, request, view):
-        result = Roles.has_role(request.user, settings.GROUPS.ADMIN_GROUP_NAME)
+        result = Roles.has_role(settings.GROUPS.ADMIN_GROUP_NAME, request.user)
         logger.debug('user is admin? %s', str(result))
         return result
 
@@ -39,7 +39,7 @@ class AdminOrOwner(permissions.IsAuthenticated):
                 username = data.get('username')
             except json.JSONDecodeError:
                 pass
-        return (Roles.has_role(request.user, settings.GROUPS.ADMIN_GROUP_NAME) or request.user.username == username) and super().has_permission(request, view)
+        return (Roles.has_role(settings.GROUPS.ADMIN_GROUP_NAME, request.user) or request.user.username == username) and super().has_permission(request, view)
 
 
 class {{project_name|title}}UserViewSetPermissions(UserViewSetPermissions):
@@ -50,4 +50,4 @@ class {{project_name|title}}UserViewSetPermissions(UserViewSetPermissions):
         '''
         How admin is determined
         '''
-        return Roles.has_role(request.user, settings.GROUPS.ADMIN_GROUP_NAME)
+        return Roles.has_role(settings.GROUPS.ADMIN_GROUP_NAME, request.user)

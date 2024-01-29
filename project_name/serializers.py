@@ -11,13 +11,14 @@ import logging
 from django.contrib.auth import get_user_model
 from django.db.models import Q
 from django.db import transaction
+from django.conf import settings
 from rest_framework import serializers, viewsets
 from ifxuser import serializers as ifxuser_serializers
 from ifxuser import models as ifxuser_models
+from ifxuser import roles as Roles
 from ifxbilling import models as ifxbilling_models
 from ifxbilling import serializers as ifxbilling_serializers
 from {{project_name}} import permissions
-from {{project_name}} import roles as Roles
 from {{project_name}} import models
 
 logger = logging.getLogger(__name__)
@@ -163,7 +164,7 @@ class UserViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.{{project_name|title}}UserViewSetPermissions]
 
     def get_queryset(self):
-        if Roles.has_role(request.user, settings.GROUPS.ADMIN_GROUP_NAME):
+        if Roles.has_role(settings.GROUPS.ADMIN_GROUP_NAME, self.request.user):
             groupstr = self.request.query_params.get('groups')
             username = self.request.query_params.get('username')
             search = self.request.query_params.get('search')

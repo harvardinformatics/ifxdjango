@@ -31,7 +31,7 @@ class Command(BaseCommand):
             except Exception as e:
                 print(f'Error resetting token for {user}: {e}')
         # Load auth
-        call_command('loaddata', '/app/{{project_name}}/fixtures/auth.json')
+        call_command('loaddata', '/app/{{project_name}}/fixtures/authgroup.json')
         # Load users
         call_command('loaddata', '/app/{{project_name}}/fixtures/ifxuser.json')
         # Load tokens

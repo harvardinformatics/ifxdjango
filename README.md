@@ -19,7 +19,7 @@ It goes without saying that you do not want to use the production token here.
 
 Library submodules should then be added to the application
 
-   > for m in ifxauth ifxurls nanites.client ifxuser ifxmail.client ifxrequest ifxreport fiine.client ifxbilling; do git submodule add git@github.com:harvardinformatics/${m}.git; done
+   > for m in ifxauth ifxurls djvocab nanites.client ifxuser ifxmail.client ifxrequest ifxreport ifxec fiine.client ifxbilling; do git submodule add git@github.com:harvardinformatics/${m}.git; done
 
 Your application may require a different list.  If so, make sure that PYTHONPATH is properly set.
 

@@ -27,9 +27,9 @@ from ifxuser.nanites import updateOrCreateIfxUser
 from ifxuser.views import get_ifxapp_nanite_login as ifxuser_get_ifxapp_nanite_login
 from ifxuser.views import get_location_info as ifxuser_get_location_info
 from ifxuser.views import get_contact_list as ifxuser_get_contact_list
+from ifxuser import roles as Roles
 from nanites.client import API as NanitesAPI
 from {{project_name}}.permissions import AdminOrOwner, AdminPermission
-from {{project_name}} import roles as Roles
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST, HTTP_500_INTERNAL_SERVER_ERROR
 
 # Import views from ifxmail.client after aaron pushes the changes
@@ -173,14 +173,14 @@ def update_person(request):
         person_data = NanitesAPI.readPerson(ifxid=data['ifxid']).to_dict()
 
         fieldlist = USER_EDITABLE_PERSON_FIELDS
-        if Roles.has_role(request.user, settings.GROUPS.ADMIN_GROUP_NAME):
+        if Roles.has_role(settings.GROUPS.ADMIN_GROUP_NAME, request.user):
             fieldlist = ADMIN_EDITABLE_PERSON_FIELDS
 
         for field in fieldlist:
             person_data[field] = data[field]
 
         # Catch changes to is_active as a modification to the login
-        if Roles.has_role(request.user, settings.GROUPS.ADMIN_GROUP_NAME):
+        if Roles.has_role(settings.GROUPS.ADMIN_GROUP_NAME, request.user):
             for i, login in enumerate(person_data['logins']):
                 if login['application'] == settings.IFX_APP['name']:
                     if is_active is not None and login['is_enabled'] != is_active:

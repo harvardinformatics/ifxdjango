@@ -13,7 +13,7 @@ RUN --mount=type=ssh pip install --upgrade pip && \
     pip install 'Django>4,<5' && \
     pip install -r requirements.txt
 
-ENV PYTHONPATH /app:/app/ifxreport:/app/djvocab:/app/ifxurls:/app/nanites.client:/app/ifxuser:/app/ifxauth:/app/ifxmail.client:/app/ifxrequest:/app/fiine.client:/app/ifxbilling
+ENV PYTHONPATH /app:/app/ifxreport:/app/djvocab:/app/ifxurls:/app/nanites.client:/app/ifxuser:/app/ifxauth:/app/ifxmail.client:/app/ifxrequest:/app/ifxec:/app/fiine.client:/app/ifxbilling
 ENV DJANGO_SETTINGS_MODULE {{project_name}}.settings
 
 CMD ./wait-for-it.sh -t 120 {{project_name}}-db:3306 && \

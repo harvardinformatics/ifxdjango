@@ -11,7 +11,8 @@ All rights reserved.
 @license: GPL v2.0
 '''
 import logging
-
+from django.conf import settings
+from django.contrib.auth.models import Group
 
 logger = logging.getLogger(__name__)
 

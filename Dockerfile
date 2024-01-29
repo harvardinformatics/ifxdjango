@@ -38,7 +38,7 @@ RUN --mount=type=ssh pip install --upgrade pip && \
 
 ADD . /app
 
-ENV PYTHONPATH /app:/app/ifxreport:/app/djvocab:/app/ifxurls:/app/nanites.client:/app/ifxuser:/app/ifxauth:/app/ifxmail.client:/app/ifxrequest:/app/fiine.client:/app/ifxbilling
+ENV PYTHONPATH /app:/app/ifxreport:/app/djvocab:/app/ifxurls:/app/nanites.client:/app/ifxuser:/app/ifxauth:/app/ifxmail.client:/app/ifxrequest:/app/ifxec:/app/fiine.client:/app/ifxbilling
 
 RUN mkdir -p /app/media/reports
 RUN rm -rf /app/frontend/dist/* && rm -rf /static/*
