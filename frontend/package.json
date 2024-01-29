@@ -22,7 +22,7 @@
     "ifxvue": "harvardinformatics/ifxvue#ajk_deploy",
     "lodash": "4.17.21",
     "material-design-icons-iconfont": "6.1.0",
-    "moment": "2.29.1",
+    "moment": "2.29.4",
     "v-currency-field": "3.1.1",
     "vue": "2.6.12",
     "vue-json-csv": "^1.2.12",
