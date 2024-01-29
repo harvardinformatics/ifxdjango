@@ -10,6 +10,21 @@ export default {
     title: 'Admin',
     items: [
       {
+        icon: 'account_balance_wallet',
+        title: 'Expense Codes / POs',
+        link: 'AccountList',
+      },
+      {
+        icon: 'money',
+        title: 'Billing Records',
+        link: 'BillingRecordList',
+      },
+      {
+        icon: 'mdi-finance',
+        title: 'Reports',
+        link: 'ReportRunList',
+      },
+      {
         icon: 'group',
         title: 'Users',
         link: 'UserList'

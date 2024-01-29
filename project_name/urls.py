@@ -2,27 +2,19 @@
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-from django.conf.urls import url, include
+from django.urls import path, re_path
+from django.conf.urls import include
 from django.conf.urls.static import static
 from django.views.generic.base import TemplateView
 from rest_framework import routers
-from ifxuser.views import get_org_names
+from ifxuser.views import get_org_names, get_org_list
 from ifxuser import serializers as ifxuser_serializers
 from ifxbilling import serializers as ifxbilling_serializers
 from ifxbilling import views as ifxbilling_views
+from ifxreport.views import run_report
+from ifxreport.serializers import ReportRunViewSet, ReportViewSet
 from {{project_name}} import settings, serializers
 from {{project_name}} import views
 from {{project_name}}.request import views as request_views
@@ -40,6 +32,9 @@ router.register(r'accounts', ifxbilling_serializers.AccountViewSet, 'account')
 router.register(r'billing-records', ifxbilling_serializers.BillingRecordViewSet, 'billing-records')
 router.register(r'products', ifxbilling_serializers.ProductViewSet, 'products')
 router.register(r'facilities', ifxbilling_serializers.FacilityViewSet, 'facilities')
+router.register(r'accounts', ifxbilling_serializers.AccountViewSet, 'account')
+router.register(r'report-runs', ReportRunViewSet, 'report-run')
+router.register(r'reports', ReportViewSet, 'report')
 
 
 # Wire up our API using automatic URL routing.
@@ -66,7 +61,13 @@ urlpatterns = static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + [
     path(r'{{project_name}}/api/mailings/<int:pk>/', views.ifx_read_mailing, name='read-mailing'),
     path(r'{{project_name}}/api/send-mailing/', views.send_ifx_mailing),
     path(r'{{project_name}}/api/billing/expense-code-request/', ifxbilling_views.expense_code_request),
+    path(r'{{project_name}}/api/billing/get-billing-record-list/', ifxbilling_views.get_billing_record_list),
     path(r'{{project_name}}/api/get-org-names/', get_org_names),
+    path(r'{{project_name}}/api/get-org-list/', get_org_list),
+    path(r'{{project_name}}/api/get-contactables/', views.get_contactables),
+    path(r'{{project_name}}/api/billing-records/bulk-update/', ifxbilling_serializers.BillingRecordViewSet.bulk_update),
+    path(r'{{project_name}}/api/billing/update-user-accounts/', views.update_user_accounts_view, name='update-user-accounts'),
+    path(r'{{project_name}}/api/run-report/', run_report, name='run-report'),
     path(r'{{project_name}}/api/', include(router.urls)),
-    url(r'^{{project_name}}/.*$', TemplateView.as_view(template_name="index.html")),
+    re_path(r'^{{project_name}}/.*$', TemplateView.as_view(template_name="index.html")),
 ]

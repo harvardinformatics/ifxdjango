@@ -6,10 +6,8 @@ auth.js
 An auth class with convenience methods for getting and setting auth tokens
 */
 
-import { API_ROOT } from '@/urls'
-
 class TokenAuth {
-  constructor () {
+  constructor() {
     this.authTokenKey = 'auth-token'
     this.isAdminKey = 'is-admin'
     this.usernameKey = 'username'
@@ -17,7 +15,8 @@ class TokenAuth {
     this.firstNameKey = 'first-name'
     this.lastNameKey = 'last-name'
   }
-  initUser (userinfo) {
+
+  initUser(userinfo) {
     sessionStorage.setItem(this.isAdminKey, userinfo.is_staff)
     sessionStorage.setItem(this.usernameKey, userinfo.username)
     sessionStorage.setItem(this.groupsKey, userinfo.groups)
@@ -25,7 +24,8 @@ class TokenAuth {
     sessionStorage.setItem(this.lastNameKey, userinfo.last_name)
     this.setAuthToken(userinfo.token)
   }
-  destroyUser () {
+
+  destroyUser() {
     sessionStorage.removeItem(this.isAdminKey)
     sessionStorage.removeItem(this.usernameKey)
     sessionStorage.removeItem(this.groupsKey)
@@ -33,7 +33,8 @@ class TokenAuth {
     sessionStorage.removeItem(this.lastNameKey)
     this.setAuthToken()
   }
-  setAuthToken (token) {
+
+  setAuthToken(token) {
     /*
       Sets the authentication token in sessionStorage.  If token is null
       the storage item is cleared
@@ -45,9 +46,10 @@ class TokenAuth {
     }
     this.setAuthHeaderValue()
   }
-  fetchToken () {
+
+  fetchToken() {
     return axios.get(LOGIN_URL).then((response) => {
-      var token = response.data.token
+      const token = response.data.token
       if (token) {
         this.setAuthToken(token)
         return token
@@ -55,53 +57,63 @@ class TokenAuth {
       return ''
     })
   }
-  getAuthToken () {
-    var token = sessionStorage.getItem(this.authTokenKey)
+
+  getAuthToken() {
+    const token = sessionStorage.getItem(this.authTokenKey)
     if (token) {
       return token
-    } else {
-      return null
     }
+    return null
   }
-  setAuthHeaderValue () {
-    axios.defaults.headers.common['Authorization'] = this.getAuthHeaderValue()
+
+  setAuthHeaderValue() {
+    axios.defaults.headers.common.Authorization = this.getAuthHeaderValue()
   }
-  getAuthHeaderValue () {
-    let token = this.getAuthToken() || ''
-    return 'Token ' + token
+
+  getAuthHeaderValue() {
+    const token = this.getAuthToken() || ''
+    return `Token ${token}`
   }
-  checkAuthentication () {
+
+  checkAuthentication() {
     if (this.isAuthenticated()) {
       this.setAuthHeaderValue()
     }
   }
-  isAuthenticated () {
+
+  isAuthenticated() {
     return (this.getUsername() !== null && this.getAuthToken() !== null)
   }
-  isDjangoStaff () {
+
+  isDjangoStaff() {
     return sessionStorage.getItem(this.isAdminKey)
   }
-  getFirstName () {
+
+  getFirstName() {
     return sessionStorage.getItem(this.firstNameKey)
   }
-  getFullName () {
+
+  getFullName() {
     return `${sessionStorage.getItem(this.firstNameKey)} ${sessionStorage.getItem(this.lastNameKey)}`
   }
-  logout () {
+
+  logout() {
     this.destroyUser()
   }
-  getUsername () {
+
+  getUsername() {
     return sessionStorage.getItem(this.usernameKey)
   }
-  hasGroup (group) {
-    let groupstr = sessionStorage.getItem(this.groupsKey)
+
+  hasGroup(group) {
+    const groupstr = sessionStorage.getItem(this.groupsKey)
     if (!groupstr) {
       return false
     }
-    let groups = groupstr.split(',')
+    const groups = groupstr.split(',')
     return groups.includes(group)
   }
 }
 
-let auth = new TokenAuth()
+const auth = new TokenAuth()
 export default auth

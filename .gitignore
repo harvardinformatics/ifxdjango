@@ -131,3 +131,6 @@ venv.bak/
 /frontend/tests/e2e/media
 *.code-workspace
 vetur.config.js
+
+*_bk
+media/report*

@@ -20,9 +20,14 @@ import {
   IFXContactDetail,
   IFXContactCreateEdit,
   IFXOrganizationList,
-  IFXOrganizationDetail,
   IFXOrganizationCreateEdit,
-  IFXAccountList
+  IFXOrganizationDetail,
+  IFXAccountList,
+  IFXAccountDetail,
+  IFXBillingRecordDetail,
+  IFXCalculateBillingMonth,
+  IFXBillingRecords,
+  IFXReportRunList,
 } from 'ifxvue'
 
 const { IFXNotFound, IFXForbidden } = ifxcomponents
@@ -161,13 +166,27 @@ const routes = [
   {
     path: '/mailings/compose/',
     name: 'MailingCompose',
-    component: IFXMailingCompose
+    component: IFXMailingCompose,
+    isAdminRoute: true,
+    props: (route) => ({
+      from: route.params.from,
+      to: cloneDeep(route.params.to),
+      cc: cloneDeep(route.params.cc),
+      bcc: cloneDeep(route.params.bcc),
+      message: route.params.message,
+      messageName: route.params.messageName,
+      subject: route.params.subject,
+      recipients: route.params.recipients,
+      recipientField: route.params.recipientField,
+      labManagerOrgSlugs: cloneDeep(route.params.labManagerOrgSlugs),
+    }),
   },
   {
     path: '/mailings/list/',
     name: 'MailingList',
     pathToRegexpOptions: { strict: true },
-    component: IFXMailingList
+    component: IFXMailingList,
+    isAdminRoute: true,
   },
   {
     path: '/mailings/:id/',
@@ -213,6 +232,77 @@ const routes = [
     component: IFXAccountList
   },
   {
+    path: '/accounts/:id/',
+    name: 'AccountDetail',
+    component: IFXAccountDetail,
+    props: (route) => ({
+      id: String(route.params.id),
+    }),
+  },
+  {
+    path: '/billing/billing-records/list/',
+    pathToRegexpOptions: { strict: true },
+    name: 'BillingRecordList',
+    component: IFXBillingRecords,
+    props: () => ({
+      useDefaultMailButton: false,
+      allowChangeExpenseCode: true,
+      allowDownloads: true,
+      showDates: true,
+      showTotals: true,
+      totalUnits: 'hours'
+    }),
+    isAdminRoute: true,
+  },
+  {
+    path: '/billing/calculate-billing-month/:facility_id/',
+    pathToRegexpOptions: { strict: true },
+    name: 'CalculateBillingMonthFacility',
+    component: IFXCalculateBillingMonth,
+    isAdminRoute: true,
+    props: (route) => ({
+      facilityId: String(route.params.facility_id),
+    }),
+  },
+  {
+    path: '/billing/calculate-billing-month/:facility_id/:year/:month/',
+    pathToRegexpOptions: { strict: true },
+    name: 'CalculateBillingMonthAll',
+    component: IFXCalculateBillingMonth,
+    isAdminRoute: true,
+    props: (route) => ({
+      facilityId: String(route.params.facility_id),
+      year: String(route.params.year),
+      month: String(route.params.month),
+    }),
+  },
+  {
+    path: '/billing/calculate-billing-month/',
+    pathToRegexpOptions: { strict: true },
+    name: 'CalculateBillingMonth',
+    component: IFXCalculateBillingMonth,
+    isAdminRoute: true,
+  },
+  {
+    path: '/billing/billing-records/:facility_id/:id/',
+    pathToRegexpOptions: { strict: true },
+    name: 'BillingRecordDetail',
+    component: IFXBillingRecordDetail,
+    isAdminRoute: true,
+    props: (route) => ({
+      id: String(route.params.id),
+      facilityId: String(route.params.facility_id),
+      showEditButtons: true,
+    }),
+  },
+  {
+    path: '/report-runs/list/',
+    pathToRegexpOptions: { strict: true },
+    name: 'ReportRunList',
+    component: IFXReportRunList,
+    isAdminRoute: true,
+  },
+  {
     path: '/forbidden/',
     name: 'Forbidden',
     pathToRegexpOptions: { strict: true },
@@ -241,4 +331,4 @@ const router = new Router({
   routes
 })
 
-export default router
+export { router, routes }

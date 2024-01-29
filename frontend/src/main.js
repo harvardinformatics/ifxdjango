@@ -6,7 +6,7 @@ import { IFXRequestAPI } from '@/API/IFXRequestAPI'
 import APIStore from '@/API/APIStore'
 import vuexStore from '@/store'
 import App from '@/App'
-import router from '@/router'
+import { router, routes } from '@/router'
 import vuetify from '@/plugins/vuetify';
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
 import 'vuetify/dist/vuetify.min.css'
@@ -33,20 +33,24 @@ Vue.prototype.$requestApi = requestApi
 
 // Loop through routes, set options for all paths and admin routes
 // To make route admin only, go to router index and add isAdminRoute:true to specific route
-router.options.routes.forEach(route => {
+//  route.pathToRegexpOptions = { strict: true }
+const check = (to, from, next) => {
+  if (api.auth.isAdmin) {
+    // TODO: add message
+    next()
+  } else {
+    next({ name: 'Forbidden' })
+  }
+}
+
+routes.forEach((route) => {
   // eslint-disable-next-line no-param-reassign
   route.pathToRegexpOptions = { strict: true }
   if (route.isAdminRoute) {
     // eslint-disable-next-line no-param-reassign
-    route.beforeEnter = (to, from, next) => {
-      if (api.authUser.isAdmin) {
-        // TODO: add message
-        next()
-      } else {
-        next({ name: 'Forbidden' })
-      }
-    }
+    route.beforeEnter = check;
   }
+  router.addRoute(route)
 })
 
 // Disable routes by unathenticated users

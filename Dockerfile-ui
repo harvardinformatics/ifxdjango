@@ -1,4 +1,4 @@
-FROM node:14
+FROM node:16
 
 EXPOSE 8080
 
@@ -6,8 +6,5 @@ WORKDIR /app/frontend
 
 RUN apt-get update -y && apt-get install -y vim xvfb libxtst-dev libnss3-dev libgtk-3-dev libxss-dev libasound2-dev
 RUN npm install -g @vue/cli@4.5.9 @vue/cli-service@4.5.9 eslint@7.32.0 n@7.0.0 node-gyp@7.1.2 npm@6.14.10 prettier@2.3.2
-
-RUN npm install -g --unsafe-perm=true --allow-root cypress@8.2.0
-RUN npm install -g --unsafe-perm=true --allow-root @vue/cli-plugin-e2e-cypress@4.5.13 @cypress/webpack-preprocessor@5.5.0
 
 CMD npm run-script serve

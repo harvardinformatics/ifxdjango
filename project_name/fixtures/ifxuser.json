@@ -1,984 +1,1078 @@
 [
-{
+  {
     "model": "ifxuser.organization",
-    "pk": 1,
     "fields": {
-        "ifxorg": "IFXORGX000000002",
-        "name": "Hyperion Catalysis Intl.",
-        "rank": "institution",
-        "org_tree": "CNS",
-        "slug": "Hyperion Catalysis Intl. (a CNS Institution)",
-        "code": null,
-        "application_key": null
+      "ifxorg": "IFXORGX000000002",
+      "name": "Hyperion Catalysis Intl.",
+      "rank": "institution",
+      "org_tree": "CNS",
+      "slug": "Hyperion Catalysis Intl. (a CNS Institution)",
+      "code": null,
+      "application_key": null
     }
-},
-{
+  },
+  {
     "model": "ifxuser.organization",
-    "pk": 2,
     "fields": {
-        "ifxorg": "IFXORGX000000003",
-        "name": "National Semiconductor Corp.",
-        "rank": "institution",
-        "org_tree": "NSC",
-        "slug": "National Semiconductor Corp. (a NSC Institution)",
-        "code": null,
-        "application_key": null
+      "ifxorg": "IFXORGX000000003",
+      "name": "National Semiconductor Corp.",
+      "rank": "institution",
+      "org_tree": "NSC",
+      "slug": "National Semiconductor Corp. (a NSC Institution)",
+      "code": null,
+      "application_key": null
     }
-},
-{
+  },
+  {
     "model": "ifxuser.organization",
-    "pk": 3,
     "fields": {
-        "ifxorg": "IFXORGX000000005",
-        "name": "University of New Hampshire",
-        "rank": "institution",
-        "org_tree": "CNS",
-        "slug": "University of New Hampshire (a CNS Institution)",
-        "code": null,
-        "application_key": null
+      "ifxorg": "IFXORGX000000005",
+      "name": "University of New Hampshire",
+      "rank": "institution",
+      "org_tree": "CNS",
+      "slug": "University of New Hampshire (a CNS Institution)",
+      "code": null,
+      "application_key": null
     }
-},
-{
+  },
+  {
     "model": "ifxuser.organization",
-    "pk": 4,
     "fields": {
-        "ifxorg": "IFXORGX000000001",
-        "name": "NYS Health",
-        "rank": "institution",
-        "org_tree": "CNS",
-        "slug": "NYS Health (a CNS Institution)",
-        "code": null,
-        "application_key": null
+      "ifxorg": "IFXORGX000000001",
+      "name": "NYS Health",
+      "rank": "institution",
+      "org_tree": "CNS",
+      "slug": "NYS Health (a CNS Institution)",
+      "code": null,
+      "application_key": null
     }
-},
-{
+  },
+  {
     "model": "ifxuser.organization",
-    "pk": 5,
     "fields": {
-        "ifxorg": "IFXORGX000000007",
-        "name": "Boston University",
-        "rank": "institution",
-        "org_tree": "CNS",
-        "slug": "Boston University (a CNS Institution)",
-        "code": null,
-        "application_key": null
+      "ifxorg": "IFXORGX000000007",
+      "name": "Boston University",
+      "rank": "institution",
+      "org_tree": "CNS",
+      "slug": "Boston University (a CNS Institution)",
+      "code": null,
+      "application_key": null
     }
-},
-{
+  },
+  {
     "model": "ifxuser.organization",
-    "pk": 6,
     "fields": {
-        "ifxorg": "IFXORG000000000B",
-        "name": "Algorithm Lab",
-        "rank": "lab",
-        "org_tree": "Harvard",
-        "slug": "Algorithm Lab (a Harvard Laboratory)",
-        "code": null,
-        "application_key": null
+      "ifxorg": "IFXORG000000000B",
+      "name": "Algorithm Lab",
+      "rank": "lab",
+      "org_tree": "Harvard",
+      "slug": "Algorithm Lab (a Harvard Laboratory)",
+      "code": null,
+      "application_key": null
     }
-},
-{
+  },
+  {
     "model": "ifxuser.organization",
-    "pk": 7,
     "fields": {
-        "ifxorg": "IFXORG0000000008",
-        "name": "Apple",
-        "rank": "company",
-        "org_tree": "Harvard",
-        "slug": "Apple (a Harvard Company)",
-        "code": null,
-        "application_key": null
+      "ifxorg": "IFXORG0000000008",
+      "name": "Apple",
+      "rank": "company",
+      "org_tree": "Harvard",
+      "slug": "Apple (a Harvard Company)",
+      "code": null,
+      "application_key": null
     }
-},
-{
+  },
+  {
     "model": "ifxuser.organization",
-    "pk": 8,
     "fields": {
-        "ifxorg": "IFXORG0000000009",
-        "name": "C Lab",
-        "rank": "lab",
-        "org_tree": "Harvard",
-        "slug": "C Lab (a Harvard Laboratory)",
-        "code": null,
-        "application_key": null
+      "ifxorg": "IFXORG0000000009",
+      "name": "C Lab",
+      "rank": "lab",
+      "org_tree": "Harvard",
+      "slug": "C Lab (a Harvard Laboratory)",
+      "code": null,
+      "application_key": null
     }
-},
-{
+  },
+  {
     "model": "ifxuser.organization",
-    "pk": 9,
     "fields": {
-        "ifxorg": "IFXORG000000000D",
-        "name": "Computing",
-        "rank": "department",
-        "org_tree": "Harvard",
-        "slug": "Computing (a Harvard Department)",
-        "code": null,
-        "application_key": null
+      "ifxorg": "IFXORG000000000D",
+      "name": "Computing",
+      "rank": "department",
+      "org_tree": "Harvard",
+      "slug": "Computing (a Harvard Department)",
+      "code": null,
+      "application_key": null
     }
-},
-{
+  },
+  {
     "model": "ifxuser.organization",
-    "pk": 10,
     "fields": {
-        "ifxorg": "IFXORG000000000F",
-        "name": "FAS Informatics",
-        "rank": "facility",
-        "org_tree": "Harvard",
-        "slug": "FAS Informatics (a Harvard Facility)",
-        "code": null,
-        "application_key": null
+      "ifxorg": "IFXORG000000000F",
+      "name": "FAS Informatics",
+      "rank": "facility",
+      "org_tree": "Harvard",
+      "slug": "FAS Informatics (a Harvard Facility)",
+      "code": null,
+      "application_key": null
     }
-},
-{
+  },
+  {
     "model": "ifxuser.organization",
-    "pk": 11,
     "fields": {
-        "ifxorg": "IFXORG0000000004",
-        "name": "Harvard University (HSPH)",
-        "rank": "institution",
-        "org_tree": "Harvard",
-        "slug": "Harvard University (HSPH) (a Harvard Institution)",
-        "code": null,
-        "application_key": null
+      "ifxorg": "IFXORG0000000004",
+      "name": "Harvard University (HSPH)",
+      "rank": "institution",
+      "org_tree": "Harvard",
+      "slug": "Harvard University (HSPH) (a Harvard Institution)",
+      "code": null,
+      "application_key": null
     }
-},
-{
+  },
+  {
     "model": "ifxuser.organization",
-    "pk": 12,
     "fields": {
-        "ifxorg": "IFXORG000000000G",
-        "name": "Kitzmiller Lab",
-        "rank": "lab",
-        "org_tree": "Harvard",
-        "slug": "Kitzmiller Lab (a Harvard Laboratory)",
-        "code": null,
-        "application_key": null
+      "ifxorg": "IFXORG000000000G",
+      "name": "Kitzmiller Lab",
+      "rank": "lab",
+      "org_tree": "Harvard",
+      "slug": "Kitzmiller Lab (a Harvard Laboratory)",
+      "code": null,
+      "application_key": null
     }
-},
-{
+  },
+  {
     "model": "ifxuser.organization",
-    "pk": 13,
     "fields": {
-        "ifxorg": "IFXORG000000000H",
-        "name": "Nobody Lab",
-        "rank": "lab",
-        "org_tree": "Harvard",
-        "slug": "Nobody Lab (a Harvard Laboratory)",
-        "code": null,
-        "application_key": null
+      "ifxorg": "IFXORG000000000H",
+      "name": "Nobody Lab",
+      "rank": "lab",
+      "org_tree": "Harvard",
+      "slug": "Nobody Lab (a Harvard Laboratory)",
+      "code": null,
+      "application_key": null
     }
-},
-{
+  },
+  {
     "model": "ifxuser.organization",
-    "pk": 14,
     "fields": {
-        "ifxorg": "IFXORG000000000C",
-        "name": "Python Lab",
-        "rank": "lab",
-        "org_tree": "Harvard",
-        "slug": "Python Lab (a Harvard Laboratory)",
-        "code": null,
-        "application_key": null
+      "ifxorg": "IFXORG000000000C",
+      "name": "Python Lab",
+      "rank": "lab",
+      "org_tree": "Harvard",
+      "slug": "Python Lab (a Harvard Laboratory)",
+      "code": null,
+      "application_key": null
     }
-},
-{
+  },
+  {
     "model": "ifxuser.organization",
-    "pk": 15,
     "fields": {
-        "ifxorg": "IFXORG000000000E",
-        "name": "Snake",
-        "rank": "school",
-        "org_tree": "Harvard",
-        "slug": "Snake (a Harvard School)",
-        "code": null,
-        "application_key": null
+      "ifxorg": "IFXORG000000000E",
+      "name": "Snake",
+      "rank": "school",
+      "org_tree": "Harvard",
+      "slug": "Snake (a Harvard School)",
+      "code": null,
+      "application_key": null
     }
-},
-{
+  },
+  {
     "model": "ifxuser.ifxuser",
-    "pk": 1,
     "fields": {
-        "password": "",
-        "last_login": null,
-        "is_superuser": true,
-        "ifxid": null,
-        "full_name": null,
-        "hkeymail": null,
-        "primary_affiliation": null,
-        "username": "ifxonboard",
-        "first_name": "IfxOnboard",
-        "last_name": "Application",
-        "email": "",
-        "is_staff": false,
-        "is_active": true,
-        "date_joined": "2021-09-08T18:14:16.161Z",
-        "last_update": "2021-09-08T18:14:16.162Z",
-        "groups": [],
-        "user_permissions": []
+      "password": "",
+      "last_login": null,
+      "is_superuser": true,
+      "ifxid": null,
+      "full_name": null,
+      "hkeymail": null,
+      "primary_affiliation": null,
+      "username": "ifxonboard",
+      "first_name": "IfxOnboard",
+      "last_name": "Application",
+      "email": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2021-09-08T18:14:16.161Z",
+      "last_update": "2021-09-08T18:14:16.162Z",
+      "groups": [],
+      "user_permissions": []
     }
-},
-{
+  },
+  {
     "model": "ifxuser.ifxuser",
-    "pk": 2,
     "fields": {
-        "password": "",
-        "last_login": null,
-        "is_superuser": false,
-        "ifxid": null,
-        "full_name": null,
-        "hkeymail": null,
-        "primary_affiliation": null,
-        "username": "{{project_name}}",
-        "first_name": "{{project_name}}",
-        "last_name": "Application",
-        "email": "",
-        "is_staff": false,
-        "is_active": true,
-        "date_joined": "2021-09-08T18:14:16.265Z",
-        "last_update": "2021-09-08T18:14:16.278Z",
-        "groups": [],
-        "user_permissions": []
+      "password": "",
+      "last_login": null,
+      "is_superuser": false,
+      "ifxid": null,
+      "full_name": null,
+      "hkeymail": null,
+      "primary_affiliation": null,
+      "username": "cbsn",
+      "first_name": "cbsn",
+      "last_name": "Application",
+      "email": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2021-09-08T18:14:16.265Z",
+      "last_update": "2021-09-08T18:14:16.278Z",
+      "groups": [],
+      "user_permissions": []
     }
-},
-{
+  },
+  {
     "model": "ifxuser.ifxuser",
-    "pk": 3,
     "fields": {
-        "password": "",
-        "last_login": null,
-        "is_superuser": true,
-        "ifxid": null,
-        "full_name": null,
-        "hkeymail": null,
-        "primary_affiliation": null,
-        "username": "fiine",
-        "first_name": "Fiine",
-        "last_name": "Application",
-        "email": "",
-        "is_staff": false,
-        "is_active": true,
-        "date_joined": "2021-09-08T18:14:16.317Z",
-        "last_update": "2021-09-08T18:14:16.317Z",
-        "groups": [],
-        "user_permissions": []
+      "password": "",
+      "last_login": null,
+      "is_superuser": true,
+      "ifxid": null,
+      "full_name": null,
+      "hkeymail": null,
+      "primary_affiliation": null,
+      "username": "fiine",
+      "first_name": "Fiine",
+      "last_name": "Application",
+      "email": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2021-09-08T18:14:16.317Z",
+      "last_update": "2021-09-08T18:14:16.317Z",
+      "groups": [],
+      "user_permissions": []
     }
-},
-{
+  },
+  {
     "model": "ifxuser.ifxuser",
-    "pk": 4,
     "fields": {
-        "password": "",
-        "last_login": "2021-09-08T20:11:36.455Z",
-        "is_superuser": true,
-        "ifxid": "IFXID000000000C",
-        "full_name": "Vera D. Min",
-        "hkeymail": null,
-        "primary_affiliation": 10,
-        "username": "veradmin",
-        "first_name": "Vera",
-        "last_name": "Min",
-        "email": "veradmin@harvard.edu",
-        "is_staff": true,
-        "is_active": true,
-        "date_joined": "2021-09-08T18:14:34.833Z",
-        "last_update": "2021-09-08T20:11:17.092Z",
-        "groups": [
-            1
-        ],
-        "user_permissions": []
+      "password": "",
+      "last_login": "2021-09-08T20:11:36.455Z",
+      "is_superuser": true,
+      "ifxid": "IFXID000000000C",
+      "full_name": "Vera D. Min",
+      "hkeymail": null,
+      "primary_affiliation": [
+        "FAS Informatics",
+        "facility",
+        "Harvard"
+      ],
+      "username": "veradmin",
+      "first_name": "Vera",
+      "last_name": "Min",
+      "email": "veradmin@harvard.edu",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2021-09-08T18:14:34.833Z",
+      "last_update": "2021-09-08T20:11:17.092Z",
+      "groups": [
+        [
+          "Admin"
+        ]
+      ],
+      "user_permissions": []
     }
-},
-{
+  },
+  {
     "model": "ifxuser.ifxuser",
-    "pk": 5,
     "fields": {
-        "password": "",
-        "last_login": null,
-        "is_superuser": true,
-        "ifxid": "IFXID0000000001",
-        "full_name": "Alan Turing",
-        "hkeymail": null,
-        "primary_affiliation": 6,
-        "username": "alanturing",
-        "first_name": "Alan",
-        "last_name": "Turing",
-        "email": "alan@turing.com",
-        "is_staff": true,
-        "is_active": true,
-        "date_joined": "2021-09-08T18:14:34.918Z",
-        "last_update": "2021-09-08T20:11:15.573Z",
-        "groups": [
-            1
-        ],
-        "user_permissions": []
+      "password": "",
+      "last_login": null,
+      "is_superuser": true,
+      "ifxid": "IFXID0000000001",
+      "full_name": "Alan Turing",
+      "hkeymail": null,
+      "primary_affiliation": [
+        "Algorithm Lab",
+        "lab",
+        "Harvard"
+      ],
+      "username": "alanturing",
+      "first_name": "Alan",
+      "last_name": "Turing",
+      "email": "alan@turing.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2021-09-08T18:14:34.918Z",
+      "last_update": "2021-09-08T20:11:15.573Z",
+      "groups": [
+        [
+          "Admin"
+        ]
+      ],
+      "user_permissions": []
     }
-},
-{
+  },
+  {
     "model": "ifxuser.ifxuser",
-    "pk": 6,
     "fields": {
-        "password": "",
-        "last_login": null,
-        "is_superuser": true,
-        "ifxid": "IFXID0000000002",
-        "full_name": "Ada Lovelace",
-        "hkeymail": null,
-        "primary_affiliation": 6,
-        "username": "adalovelace",
-        "first_name": "Ada",
-        "last_name": "Lovelace",
-        "email": "lovelace@adaperson.com",
-        "is_staff": true,
-        "is_active": true,
-        "date_joined": "2021-09-08T18:14:34.955Z",
-        "last_update": "2021-09-08T20:11:15.712Z",
-        "groups": [
-            1
-        ],
-        "user_permissions": []
+      "password": "",
+      "last_login": null,
+      "is_superuser": true,
+      "ifxid": "IFXID0000000002",
+      "full_name": "Ada Lovelace",
+      "hkeymail": null,
+      "primary_affiliation": [
+        "Algorithm Lab",
+        "lab",
+        "Harvard"
+      ],
+      "username": "adalovelace",
+      "first_name": "Ada",
+      "last_name": "Lovelace",
+      "email": "lovelace@adaperson.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2021-09-08T18:14:34.955Z",
+      "last_update": "2021-09-08T20:11:15.712Z",
+      "groups": [
+        [
+          "Admin"
+        ]
+      ],
+      "user_permissions": []
     }
-},
-{
+  },
+  {
     "model": "ifxuser.ifxuser",
-    "pk": 7,
     "fields": {
-        "password": "",
-        "last_login": null,
-        "is_superuser": false,
-        "ifxid": "IFXID0000000003",
-        "full_name": "John von Neumann",
-        "hkeymail": null,
-        "primary_affiliation": 6,
-        "username": "jvneumann",
-        "first_name": "John von",
-        "last_name": "Neumann",
-        "email": "coolguy@neumann.com",
-        "is_staff": false,
-        "is_active": true,
-        "date_joined": "2021-09-08T18:14:35Z",
-        "last_update": "2021-09-08T20:11:15.792Z",
-        "groups": [],
-        "user_permissions": []
+      "password": "",
+      "last_login": null,
+      "is_superuser": false,
+      "ifxid": "IFXID0000000003",
+      "full_name": "John von Neumann",
+      "hkeymail": null,
+      "primary_affiliation": [
+        "Algorithm Lab",
+        "lab",
+        "Harvard"
+      ],
+      "username": "jvneumann",
+      "first_name": "John von",
+      "last_name": "Neumann",
+      "email": "coolguy@neumann.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2021-09-08T18:14:35Z",
+      "last_update": "2021-09-08T20:11:15.792Z",
+      "groups": [],
+      "user_permissions": []
     }
-},
-{
+  },
+  {
     "model": "ifxuser.ifxuser",
-    "pk": 8,
     "fields": {
-        "password": "",
-        "last_login": null,
-        "is_superuser": false,
-        "ifxid": "IFXID0000000004",
-        "full_name": "Grace Hopper",
-        "hkeymail": null,
-        "primary_affiliation": 6,
-        "username": "ghopper",
-        "first_name": "Grace",
-        "last_name": "Hopper",
-        "email": "hopper@grace.com",
-        "is_staff": false,
-        "is_active": true,
-        "date_joined": "2021-09-08T18:14:35.019Z",
-        "last_update": "2021-09-08T20:11:15.853Z",
-        "groups": [],
-        "user_permissions": []
+      "password": "",
+      "last_login": null,
+      "is_superuser": false,
+      "ifxid": "IFXID0000000004",
+      "full_name": "Grace Hopper",
+      "hkeymail": null,
+      "primary_affiliation": [
+        "Algorithm Lab",
+        "lab",
+        "Harvard"
+      ],
+      "username": "ghopper",
+      "first_name": "Grace",
+      "last_name": "Hopper",
+      "email": "hopper@grace.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2021-09-08T18:14:35.019Z",
+      "last_update": "2021-09-08T20:11:15.853Z",
+      "groups": [],
+      "user_permissions": []
     }
-},
-{
+  },
+  {
     "model": "ifxuser.ifxuser",
-    "pk": 9,
     "fields": {
-        "password": "",
-        "last_login": null,
-        "is_superuser": false,
-        "ifxid": "IFXID0000000005",
-        "full_name": "Dennis Ritchie",
-        "hkeymail": null,
-        "primary_affiliation": 8,
-        "username": "dritchie",
-        "first_name": "Dennis",
-        "last_name": "Ritchie",
-        "email": "danceallnight@dennis.com",
-        "is_staff": true,
-        "is_active": true,
-        "date_joined": "2021-09-08T18:14:35.046Z",
-        "last_update": "2021-09-08T20:11:16.033Z",
-        "groups": [],
-        "user_permissions": []
+      "password": "",
+      "last_login": null,
+      "is_superuser": false,
+      "ifxid": "IFXID0000000005",
+      "full_name": "Dennis Ritchie",
+      "hkeymail": null,
+      "primary_affiliation": [
+        "C Lab",
+        "lab",
+        "Harvard"
+      ],
+      "username": "dritchie",
+      "first_name": "Dennis",
+      "last_name": "Ritchie",
+      "email": "danceallnight@dennis.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2021-09-08T18:14:35.046Z",
+      "last_update": "2021-09-08T20:11:16.033Z",
+      "groups": [],
+      "user_permissions": []
     }
-},
-{
+  },
+  {
     "model": "ifxuser.ifxuser",
-    "pk": 10,
     "fields": {
-        "password": "",
-        "last_login": null,
-        "is_superuser": false,
-        "ifxid": "IFXID0000000006",
-        "full_name": "Donald Knuth",
-        "hkeymail": null,
-        "primary_affiliation": 8,
-        "username": "dknuth",
-        "first_name": "Donald",
-        "last_name": "Knuth",
-        "email": "writeallday@knuth.com",
-        "is_staff": false,
-        "is_active": true,
-        "date_joined": "2021-09-08T18:14:35.066Z",
-        "last_update": "2021-09-08T20:11:16.244Z",
-        "groups": [],
-        "user_permissions": []
+      "password": "",
+      "last_login": null,
+      "is_superuser": false,
+      "ifxid": "IFXID0000000006",
+      "full_name": "Donald Knuth",
+      "hkeymail": null,
+      "primary_affiliation": [
+        "C Lab",
+        "lab",
+        "Harvard"
+      ],
+      "username": "dknuth",
+      "first_name": "Donald",
+      "last_name": "Knuth",
+      "email": "writeallday@knuth.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2021-09-08T18:14:35.066Z",
+      "last_update": "2021-09-08T20:11:16.244Z",
+      "groups": [],
+      "user_permissions": []
     }
-},
-{
+  },
+  {
     "model": "ifxuser.ifxuser",
-    "pk": 11,
     "fields": {
-        "password": "",
-        "last_login": null,
-        "is_superuser": false,
-        "ifxid": "IFXID0000000007",
-        "full_name": "Guido von Rossum",
-        "hkeymail": null,
-        "primary_affiliation": 14,
-        "username": "gvrossum",
-        "first_name": "Guido von",
-        "last_name": "Rossum",
-        "email": "python4lyfe@guido.com",
-        "is_staff": true,
-        "is_active": true,
-        "date_joined": "2021-09-08T18:14:35.081Z",
-        "last_update": "2021-09-08T20:11:16.327Z",
-        "groups": [],
-        "user_permissions": []
+      "password": "",
+      "last_login": null,
+      "is_superuser": false,
+      "ifxid": "IFXID0000000007",
+      "full_name": "Guido von Rossum",
+      "hkeymail": null,
+      "primary_affiliation": [
+        "Python Lab",
+        "lab",
+        "Harvard"
+      ],
+      "username": "gvrossum",
+      "first_name": "Guido von",
+      "last_name": "Rossum",
+      "email": "python4lyfe@guido.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2021-09-08T18:14:35.081Z",
+      "last_update": "2021-09-08T20:11:16.327Z",
+      "groups": [],
+      "user_permissions": []
     }
-},
-{
+  },
+  {
     "model": "ifxuser.ifxuser",
-    "pk": 12,
     "fields": {
-        "password": "",
-        "last_login": null,
-        "is_superuser": true,
-        "ifxid": "IFXID0000000008",
-        "full_name": "Margaret Hamilton",
-        "hkeymail": null,
-        "primary_affiliation": 6,
-        "username": "mhamilton",
-        "first_name": "Margaret",
-        "last_name": "Hamilton",
-        "email": "mhamilton@nasa.com",
-        "is_staff": true,
-        "is_active": true,
-        "date_joined": "2021-09-08T18:14:35.102Z",
-        "last_update": "2021-09-08T20:11:16.559Z",
-        "groups": [
-            1
-        ],
-        "user_permissions": []
+      "password": "",
+      "last_login": null,
+      "is_superuser": true,
+      "ifxid": "IFXID0000000008",
+      "full_name": "Margaret Hamilton",
+      "hkeymail": null,
+      "primary_affiliation": [
+        "Algorithm Lab",
+        "lab",
+        "Harvard"
+      ],
+      "username": "mhamilton",
+      "first_name": "Margaret",
+      "last_name": "Hamilton",
+      "email": "mhamilton@nasa.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2021-09-08T18:14:35.102Z",
+      "last_update": "2021-09-08T20:11:16.559Z",
+      "groups": [
+        [
+          "Admin"
+        ]
+      ],
+      "user_permissions": []
     }
-},
-{
+  },
+  {
     "model": "ifxuser.ifxuser",
-    "pk": 13,
     "fields": {
-        "password": "",
-        "last_login": null,
-        "is_superuser": false,
-        "ifxid": "IFXID0000000009",
-        "full_name": "Bjarne Stroustrup",
-        "hkeymail": null,
-        "primary_affiliation": 8,
-        "username": "bstroustrup",
-        "first_name": "Bjarne",
-        "last_name": "Stroustrup",
-        "email": "cplusplustips@bjarne.com",
-        "is_staff": false,
-        "is_active": true,
-        "date_joined": "2021-09-08T18:14:35.133Z",
-        "last_update": "2021-09-08T20:11:16.742Z",
-        "groups": [],
-        "user_permissions": []
+      "password": "",
+      "last_login": null,
+      "is_superuser": false,
+      "ifxid": "IFXID0000000009",
+      "full_name": "Bjarne Stroustrup",
+      "hkeymail": null,
+      "primary_affiliation": [
+        "C Lab",
+        "lab",
+        "Harvard"
+      ],
+      "username": "bstroustrup",
+      "first_name": "Bjarne",
+      "last_name": "Stroustrup",
+      "email": "cplusplustips@bjarne.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2021-09-08T18:14:35.133Z",
+      "last_update": "2021-09-08T20:11:16.742Z",
+      "groups": [],
+      "user_permissions": []
     }
-},
-{
+  },
+  {
     "model": "ifxuser.ifxuser",
-    "pk": 15,
     "fields": {
-        "password": "",
-        "last_login": null,
-        "is_superuser": false,
-        "ifxid": "IFXID000000000A",
-        "full_name": "Steve Wozniak",
-        "hkeymail": null,
-        "primary_affiliation": 7,
-        "username": "woz",
-        "first_name": "Steve",
-        "last_name": "Wozniak",
-        "email": "me@notapple.com",
-        "is_staff": false,
-        "is_active": true,
-        "date_joined": "2021-09-08T19:50:52.825Z",
-        "last_update": "2021-09-08T20:11:16.918Z",
-        "groups": [],
-        "user_permissions": []
+      "password": "",
+      "last_login": null,
+      "is_superuser": false,
+      "ifxid": "IFXID000000000A",
+      "full_name": "Steve Wozniak",
+      "hkeymail": null,
+      "primary_affiliation": [
+        "Apple",
+        "company",
+        "Harvard"
+      ],
+      "username": "woz",
+      "first_name": "Steve",
+      "last_name": "Wozniak",
+      "email": "me@notapple.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2021-09-08T19:50:52.825Z",
+      "last_update": "2021-09-08T20:11:16.918Z",
+      "groups": [],
+      "user_permissions": []
     }
-},
-{
+  },
+  {
     "model": "ifxuser.contact",
-    "pk": 1,
     "fields": {
-        "name": "Alan Turing",
-        "ifxcon": "IFXCON0000000001",
-        "type": "Email",
-        "detail": "alan@turing.com",
-        "phone": null,
-        "address": null,
-        "is_valid": true,
-        "created": "2021-09-08T18:14:35.578Z"
+      "name": "Alan Turing",
+      "ifxcon": "IFXCON0000000001",
+      "type": "Email",
+      "detail": "alan@turing.com",
+      "phone": null,
+      "address": null,
+      "is_valid": true,
+      "created": "2021-09-08T18:14:35.578Z"
     }
-},
-{
+  },
+  {
     "model": "ifxuser.contact",
-    "pk": 2,
     "fields": {
-        "name": "Peter Parker",
-        "ifxcon": null,
-        "type": "email",
-        "detail": "notspiderman@marvel.com",
-        "phone": "1234567890",
-        "address": "123 4th Avenue, New York City",
-        "is_valid": true,
-        "created": "2021-09-08T18:14:35.590Z"
+      "name": "Peter Parker",
+      "ifxcon": null,
+      "type": "email",
+      "detail": "notspiderman@marvel.com",
+      "phone": "1234567890",
+      "address": "123 4th Avenue, New York City",
+      "is_valid": true,
+      "created": "2021-09-08T18:14:35.590Z"
     }
-},
-{
+  },
+  {
     "model": "ifxuser.contact",
-    "pk": 3,
     "fields": {
-        "name": "Bruce Banner",
-        "ifxcon": null,
-        "type": "Email",
-        "detail": "hulksmash@marvel.com",
-        "phone": "8751346854",
-        "address": "654 9th Avenue, Los Angeles",
-        "is_valid": true,
-        "created": "2021-09-08T18:14:35.605Z"
+      "name": "Bruce Banner",
+      "ifxcon": null,
+      "type": "Email",
+      "detail": "hulksmash@marvel.com",
+      "phone": "8751346854",
+      "address": "654 9th Avenue, Los Angeles",
+      "is_valid": true,
+      "created": "2021-09-08T18:14:35.605Z"
     }
-},
-{
+  },
+  {
     "model": "ifxuser.contact",
-    "pk": 4,
     "fields": {
-        "name": "Bruce Wayne",
-        "ifxcon": null,
-        "type": "Email",
-        "detail": "batmanbutiamreallyrich@dccomicsforeverandever.com",
-        "phone": "1234567890123456",
-        "address": "Wayne Tower Road, Gotham",
-        "is_valid": true,
-        "created": "2021-09-08T18:14:35.617Z"
+      "name": "Bruce Wayne",
+      "ifxcon": null,
+      "type": "Email",
+      "detail": "batmanbutiamreallyrich@dccomicsforeverandever.com",
+      "phone": "1234567890123456",
+      "address": "Wayne Tower Road, Gotham",
+      "is_valid": true,
+      "created": "2021-09-08T18:14:35.617Z"
     }
-},
-{
+  },
+  {
     "model": "ifxuser.contact",
-    "pk": 5,
     "fields": {
-        "name": "Selina Kyle",
-        "ifxcon": null,
-        "type": "Email",
-        "detail": "catwoman@dccomics.com",
-        "phone": "0394568732",
-        "address": "Cat Street, Gotham",
-        "is_valid": true,
-        "created": "2021-09-08T18:14:35.629Z"
+      "name": "Selina Kyle",
+      "ifxcon": null,
+      "type": "Email",
+      "detail": "catwoman@dccomics.com",
+      "phone": "0394568732",
+      "address": "Cat Street, Gotham",
+      "is_valid": true,
+      "created": "2021-09-08T18:14:35.629Z"
     }
-},
-{
+  },
+  {
     "model": "ifxuser.contact",
-    "pk": 6,
     "fields": {
-        "name": "Barry Allen",
-        "ifxcon": null,
-        "type": "Phone",
-        "detail": "theflash@comicsdcawesome.com",
-        "phone": "9486750128",
-        "address": "wherever",
-        "is_valid": true,
-        "created": "2021-09-08T18:14:35.641Z"
+      "name": "Barry Allen",
+      "ifxcon": null,
+      "type": "Phone",
+      "detail": "theflash@comicsdcawesome.com",
+      "phone": "9486750128",
+      "address": "wherever",
+      "is_valid": true,
+      "created": "2021-09-08T18:14:35.641Z"
     }
-},
-{
+  },
+  {
     "model": "ifxuser.contact",
-    "pk": 7,
     "fields": {
-        "name": "Barbara Gordon",
-        "ifxcon": null,
-        "type": "Email",
-        "detail": "batgirl@thedccomicsuniverse.co",
-        "phone": "9825471324",
-        "address": "Somewhere in Gotham",
-        "is_valid": true,
-        "created": "2021-09-08T18:14:35.662Z"
+      "name": "Barbara Gordon",
+      "ifxcon": null,
+      "type": "Email",
+      "detail": "batgirl@thedccomicsuniverse.co",
+      "phone": "9825471324",
+      "address": "Somewhere in Gotham",
+      "is_valid": true,
+      "created": "2021-09-08T18:14:35.662Z"
     }
-},
-{
+  },
+  {
     "model": "ifxuser.contact",
-    "pk": 8,
     "fields": {
-        "name": "Tony Stark",
-        "ifxcon": null,
-        "type": "Email",
-        "detail": "ironman@marvel.edu",
-        "phone": "85745747248596338",
-        "address": "New York City",
-        "is_valid": true,
-        "created": "2021-09-08T18:14:35.673Z"
+      "name": "Tony Stark",
+      "ifxcon": null,
+      "type": "Email",
+      "detail": "ironman@marvel.edu",
+      "phone": "85745747248596338",
+      "address": "New York City",
+      "is_valid": true,
+      "created": "2021-09-08T18:14:35.673Z"
     }
-},
-{
+  },
+  {
     "model": "ifxuser.contact",
-    "pk": 9,
     "fields": {
-        "name": "Carol Danvers",
-        "ifxcon": null,
-        "type": "Email",
-        "detail": "carolcaptain@marvel.net",
-        "phone": "",
-        "address": "New York City",
-        "is_valid": true,
-        "created": "2021-09-08T18:14:35.682Z"
+      "name": "Carol Danvers",
+      "ifxcon": null,
+      "type": "Email",
+      "detail": "carolcaptain@marvel.net",
+      "phone": "",
+      "address": "New York City",
+      "is_valid": true,
+      "created": "2021-09-08T18:14:35.682Z"
     }
-},
-{
+  },
+  {
     "model": "ifxuser.contact",
-    "pk": 10,
     "fields": {
-        "name": "Diana Prince",
-        "ifxcon": null,
-        "type": "Phone",
-        "detail": "1845674345",
-        "phone": "1845674345",
-        "address": "who knows",
-        "is_valid": true,
-        "created": "2021-09-08T18:14:35.721Z"
+      "name": "Diana Prince",
+      "ifxcon": null,
+      "type": "Phone",
+      "detail": "1845674345",
+      "phone": "1845674345",
+      "address": "who knows",
+      "is_valid": true,
+      "created": "2021-09-08T18:14:35.721Z"
     }
-},
-{
+  },
+  {
     "model": "ifxuser.contact",
-    "pk": 11,
     "fields": {
-        "name": "Clark Kent",
-        "ifxcon": null,
-        "type": "Email",
-        "detail": "clarkkent@dailyplanet.com",
-        "phone": "1234567890",
-        "address": "Daily Planet Street, Metropolis",
-        "is_valid": true,
-        "created": "2021-09-08T18:14:35.733Z"
+      "name": "Clark Kent",
+      "ifxcon": null,
+      "type": "Email",
+      "detail": "clarkkent@dailyplanet.com",
+      "phone": "1234567890",
+      "address": "Daily Planet Street, Metropolis",
+      "is_valid": true,
+      "created": "2021-09-08T18:14:35.733Z"
     }
-},
-{
+  },
+  {
     "model": "ifxuser.contact",
-    "pk": 12,
     "fields": {
-        "name": "Ada Lovelace",
-        "ifxcon": "IFXCON0000000002",
-        "type": "Email",
-        "detail": "lovelace@adaperson.com",
-        "phone": null,
-        "address": null,
-        "is_valid": true,
-        "created": "2021-09-08T19:50:48.271Z"
+      "name": "Ada Lovelace",
+      "ifxcon": "IFXCON0000000002",
+      "type": "Email",
+      "detail": "lovelace@adaperson.com",
+      "phone": null,
+      "address": null,
+      "is_valid": true,
+      "created": "2021-09-08T19:50:48.271Z"
     }
-},
-{
+  },
+  {
     "model": "ifxuser.contact",
-    "pk": 13,
     "fields": {
-        "name": "John von Neumann",
-        "ifxcon": "IFXCON0000000003",
-        "type": "Email",
-        "detail": "coolguy@neumann.com",
-        "phone": null,
-        "address": null,
-        "is_valid": true,
-        "created": "2021-09-08T19:50:48.561Z"
+      "name": "John von Neumann",
+      "ifxcon": "IFXCON0000000003",
+      "type": "Email",
+      "detail": "coolguy@neumann.com",
+      "phone": null,
+      "address": null,
+      "is_valid": true,
+      "created": "2021-09-08T19:50:48.561Z"
     }
-},
-{
+  },
+  {
     "model": "ifxuser.contact",
-    "pk": 14,
     "fields": {
-        "name": "Grace Hopper",
-        "ifxcon": "IFXCON0000000004",
-        "type": "Email",
-        "detail": "hopper@grace.com",
-        "phone": null,
-        "address": null,
-        "is_valid": true,
-        "created": "2021-09-08T19:50:48.628Z"
+      "name": "Grace Hopper",
+      "ifxcon": "IFXCON0000000004",
+      "type": "Email",
+      "detail": "hopper@grace.com",
+      "phone": null,
+      "address": null,
+      "is_valid": true,
+      "created": "2021-09-08T19:50:48.628Z"
     }
-},
-{
+  },
+  {
     "model": "ifxuser.contact",
-    "pk": 15,
     "fields": {
-        "name": "Dennis Ritchie",
-        "ifxcon": "IFXCON0000000005",
-        "type": "Email",
-        "detail": "danceallnight@dennis.com",
-        "phone": null,
-        "address": null,
-        "is_valid": true,
-        "created": "2021-09-08T19:50:48.834Z"
+      "name": "Dennis Ritchie",
+      "ifxcon": "IFXCON0000000005",
+      "type": "Email",
+      "detail": "danceallnight@dennis.com",
+      "phone": null,
+      "address": null,
+      "is_valid": true,
+      "created": "2021-09-08T19:50:48.834Z"
     }
-},
-{
+  },
+  {
     "model": "ifxuser.contact",
-    "pk": 16,
     "fields": {
-        "name": null,
-        "ifxcon": "IFXCON000000000C",
-        "type": "Email",
-        "detail": "donaldanddennis@c.com",
-        "phone": null,
-        "address": null,
-        "is_valid": true,
-        "created": "2021-09-08T19:50:48.864Z"
+      "name": null,
+      "ifxcon": "IFXCON000000000C",
+      "type": "Email",
+      "detail": "donaldanddennis@c.com",
+      "phone": null,
+      "address": null,
+      "is_valid": true,
+      "created": "2021-09-08T19:50:48.864Z"
     }
-},
-{
+  },
+  {
     "model": "ifxuser.contact",
-    "pk": 17,
     "fields": {
-        "name": "Donald Knuth",
-        "ifxcon": "IFXCON0000000006",
-        "type": "Email",
-        "detail": "writeallday@knuth.com",
-        "phone": null,
-        "address": null,
-        "is_valid": true,
-        "created": "2021-09-08T19:50:50.657Z"
+      "name": "Donald Knuth",
+      "ifxcon": "IFXCON0000000006",
+      "type": "Email",
+      "detail": "writeallday@knuth.com",
+      "phone": null,
+      "address": null,
+      "is_valid": true,
+      "created": "2021-09-08T19:50:50.657Z"
     }
-},
-{
+  },
+  {
     "model": "ifxuser.contact",
-    "pk": 18,
     "fields": {
-        "name": "Guido von Rossum",
-        "ifxcon": "IFXCON0000000007",
-        "type": "Email",
-        "detail": "python4lyfe@guido.com",
-        "phone": null,
-        "address": null,
-        "is_valid": true,
-        "created": "2021-09-08T19:50:51.861Z"
+      "name": "Guido von Rossum",
+      "ifxcon": "IFXCON0000000007",
+      "type": "Email",
+      "detail": "python4lyfe@guido.com",
+      "phone": null,
+      "address": null,
+      "is_valid": true,
+      "created": "2021-09-08T19:50:51.861Z"
     }
-},
-{
+  },
+  {
     "model": "ifxuser.contact",
-    "pk": 19,
     "fields": {
-        "name": "Margaret Hamilton",
-        "ifxcon": "IFXCON0000000008",
-        "type": "Email",
-        "detail": "mhamilton@nasa.com",
-        "phone": null,
-        "address": null,
-        "is_valid": true,
-        "created": "2021-09-08T19:50:52.045Z"
+      "name": "Margaret Hamilton",
+      "ifxcon": "IFXCON0000000008",
+      "type": "Email",
+      "detail": "mhamilton@nasa.com",
+      "phone": null,
+      "address": null,
+      "is_valid": true,
+      "created": "2021-09-08T19:50:52.045Z"
     }
-},
-{
+  },
+  {
     "model": "ifxuser.contact",
-    "pk": 20,
     "fields": {
-        "name": "Bjarne Stroustrup",
-        "ifxcon": "IFXCON0000000009",
-        "type": "Email",
-        "detail": "cplusplustips@bjarne.com",
-        "phone": null,
-        "address": null,
-        "is_valid": true,
-        "created": "2021-09-08T19:50:52.581Z"
+      "name": "Bjarne Stroustrup",
+      "ifxcon": "IFXCON0000000009",
+      "type": "Email",
+      "detail": "cplusplustips@bjarne.com",
+      "phone": null,
+      "address": null,
+      "is_valid": true,
+      "created": "2021-09-08T19:50:52.581Z"
     }
-},
-{
+  },
+  {
     "model": "ifxuser.contact",
-    "pk": 21,
     "fields": {
-        "name": "Steve Wozniak",
-        "ifxcon": "IFXCON000000000A",
-        "type": "Email",
-        "detail": "me@notapple.com",
-        "phone": null,
-        "address": null,
-        "is_valid": true,
-        "created": "2021-09-08T19:50:52.947Z"
+      "name": "Steve Wozniak",
+      "ifxcon": "IFXCON000000000A",
+      "type": "Email",
+      "detail": "me@notapple.com",
+      "phone": null,
+      "address": null,
+      "is_valid": true,
+      "created": "2021-09-08T19:50:52.947Z"
     }
-},
-{
+  },
+  {
     "model": "ifxuser.contact",
-    "pk": 22,
     "fields": {
-        "name": "Vera D. Min",
-        "ifxcon": "IFXCON000000000D",
-        "type": "Email",
-        "detail": "veradmin@harvard.edu",
-        "phone": null,
-        "address": null,
-        "is_valid": true,
-        "created": "2021-09-08T19:50:53.856Z"
+      "name": "Vera D. Min",
+      "ifxcon": "IFXCON000000000D",
+      "type": "Email",
+      "detail": "veradmin@harvard.edu",
+      "phone": null,
+      "address": null,
+      "is_valid": true,
+      "created": "2021-09-08T19:50:53.856Z"
     }
-},
-{
+  },
+  {
     "model": "ifxuser.usercontact",
-    "pk": 14,
     "fields": {
-        "user": 5,
-        "contact": 1,
-        "role": "Primary Email"
+      "user": [
+        "alanturing"
+      ],
+      "contact": [
+        "Email",
+        "alan@turing.com"
+      ],
+      "role": "Primary Email",
+      "active": true
     }
-},
-{
+  },
+  {
     "model": "ifxuser.usercontact",
-    "pk": 15,
     "fields": {
-        "user": 6,
-        "contact": 12,
-        "role": "Primary Email"
+      "user": [
+        "adalovelace"
+      ],
+      "contact": [
+        "Email",
+        "lovelace@adaperson.com"
+      ],
+      "role": "Primary Email",
+      "active": true
     }
-},
-{
+  },
+  {
     "model": "ifxuser.usercontact",
-    "pk": 16,
     "fields": {
-        "user": 7,
-        "contact": 13,
-        "role": "Primary Email"
+      "user": [
+        "jvneumann"
+      ],
+      "contact": [
+        "Email",
+        "coolguy@neumann.com"
+      ],
+      "role": "Primary Email",
+      "active": true
     }
-},
-{
+  },
+  {
     "model": "ifxuser.usercontact",
-    "pk": 17,
     "fields": {
-        "user": 8,
-        "contact": 14,
-        "role": "Primary Email"
+      "user": [
+        "ghopper"
+      ],
+      "contact": [
+        "Email",
+        "hopper@grace.com"
+      ],
+      "role": "Primary Email",
+      "active": true
     }
-},
-{
+  },
+  {
     "model": "ifxuser.usercontact",
-    "pk": 18,
     "fields": {
-        "user": 9,
-        "contact": 15,
-        "role": "Primary Email"
+      "user": [
+        "dritchie"
+      ],
+      "contact": [
+        "Email",
+        "danceallnight@dennis.com"
+      ],
+      "role": "Primary Email",
+      "active": true
     }
-},
-{
+  },
+  {
     "model": "ifxuser.usercontact",
-    "pk": 19,
     "fields": {
-        "user": 9,
-        "contact": 16,
-        "role": "Secondary Email"
+      "user": [
+        "dritchie"
+      ],
+      "contact": [
+        "Email",
+        "donaldanddennis@c.com"
+      ],
+      "role": "Secondary Email",
+      "active": true
     }
-},
-{
+  },
+  {
     "model": "ifxuser.usercontact",
-    "pk": 20,
     "fields": {
-        "user": 10,
-        "contact": 17,
-        "role": "Primary Email"
+      "user": [
+        "dknuth"
+      ],
+      "contact": [
+        "Email",
+        "writeallday@knuth.com"
+      ],
+      "role": "Primary Email",
+      "active": true
     }
-},
-{
+  },
+  {
     "model": "ifxuser.usercontact",
-    "pk": 21,
     "fields": {
-        "user": 10,
-        "contact": 16,
-        "role": "Secondary Email"
+      "user": [
+        "dknuth"
+      ],
+      "contact": [
+        "Email",
+        "donaldanddennis@c.com"
+      ],
+      "role": "Secondary Email",
+      "active": true
     }
-},
-{
+  },
+  {
     "model": "ifxuser.usercontact",
-    "pk": 22,
     "fields": {
-        "user": 11,
-        "contact": 18,
-        "role": "Primary Email"
+      "user": [
+        "gvrossum"
+      ],
+      "contact": [
+        "Email",
+        "python4lyfe@guido.com"
+      ],
+      "role": "Primary Email",
+      "active": true
     }
-},
-{
+  },
+  {
     "model": "ifxuser.usercontact",
-    "pk": 23,
     "fields": {
-        "user": 12,
-        "contact": 19,
-        "role": "Primary Email"
+      "user": [
+        "mhamilton"
+      ],
+      "contact": [
+        "Email",
+        "mhamilton@nasa.com"
+      ],
+      "role": "Primary Email",
+      "active": true
     }
-},
-{
+  },
+  {
     "model": "ifxuser.usercontact",
-    "pk": 24,
     "fields": {
-        "user": 13,
-        "contact": 20,
-        "role": "Primary Email"
+      "user": [
+        "bstroustrup"
+      ],
+      "contact": [
+        "Email",
+        "cplusplustips@bjarne.com"
+      ],
+      "role": "Primary Email",
+      "active": true
     }
-},
-{
+  },
+  {
     "model": "ifxuser.usercontact",
-    "pk": 25,
     "fields": {
-        "user": 15,
-        "contact": 21,
-        "role": "Primary Email"
+      "user": [
+        "woz"
+      ],
+      "contact": [
+        "Email",
+        "me@notapple.com"
+      ],
+      "role": "Primary Email",
+      "active": true
     }
-},
-{
+  },
+  {
     "model": "ifxuser.usercontact",
-    "pk": 26,
     "fields": {
-        "user": 4,
-        "contact": 22,
-        "role": "Primary Email"
+      "user": [
+        "veradmin"
+      ],
+      "contact": [
+        "Email",
+        "veradmin@harvard.edu"
+      ],
+      "role": "Primary Email",
+      "active": true
     }
-},
-{
+  },
+  {
     "model": "ifxuser.orgrelation",
-    "pk": 1,
     "fields": {
-        "child": 6,
-        "parent": 9
+      "child": [
+        "Algorithm Lab",
+        "lab",
+        "Harvard"
+      ],
+      "parent": [
+        "Computing",
+        "department",
+        "Harvard"
+      ]
     }
-},
-{
+  },
+  {
     "model": "ifxuser.orgrelation",
-    "pk": 2,
     "fields": {
-        "child": 8,
-        "parent": 9
+      "child": [
+        "C Lab",
+        "lab",
+        "Harvard"
+      ],
+      "parent": [
+        "Computing",
+        "department",
+        "Harvard"
+      ]
     }
-},
-{
+  },
+  {
     "model": "ifxuser.orgrelation",
-    "pk": 3,
     "fields": {
-        "child": 14,
-        "parent": 9
+      "child": [
+        "Python Lab",
+        "lab",
+        "Harvard"
+      ],
+      "parent": [
+        "Computing",
+        "department",
+        "Harvard"
+      ]
     }
-},
-{
+  },
+  {
     "model": "ifxuser.orgrelation",
-    "pk": 4,
     "fields": {
-        "child": 14,
-        "parent": 15
+      "child": [
+        "Python Lab",
+        "lab",
+        "Harvard"
+      ],
+      "parent": [
+        "Snake",
+        "school",
+        "Harvard"
+      ]
     }
-}
+  }
 ]

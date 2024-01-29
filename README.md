@@ -17,18 +17,24 @@ users setup in the nanites/initDev.py file.
 
 It goes without saying that you do not want to use the production token here.
 
+Library submodules should then be added to the application
+
+   > for m in ifxauth ifxurls djvocab nanites.client ifxuser ifxmail.client ifxrequest ifxreport ifxec fiine.client ifxbilling; do git submodule add git@github.com:harvardinformatics/${m}.git; done
+
+Your application may require a different list.  If so, make sure that PYTHONPATH is properly set.
+
 Once the project has been created, build the necessary containers and install the Javascript libraries
 
     > make build
-    > docker-compose run ifxtest-ui yarn
+    > docker compose run ifxtest-ui yarn
 
 After several minutes of this, you should be able to start up the application
 
-    > docker-compose up
+    > docker compose up
 
 Before logging in or attempting to access the authenticated "Demo" page (which automatically attemps to log you in), run the applyDevData management command to ensure that the test user is properly set up.
 
-    > docker-compose run drf ./manage.py applyDevData
+    > docker compose run ifxtest-drf ./manage.py applyDevData
 
 UserSerializer and UserViewSet classes will need to be created in serializers.py.  They are not created beforehand
 so that the proper local IfxUser subclass can be specified

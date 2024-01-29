@@ -17,6 +17,7 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -26,6 +27,8 @@ SECRET_KEY = os.environ.get('{{project_name|upper}}_DJANGO_KEY', 'alskdfjalskdja
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('{{project_name|upper}}_DEBUG', 'FALSE').upper() == 'TRUE'
+
+SITE_ID = 1
 
 ALLOWED_HOSTS = ['*']
 
@@ -59,8 +62,6 @@ IFX_AUTH_META_KEY = 'HTTP_HKEY_EDUPERSONPRINCIPALNAME'
 if IFX_APP['token'] == 'FIXME':
     print('HEY!!!!!  Set the IFX_APP_TOKEN in docker-compose!')
 
-# Erroneous error for json field with mariadb
-SILENCED_SYSTEM_CHECKS = ['django_mysql.E016']
 
 # Application definition
 INSTALLED_APPS = [
@@ -71,7 +72,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_nose',
+    'django.contrib.sites',
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
@@ -80,6 +81,8 @@ INSTALLED_APPS = [
     'author',
     'ifxrequest',
     'ifxbilling',
+    'ifxreport',
+    'django_extensions',
     '{{project_name}}',
 ]
 
@@ -104,7 +107,7 @@ ROOT_URLCONF = '{{project_name}}.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'static'), os.path.join(BASE_DIR, 'frontend', 'dist'),],
+        'DIRS': ['/static', os.path.join(BASE_DIR, 'static'), os.path.join(BASE_DIR, 'frontend', 'dist'),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -273,9 +276,15 @@ AUTH_USER_MODEL = 'ifxuser.IfxUser'
 # User that will 'author' request state changes that are not done by a person
 DEFAULT_USERNAME = '{{project_name}}'
 
+IFXREQUEST_PROCESSOR_MODULE = '{{project_name}}.request.processor'
+IFXREQUEST_DEFAULT_USERNAME = '{{project_name}}'
+IFX_AUTH_NEW_USER_ENABLED = False
+
 MEDIA_ROOT = '/app/media/'
 MEDIA_URL = '/{{project_name}}/media/'
 
+IFXREPORT_FILE_ROOT = os.path.join(MEDIA_ROOT, 'reports')
+IFXREPORT_URL_ROOT = f'{MEDIA_URL}reports'
 
 ADMINS = [
     ('Informatics Software Operations', 'ifx@fas.harvard.edu')
@@ -309,6 +318,17 @@ class IFXMESSAGES():
     ACCOUNT_REQUEST_APPROVER_NOTIFICATION_MESSAGE = '{{project_name}}_account_request_approver_notification_message'
     ACCOUNT_REQUEST_COMPLETED_MESSAGE = '{{project_name}}_account_request_completed_message'
     ACCOUNT_REQUEST_COMPLETED_USER_NOTIFICATION_MESSAGE = '{{project_name}}_account_request_completed_user_notification_message'
+
+
+class ROLES():
+    '''
+    Names for roles, corresponding to account request tracks
+    '''
+    TEST = 'test'
+    MODULES = [
+        'Admin',
+    ]
+    PACKAGE_NAME = '{{project_name}}.roles'
 
 
 # Assuming ifxbilling is installed, these models should be ignored by the django-author pre-save
