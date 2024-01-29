@@ -7,7 +7,7 @@
     "build": "vue-cli-service build",
     "test:e2e": "vue-cli-service test:e2e --headless --mode test",
     "lint": "vue-cli-service lint",
-    "inspect": "vue-cli-service inspect",
+    "inspect": "vue-cli-service inspect"
   },
   "dependencies": {
     "@mdi/font": "5.8.55",
