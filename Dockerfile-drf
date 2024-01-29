@@ -29,7 +29,7 @@ RUN --mount=type=ssh pip install --upgrade pip && \
     pip install git+ssh://git@github.com/harvardinformatics/ifxuser.git@${IFXUSER_COMMIT} && \
     pip install git+ssh://git@github.com/harvardinformatics/ifxauth.git@${IFXAUTH_COMMIT} && \
     pip install git+ssh://git@github.com/harvardinformatics/ifxmail.client.git@${IFXMAIL_CLIENT_COMMIT} && \
-    pip install git+ssh://git@github.com/harvardinformatics/ifxrequest.git@${IFXREQUEST_COMMIT} && \
+    pip install git+ssh://git@gitlab-int.rc.fas.harvard.edu/informatics/ifxrequest.git@${IFXREQUEST_COMMIT} && \
     pip install git+ssh://git@gitlab-int.rc.fas.harvard.edu/informatics/fiine.client.git@${FIINE_CLIENT_COMMIT} && \
     pip install git+ssh://git@gitlab-int.rc.fas.harvard.edu/informatics/ifxbilling.git@${IFXBILLING_COMMIT} && \
     pip install git+ssh://git@gitlab-int.rc.fas.harvard.edu/informatics/ifxvalidcode.git@${IFXVALIDCODE_COMMIT} && \
