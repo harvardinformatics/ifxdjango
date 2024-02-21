@@ -13,7 +13,7 @@
     "@mdi/font": "5.8.55",
     "@tinymce/tinymce-vue": "3.2.5",
     "@vue/babel-preset-app": "^4.5.11",
-    "axios": "0.21.2",
+    "axios": "0.28.0",
     "coa": "2.0.2",
     "core-js": "3.25.2",
     "ifxvue": "harvardinformatics/ifxvue#ajk_deploy",
