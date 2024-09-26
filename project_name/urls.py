@@ -32,7 +32,6 @@ router.register(r'accounts', ifxbilling_serializers.AccountViewSet, 'account')
 router.register(r'billing-records', ifxbilling_serializers.BillingRecordViewSet, 'billing-records')
 router.register(r'products', ifxbilling_serializers.ProductViewSet, 'products')
 router.register(r'facilities', ifxbilling_serializers.FacilityViewSet, 'facilities')
-router.register(r'accounts', ifxbilling_serializers.AccountViewSet, 'account')
 router.register(r'report-runs', ReportRunViewSet, 'report-run')
 router.register(r'reports', ReportViewSet, 'report')
 
@@ -45,7 +44,6 @@ urlpatterns = static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + [
     path(r'{{project_name}}/api/users/get-nanite-login/', views.get_ifxapp_nanite_login),
     path(r'{{project_name}}/api/onboard-requests/<int:pk>/', request_views.onboard_requests),
     path(r'{{project_name}}/api/onboard-requests/', request_views.onboard_requests),
-    path(r'{{project_name}}/api/users/update-person/', views.update_person),
     path(r'{{project_name}}/api/requests/get-request-list/', request_views.get_request_list),
     path(r'{{project_name}}/api/requests/get-valid-processor-states/', request_views.get_valid_processor_states),
     path(r'{{project_name}}/api/requests/set-request-state/', request_views.set_request_state),

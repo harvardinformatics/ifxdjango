@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from decimal import Decimal
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -336,6 +337,7 @@ class ROLES():
         '{{project_name}}_user',
     ]
     PACKAGE_NAME = '{{project_name}}.roles'
+    ADMIN_ROLE_NAME = '{{project_name}}_admin'
 
 ACCOUNT_REQUEST_TRACKS = ['{{project_name}}_admin', '{{project_name}}_user']
 

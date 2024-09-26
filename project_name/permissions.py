@@ -8,6 +8,7 @@ Created on  {% now "Y-m-d" %}
 
 import json
 import logging
+from django.conf import settings
 from rest_framework import permissions
 from ifxuser.permissions import UserViewSetPermissions
 from ifxuser import roles as Roles
@@ -19,7 +20,7 @@ class AdminPermission(permissions.IsAuthenticated):
     User must be an admin
     '''
     def has_permission(self, request, view):
-        result = Roles.has_role(settings.GROUPS.ADMIN_GROUP_NAME, request.user)
+        result = Roles.has_role(settings.ROLES.ADMIN_ROLE_NAME, request.user)
         logger.debug('user is admin? %s', str(result))
         return result
 
@@ -39,7 +40,7 @@ class AdminOrOwner(permissions.IsAuthenticated):
                 username = data.get('username')
             except json.JSONDecodeError:
                 pass
-        return (Roles.has_role(settings.GROUPS.ADMIN_GROUP_NAME, request.user) or request.user.username == username) and super().has_permission(request, view)
+        return (Roles.has_role(settings.ROLES.ADMIN_ROLE_NAME, request.user) or request.user.username == username) and super().has_permission(request, view)
 
 
 class {{project_name|title}}UserViewSetPermissions(UserViewSetPermissions):
@@ -50,4 +51,4 @@ class {{project_name|title}}UserViewSetPermissions(UserViewSetPermissions):
         '''
         How admin is determined
         '''
-        return Roles.has_role(settings.GROUPS.ADMIN_GROUP_NAME, request.user)
+        return Roles.has_role(settings.ROLES.ADMIN_ROLE_NAME, request.user)

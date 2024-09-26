@@ -24,9 +24,7 @@ from ifxmail.client import FieldErrorsException
 from ifxmail.client.views import messages, readUpdateOrDeleteMessage, mailings, readMailing
 from ifxuser.models import USER_EDITABLE_PERSON_FIELDS, ADMIN_EDITABLE_PERSON_FIELDS
 from ifxuser.nanites import updateOrCreateIfxUser
-from ifxuser.views import get_ifxapp_nanite_login as ifxuser_get_ifxapp_nanite_login
-from ifxuser.views import get_location_info as ifxuser_get_location_info
-from ifxuser.views import get_contact_list as ifxuser_get_contact_list
+from ifxuser import views as ifxuser_views
 from ifxuser import roles as Roles
 from nanites.client import API as NanitesAPI
 from {{project_name}}.permissions import AdminOrOwner, AdminPermission
@@ -137,7 +135,7 @@ def get_ifxapp_nanite_login(request):
     '''
     Get a nanite login by username
     '''
-    return ifxuser_get_ifxapp_nanite_login(request)
+    return ifxuser_views.get_ifxapp_nanite_login(request)
 
 
 
@@ -145,7 +143,7 @@ def get_location_info(request):
     '''
     Address location information
     '''
-    return ifxuser_get_location_info(request)
+    return ifxuser_views.get_location_info(request)
 
 
 @permission_classes((AdminPermission, ))
@@ -153,14 +151,14 @@ def get_contact_list(request):
     '''
     Contact list
     '''
-    return ifxuser_get_contact_list(request)
+    return ifxuser_views.get_contact_list(request)
 
 @permission_classes((AdminPermission, ))
 def get_contactables(request):
     '''
     ifxuser get_contactables with admin permission
     '''
-    return ifxuser_get_contactables(request)
+    return ifxuser_views.get_contactables(request)
 
 
 @permission_classes((AdminPermission, ))

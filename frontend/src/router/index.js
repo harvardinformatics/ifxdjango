@@ -228,7 +228,7 @@ const routes = [
   },
   {
     path: '/accounts/list/',
-    name: 'IFXAccountList',
+    name: 'AccountList',
     component: IFXAccountList
   },
   {
