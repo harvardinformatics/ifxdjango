@@ -59,6 +59,11 @@ IFX_APP = {
 }
 IFX_AUTH_META_KEY = 'HTTP_HKEY_EDUPERSONPRINCIPALNAME'
 
+ALLOWED_HOSTS = ['{{project_name}}-drf', 'ifxonboard-drf', 'localhost', '127.0.0.1', 'ifx.fas.harvard.edu', 'fiine.rc.fas.harvard.edu']
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+USE_X_FORWARDED_HOST = True
+
+
 if IFX_APP['token'] == 'FIXME':
     print('HEY!!!!!  Set the IFX_APP_TOKEN in docker-compose!')
 
@@ -255,12 +260,9 @@ LOGGING = {
     },
 }
 
-TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
-NOSE_ARGS = ['--nocapture',
-             '--nologcapture',]
 
-CSRF_COOKIE_NAME = '{{project_name}}-csrf-token'
 CSRF_USE_SESSIONS = False
+CSRF_TRUSTED_ORIGINS = ['http://localhost', 'https://*.rc.fas.harvard.edu', 'https://*.fas.harvard.edu']
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_METHODS = (
     'DELETE',
@@ -283,11 +285,15 @@ IFX_AUTH_NEW_USER_ENABLED = False
 MEDIA_ROOT = '/app/media/'
 MEDIA_URL = '/{{project_name}}/media/'
 
+# Needed for file uploads :)
+FILE_UPLOAD_PERMISSIONS = 0o644
+
 IFXREPORT_FILE_ROOT = os.path.join(MEDIA_ROOT, 'reports')
 IFXREPORT_URL_ROOT = f'{MEDIA_URL}reports'
 
 ADMINS = [
-    ('Informatics Software Operations', 'ifx@fas.harvard.edu')
+    ('Aaron Kitzmiller', 'akitzmiller@g.harvard.edu'),
+    ('Ifx Admin', 'ifx@fas.harvard.edu'),
 ]
 
 SERVER_EMAIL = 'ifx@fas.harvard.edu'
@@ -326,10 +332,12 @@ class ROLES():
     '''
     TEST = 'test'
     MODULES = [
-        'Admin',
+        '{{project_name}}_admin',
+        '{{project_name}}_user',
     ]
     PACKAGE_NAME = '{{project_name}}.roles'
 
+ACCOUNT_REQUEST_TRACKS = ['{{project_name}}_admin', '{{project_name}}_user']
 
 # Assuming ifxbilling is installed, these models should be ignored by the django-author pre-save
 # so that author values can be directly set
@@ -338,7 +346,6 @@ AUTHOR_IGNORE_MODELS = [
     'ifxbilling.Transaction',
 ]
 
-AUTHOR_IGNORE_MODELS = [
-    'ifxbilling.BillingRecord',
-    'ifxbilling.Transaction',
-]
+STANDARD_QUANTIZE = Decimal('0.0000')
+TWO_DIGIT_QUANTIZE = Decimal('0.00')
+REQUESTS_TIMEOUT = 300

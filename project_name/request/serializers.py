@@ -3,7 +3,7 @@
 '''
 serializers for request objects
 
-Created on  {% now "Y-m-d" %}
+Created on  2021-12-03
 
 @copyright: 2021 The President and Fellows of Harvard College.
 All rights reserved.
@@ -13,8 +13,9 @@ import logging
 from django.db import transaction
 from django.db.models import Prefetch
 from rest_framework import serializers, viewsets
-from ifxrequest.models import Request, RequestState, RequestComment
+from ifxrequest.models import Request, RequestState, RequestComment, RequestFile, RequestFileCategory
 from ifxuser import serializers as ifxuser_serializers
+from ifxuser import models as ifxuser_models
 
 
 logger = logging.getLogger(__name__)
@@ -31,7 +32,7 @@ class RequestStateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = RequestState
-        fields = ('__all__')
+        fields = '__all__'
 
 
 class RequestCommentSerializer(serializers.ModelSerializer):
@@ -44,7 +45,7 @@ class RequestCommentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = RequestComment
-        fields = ('__all__')
+        fields = '__all__'
 
     def create(self, validated_data):
         '''
@@ -61,11 +62,26 @@ class RequestCommentSerializer(serializers.ModelSerializer):
         return instance
 
 
-    def update(self, instance, validated_data):
-        '''
-        Set the "author" field to the request.user
-        '''
-        pass
+class RequestFileSerializer(serializers.ModelSerializer):
+    '''
+    serializer for RequestFiles
+    '''
+    request = serializers.PrimaryKeyRelatedField(queryset=Request.objects.all())
+    file = serializers.FileField()
+    category = serializers.SlugRelatedField(
+        slug_field='name',
+        queryset=RequestFileCategory.objects.all()
+    )
+
+    class Meta:
+        model = RequestFile
+        fields = (
+            'request',
+            'file',
+            'id',
+            'category',
+        )
+
 
 
 class RequestSerializer(serializers.ModelSerializer):
@@ -90,6 +106,7 @@ class RequestSerializer(serializers.ModelSerializer):
     request_comments = RequestCommentSerializer(source='requestcomment_set', many=True, read_only=True)
     created = serializers.DateTimeField(read_only=True)
     updated = serializers.DateTimeField(read_only=True)
+    request_files = RequestFileSerializer(source='requestfile_set', many=True, read_only=True)
 
     class Meta:
         model = Request
@@ -106,15 +123,10 @@ class RequestSerializer(serializers.ModelSerializer):
             'request_states',
             'request_comments',
             'created',
-            'updated'
+            'updated',
+            'request_files',
         )
 
-    @transaction.atomic
-    def create(self, validated_data):
-        '''
-        Create comments if they are included
-        '''
-        pass
 
     @transaction.atomic
     def update(self, instance, validated_data):
@@ -134,6 +146,35 @@ class RequestSerializer(serializers.ModelSerializer):
             setattr(instance, key, validated_data.get(key))
 
         # instance.approvers.set(validated_data.get('approvers', []))
+        requestor_data = self.initial_data.get('requestor')
+        if requestor_data:
+            try:
+                requestor_id = requestor_data.get('id')
+                requestor = ifxuser_models.IfxUser.objects.get(id=requestor_id)
+                instance.requestor = requestor
+            except ifxuser_models.IfxUser.DoesNotExist as dne:
+                raise serializers.ValidationError(f'Requestor with id {requestor_id} does not exist') from dne
+
+        approvers_data = self.initial_data.get('approvers')
+        instance.approvers.clear()
+        if approvers_data:
+            for approver_data in approvers_data:
+                try:
+                    approver = ifxuser_models.IfxUser.objects.get(id=approver_data.get('id'))
+                    instance.approvers.add(approver)
+                except ifxuser_models.IfxUser.DoesNotExist as dne:
+                    raise serializers.ValidationError(f'Approver with id {approver_data.get("id")} does not exist') from dne
+
+        request_states_data = self.initial_data.get('request_states')
+        for request_state_data in request_states_data:
+            # You only add request states when updating, never remove
+            if not request_state_data.get('id'):
+                request_state = RequestStateSerializer(
+                    data=request_state_data,
+                    context={'request': self.context.get('request')}
+                )
+                request_state.is_valid(raise_exception=True)
+                request_state.save()
 
         # Collect current and updated ids.  Difference will be the deletables
         request_comment_ids = {rc.id for rc in instance.requestcomment_set.all()}
@@ -156,6 +197,8 @@ class RequestSerializer(serializers.ModelSerializer):
         to_delete = request_comment_ids - updated
         for pk in to_delete:
             RequestComment.objects.get(id=pk).delete()
+
+        instance.save()
 
         return instance
 
