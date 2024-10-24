@@ -22,7 +22,7 @@
     "moment": "2.29.1",
     "moment-timezone": "^0.5.37",
     "v-currency-field": "3.1.1",
-    "vue": "2.6.12",
+    "vue": "3.0.0",
     "vue-json-csv": "^1.2.12",
     "vue-router": "3.5.3",
     "vuetify": "2.3.16",
