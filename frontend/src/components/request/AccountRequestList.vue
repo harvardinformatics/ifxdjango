@@ -1,5 +1,5 @@
 <script>
-import IFXRequestList from './IFXRequestList'
+import { IFXRequestList }  from 'ifxvue'
 
 export default {
   name: 'AccountRequestList',
@@ -8,33 +8,33 @@ export default {
   },
   data() {
     return {
-      dataFields: [], // Fields in the request.data blob that should be surfaced.
+      dataFields: [],
       headers: [
         {
-          text: 'ID',
-          value: 'id'
+          title: 'ID',
+          key: 'id'
         },
         {
-          text: 'Status',
-          align: 'left',
-          value: 'currentState'
+          title: 'Status',
+          align: 'start',
+          key: 'currentState'
         },
         {
-          text: 'Result',
-          align: 'left',
-          value: 'result'
+          title: 'Result',
+          align: 'start',
+          key: 'result'
         },
         {
-          text: 'Requestor',
-          value: 'requestor'
+          title: 'Requestor',
+          key: 'requestor'
         },
         {
-          text: 'Created',
-          value: 'created'
+          title: 'Created',
+          key: 'created'
         },
         {
-          text: 'Updated',
-          value: 'updated'
+          title: 'Updated',
+          key: 'updated'
         }
       ]
     }
@@ -47,5 +47,4 @@ export default {
     <IFXRequestList :headers="headers" :dataFields="dataFields" requestType="account_request" title="Account Requests">
     </IFXRequestList>
   </v-container>
-
 </template>

@@ -1,5 +1,5 @@
 // URL roots
-export const ROOT_URL = process.env.VUE_APP_DJANGO
+export const ROOT_URL = import.meta.env.VITE_DJANGO || ''
 export const API_ROOT = `${ROOT_URL}api/`
 export const LOGIN_URL = 'obtain-auth-token/'
 export const DJANGO_ADMIN_ROOT = `${ROOT_URL}djadmin/`

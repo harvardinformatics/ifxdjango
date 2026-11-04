@@ -1,5 +1,4 @@
 <script>
-import { mapActions } from 'vuex'
 
 export default {
   name: 'Login',
@@ -12,7 +11,6 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['showMessage']),
     sleep(ms) {
       return new Promise((resolve) => setTimeout(resolve, ms))
     },
@@ -20,7 +18,7 @@ export default {
       await this.sleep(1000)
       await this.$api.auth.login()
       await this.sleep(100)
-      this.eventHub.$emit('isLoggedIn', this.success)
+      this.$eventBus.emit('isLoggedIn', this.success)
       await this.sleep(1000)
       if (this.$route.query.next) {
         this.routeInfo = { path: this.$route.query.next }
@@ -44,12 +42,12 @@ export default {
 
 <template>
   <v-container fluid>
-    <v-layout align-center justify-center>
-      <v-flex v-if="success">
+    <v-row align="center" justify="center">
+      <v-col v-if="success">
         <h1>Login Successful</h1>
         <p>You are being routed...</p>
-      </v-flex>
-      <v-flex v-else-if="failure">
+      </v-col>
+      <v-col v-else-if="failure">
         <h1>Login Unsucessful</h1>
         <p>An error occurred while attempting to log you in. Here is the error message:</p>
         <p>{{ message }}</p>
@@ -58,10 +56,10 @@ export default {
           <a href="mailto:informatics@rc.fas.harvard.edu">.</a>
         </p>
         <p>You are being routed...</p>
-      </v-flex>
-      <v-flex v-else>
+      </v-col>
+      <v-col v-else>
         <h1>Logging you in...</h1>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </v-container>
 </template>

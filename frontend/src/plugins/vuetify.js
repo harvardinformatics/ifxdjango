@@ -1,43 +1,41 @@
-import Vue from 'vue'
-import Vuetify, { VTextField } from 'vuetify/lib'
+import 'vuetify/styles'
 import '@mdi/font/css/materialdesignicons.css'
-import { Ripple as VuetifyRipple } from 'vuetify/lib/directives/ripple';
+import { createVuetify } from 'vuetify'
+import * as components from 'vuetify/components'
+import * as directives from 'vuetify/directives'
 
-Vue.use(Vuetify, {
-  directives: {
-    Ripple: VuetifyRipple,
-  },
-});
-
-// [Does this still apply?]
-// With tree-shaking enabled, webpack won't recognize v-text-field within the currency field
-// Register explicitly
-Vue.component('v-text-field', VTextField)
-
-export default new Vuetify({
-  dark: false,
+export default createVuetify({
+  components,
+  directives,
   icons: {
-    iconfont: 'mdi',
+    defaultSet: 'mdi',
   },
   theme: {
+    defaultTheme: 'light',
     themes: {
       light: {
-        primary: '#C62828',
-        secondary: '#90A4AE',
-        accent: '#5C6BC0',
-        error: '#db564c',
-        warning: '#fcf3a1',
-        info: '#2196f3',
-        success: '#4caf50',
+        dark: false,
+        colors: {
+          primary: '#C62828',
+          secondary: '#90A4AE',
+          accent: '#5C6BC0',
+          error: '#db564c',
+          warning: '#fcf3a1',
+          info: '#2196f3',
+          success: '#4caf50',
+        },
       },
       dark: {
-        primary: '#C62828',
-        secondary: '#90A4AE',
-        accent: '#5C6BC0',
-        error: '#db564c',
-        warning: '#fcf3a1',
-        info: '#2196f3',
-        success: '#4caf50',
+        dark: true,
+        colors: {
+          primary: '#C62828',
+          secondary: '#90A4AE',
+          accent: '#5C6BC0',
+          error: '#db564c',
+          warning: '#fcf3a1',
+          info: '#2196f3',
+          success: '#4caf50',
+        },
       },
     },
   },

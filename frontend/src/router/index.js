@@ -1,13 +1,12 @@
 import { cloneDeep } from 'lodash'
-import Vue from 'vue'
-import Router from 'vue-router'
-import Home from '@/components/Home'
-import Login from '@/components/Login'
-import UserList from '@/components/user/UserList'
-import UserEdit from '@/components/user/UserEdit'
-import UserDetail from '@/components/user/UserDetail'
-import AccountRequestList from '@/components/request/AccountRequestList'
-import AccountRequestDetail from '@/components/request/AccountRequestDetail'
+import { createRouter, createWebHistory } from 'vue-router'
+import Home from '@/components/Home.vue'
+import Login from '@/components/Login.vue'
+import UserList from '@/components/user/UserList.vue'
+import UserEdit from '@/components/user/UserEdit.vue'
+import UserDetail from '@/components/user/UserDetail.vue'
+import AccountRequestList from '@/components/request/AccountRequestList.vue'
+import AccountRequestDetail from '@/components/request/AccountRequestDetail.vue'
 import {
   IFXMailingList,
   IFXMailingDetail,
@@ -32,142 +31,125 @@ import {
 
 const { IFXNotFound, IFXForbidden } = ifxcomponents
 
-Vue.use(Router)
-
 const routes = [
   {
     path: '/',
     name: 'Home',
-    pathToRegexpOptions: { strict: true },
     component: Home
   },
   {
     path: '/login/',
     name: 'Login',
-    pathToRegexpOptions: { strict: true },
     component: Login
   },
   {
     path: '/users/list/',
     name: 'UserList',
-    pathToRegexpOptions: { strict: true },
     component: UserList,
-    isAdminRoute: true
+    meta: { AdminRoute: true }
   },
   {
     path: '/users/:id/edit/',
     name: 'UserEdit',
-    pathToRegexpOptions: { strict: true },
     component: UserEdit,
     props: route => ({
       id: String(route.params.id),
       isEditing: true
     }),
-    isAdminRoute: true
+    meta: { AdminRoute: true }
   },
   {
     path: '/users/:id/',
     name: 'UserDetail',
-    pathToRegexpOptions: { strict: true },
     component: UserDetail,
     props: route => ({
       id: String(route.params.id)
     }),
-    isAdminRoute: true
+    meta: { AdminRoute: true }
   },
   {
     path: '/requests/account_request/list/',
     name: 'AccountRequestList',
-    pathToRegexpOptions: { strict: true },
     component: AccountRequestList,
-    isAdminRoute: true
+    meta: { AdminRoute: true }
   },
   {
     path: '/requests/account_request/:id/',
     name: 'AccountRequestDetail',
-    pathToRegexpOptions: { strict: true },
     component: AccountRequestDetail,
-    isAdminRoute: true,
+    meta: { AdminRoute: true },
     props: true
   },
   {
     path: '/contacts/list/',
     name: 'ContactList',
-    pathToRegexpOptions: { strict: true },
     component: IFXContactList,
-    isAdminRoute: true
+    meta: { AdminRoute: true }
   },
   {
     path: '/contacts/create/',
     name: 'ContactCreate',
-    pathToRegexpOptions: { strict: true },
     component: IFXContactCreateEdit,
-    isAdminRoute: true
+    meta: { AdminRoute: true }
   },
   {
     path: '/contacts/:id/edit/',
     name: 'ContactEdit',
-    pathToRegexpOptions: { strict: true },
     component: IFXContactCreateEdit,
     props: route => ({
       id: String(route.params.id),
       isEditing: true
     }),
-    isAdminRoute: true
+    meta: { AdminRoute: true }
   },
   {
     path: '/contacts/:id/',
     name: 'ContactDetail',
-    pathToRegexpOptions: { strict: true },
     component: IFXContactDetail,
     props: route => ({
       id: String(route.params.id)
     }),
-    isAdminRoute: true
+    meta: { AdminRoute: true }
   },
   {
     path: '/organizations/list/',
     name: 'OrganizationList',
-    pathToRegexpOptions: { strict: true },
     component: IFXOrganizationList,
-    isAdminRoute: true
+    meta: { AdminRoute: true }
   },
   {
     path: '/organizations/create/',
     name: 'OrganizationCreate',
-    pathToRegexpOptions: { strict: true },
     component: IFXOrganizationCreateEdit,
     props: () => ({
       isEditing: false
     }),
-    isAdminRoute: true
+    meta: { AdminRoute: true }
   },
   {
     path: '/organizations/:id/edit/',
     name: 'OrganizationEdit',
-    pathToRegexpOptions: { strict: true },
     component: IFXOrganizationCreateEdit,
     props: route => ({
       id: String(route.params.id),
       isEditing: true
     }),
-    isAdminRoute: true
+    meta: { AdminRoute: true }
   },
   {
     path: '/organizations/:id/',
     name: 'OrganizationDetail',
-    pathToRegexpOptions: { strict: true },
     component: IFXOrganizationDetail,
     props: route => ({
       id: String(route.params.id),
     }),
-    isAdminRoute: true
+    meta: { AdminRoute: true }
   },
   {
     path: '/mailings/compose/',
     name: 'MailingCompose',
     component: IFXMailingCompose,
-    isAdminRoute: true,
+    meta: { AdminRoute: true },
     props: (route) => ({
       from: route.params.from,
       to: cloneDeep(route.params.to),
@@ -184,9 +166,8 @@ const routes = [
   {
     path: '/mailings/list/',
     name: 'MailingList',
-    pathToRegexpOptions: { strict: true },
     component: IFXMailingList,
-    isAdminRoute: true,
+    meta: { AdminRoute: true },
   },
   {
     path: '/mailings/:id/',
@@ -241,7 +222,6 @@ const routes = [
   },
   {
     path: '/billing/billing-records/list/',
-    pathToRegexpOptions: { strict: true },
     name: 'BillingRecordList',
     component: IFXBillingRecords,
     props: () => ({
@@ -252,24 +232,22 @@ const routes = [
       showTotals: true,
       totalUnits: 'hours'
     }),
-    isAdminRoute: true,
+    meta: { AdminRoute: true },
   },
   {
     path: '/billing/calculate-billing-month/:facility_id/',
-    pathToRegexpOptions: { strict: true },
     name: 'CalculateBillingMonthFacility',
     component: IFXCalculateBillingMonth,
-    isAdminRoute: true,
+    meta: { AdminRoute: true },
     props: (route) => ({
       facilityId: String(route.params.facility_id),
     }),
   },
   {
     path: '/billing/calculate-billing-month/:facility_id/:year/:month/',
-    pathToRegexpOptions: { strict: true },
     name: 'CalculateBillingMonthAll',
     component: IFXCalculateBillingMonth,
-    isAdminRoute: true,
+    meta: { AdminRoute: true },
     props: (route) => ({
       facilityId: String(route.params.facility_id),
       year: String(route.params.year),
@@ -278,17 +256,15 @@ const routes = [
   },
   {
     path: '/billing/calculate-billing-month/',
-    pathToRegexpOptions: { strict: true },
     name: 'CalculateBillingMonth',
     component: IFXCalculateBillingMonth,
-    isAdminRoute: true,
+    meta: { AdminRoute: true },
   },
   {
     path: '/billing/billing-records/:facility_id/:id/',
-    pathToRegexpOptions: { strict: true },
     name: 'BillingRecordDetail',
     component: IFXBillingRecordDetail,
-    isAdminRoute: true,
+    meta: { AdminRoute: true },
     props: (route) => ({
       id: String(route.params.id),
       facilityId: String(route.params.facility_id),
@@ -297,38 +273,30 @@ const routes = [
   },
   {
     path: '/report-runs/list/',
-    pathToRegexpOptions: { strict: true },
     name: 'ReportRunList',
     component: IFXReportRunList,
-    isAdminRoute: true,
+    meta: { AdminRoute: true },
   },
   {
     path: '/forbidden/',
     name: 'Forbidden',
-    pathToRegexpOptions: { strict: true },
     component: IFXForbidden
   },
   {
     path: '/404/',
     name: 'NotFound',
-    pathToRegexpOptions: { strict: true },
     component: IFXNotFound
   },
   {
-    path: '*',
+    path: '/:pathMatch(.*)*',
     redirect: '/404/'
   }
 ]
 
-routes.forEach(r => {
-  const route = r
-  route.pathToRegexpOptions = { strict: true }
-})
-
-const router = new Router({
-  base: '/{{project_name}}/',
-  mode: 'history',
-  routes
+const router = createRouter({
+  history: createWebHistory('/{{project_name}}/'),
+  routes,
+  strict: true
 })
 
 export { router, routes }

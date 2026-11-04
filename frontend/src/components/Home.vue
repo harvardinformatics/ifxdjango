@@ -14,8 +14,8 @@ export default {
 </script>
 
 <template>
-  <v-container justify="center" align="center">
-    <v-row>
+  <v-container>
+    <v-row justify="center" align="center">
       <v-col>
         <h1 class="text-center">{{program_name}}</h1>
       </v-col>

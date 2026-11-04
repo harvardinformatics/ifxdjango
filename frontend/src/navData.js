@@ -1,21 +1,21 @@
 export default {
   actions: {
-    icon: 'check_circle',
+    icon: 'mdi-check-circle',
     title: 'Actions',
     items: [
     ]
   },
   admin: {
-    icon: 'account_balance',
+    icon: 'mdi-bank',
     title: 'Admin',
     items: [
       {
-        icon: 'account_balance_wallet',
+        icon: 'mdi-wallet',
         title: 'Expense Codes / POs',
         link: 'AccountList',
       },
       {
-        icon: 'money',
+        icon: 'mdi-currency-usd',
         title: 'Billing Records',
         link: 'BillingRecordList',
       },
@@ -25,33 +25,33 @@ export default {
         link: 'ReportRunList',
       },
       {
-        icon: 'group',
+        icon: 'mdi-account-group',
         title: 'Users',
         link: 'UserList'
       },
       {
-        icon: 'contact_mail',
+        icon: 'mdi-card-account-mail',
         title: 'Contacts',
         link: 'ContactList'
       },
       {
-        icon: 'person',
+        icon: 'mdi-account',
         title: 'Account Requests',
         link: 'AccountRequestList'
       },
       {
-        icon: 'mdi-account-group',
+        icon: 'mdi-domain',
         title: 'Organizations',
         link: 'OrganizationList'
       }
     ]
   },
   mailing: {
-    icon: 'inbox',
+    icon: 'mdi-inbox',
     title: 'Mailing',
     items: [
       {
-        icon: 'email',
+        icon: 'mdi-email',
         title: 'Compose New Mailing',
         link: 'MailingCompose'
       },
@@ -61,7 +61,7 @@ export default {
         link: 'MailingList'
       },
       {
-        icon: 'message',
+        icon: 'mdi-message',
         title: 'Messages',
         link: 'MessageList'
       },

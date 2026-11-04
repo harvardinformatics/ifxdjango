@@ -14,5 +14,4 @@ export default {
     <IFXUserList>
     </IFXUserList>
   </v-container>
-
 </template>

@@ -7,66 +7,54 @@ export default {
 }
 </script>
 <template>
-  <v-layout column>
-    <v-flex>
-      <v-layout row v-for="address in data" :key="address.type">
-        <v-flex>
-          <v-layout column>
-            <v-flex>
-              <v-layout row>
-                <v-flex xs4>
-                  Street address
-                </v-flex>
-                <v-flex>
-                  {% verbatim %}{{address.street1}}{% endverbatim %}
-                </v-flex>
-              </v-layout>
-            </v-flex>
-            <v-flex>
-              <v-layout row>
-                <v-flex xs4>
-                  City
-                </v-flex>
-                <v-flex>
-                  {% verbatim %}{{address.city}}{% endverbatim %}
-                </v-flex>
-              </v-layout>
-            </v-flex>
-            <v-flex>
-              <v-layout row>
-                <v-flex xs4>
-                  State
-                </v-flex>
-                <v-flex>
-                  {% verbatim %}{{address.state}}{% endverbatim %}
-                </v-flex>
-              </v-layout>
-            </v-flex>
-            <v-flex>
-              <v-layout row>
-                <v-flex xs4>
-                  Country
-                </v-flex>
-                <v-flex>
-                  {% verbatim %}{{address.country}}{% endverbatim %}
-                </v-flex>
-              </v-layout>
-            </v-flex>
-            <v-flex>
-              <v-layout row>
-                <v-flex xs4>
-                  Postal code
-                </v-flex>
-                <v-flex>
-                  {% verbatim %}{{address.postal_code}}{% endverbatim %}
-                </v-flex>
-              </v-layout>
-            </v-flex>
-          </v-layout>
-        </v-flex>
-      </v-layout>
-    </v-flex>
-  </v-layout>
+  <v-row>
+    <v-col>
+      <v-row v-for="address in data" :key="address.type">
+        <v-col>
+          <v-row>
+            <v-col cols="4">
+              Street address
+            </v-col>
+            <v-col>
+              {% verbatim %}{{address.street1}}{% endverbatim %}
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="4">
+              City
+            </v-col>
+            <v-col>
+              {% verbatim %}{{address.city}}{% endverbatim %}
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="4">
+              State
+            </v-col>
+            <v-col>
+              {% verbatim %}{{address.state}}{% endverbatim %}
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="4">
+              Country
+            </v-col>
+            <v-col>
+              {% verbatim %}{{address.country}}{% endverbatim %}
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="4">
+              Postal code
+            </v-col>
+            <v-col>
+              {% verbatim %}{{address.postal_code}}{% endverbatim %}
+            </v-col>
+          </v-row>
+        </v-col>
+      </v-row>
+    </v-col>
+  </v-row>
 </template>
 <style scoped>
 

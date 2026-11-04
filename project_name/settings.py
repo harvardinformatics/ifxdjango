@@ -143,7 +143,7 @@ DATABASES = {
         'OPTIONS': {
             'charset': 'utf8mb4',
             'use_unicode': True,
-            'init_command': 'SET storage_engine=INNODB,character_set_connection=utf8mb4,collation_connection=utf8mb4_unicode_ci,group_concat_max_len=50000'
+            'init_command': 'SET default_storage_engine=INNODB,character_set_connection=utf8mb4,collation_connection=utf8mb4_unicode_ci,group_concat_max_len=50000'
         },
     },
 }

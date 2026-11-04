@@ -1,5 +1,5 @@
 <script>
-import IFXAccountRequestDetail from './IFXAccountRequestDetail'
+import IFXAccountRequestDetail from './IFXAccountRequestDetail.vue'
 
 export default {
   components: {

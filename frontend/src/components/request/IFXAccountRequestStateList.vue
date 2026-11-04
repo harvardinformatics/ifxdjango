@@ -1,4 +1,5 @@
 <script>
+import { useFilters } from '@/composables/useFilters'
 
 export default {
   name: 'IFXAccountRequestStateList',
@@ -6,16 +7,20 @@ export default {
     request: Object,
     validStates: Array
   },
+  setup() {
+    const filters = useFilters()
+    return { filters }
+  },
   data() {
     return {
       default_approver: this.$requestApi.getDefaultApprover(),
       dialog: false,
       request_state: null,
       headers: [
-        { text: 'Status', align: 'left', sortable: false, value: 'name' },
-        { text: 'Updated', sortable: false, value: 'created' },
-        { text: 'User', align: 'left', sortable: false, value: 'user' },
-        { text: 'Comments', sortable: false, value: 'comment' }
+        { title: 'Status', align: 'start', sortable: false, key: 'name' },
+        { title: 'Updated', sortable: false, key: 'created' },
+        { title: 'User', align: 'start', sortable: false, key: 'user' },
+        { title: 'Comments', sortable: false, key: 'comment' }
       ]
     }
   },
@@ -42,45 +47,48 @@ export default {
 <template>
   <v-card flat>
     <v-card-title>
-      <v-layout row wrap justify-end align-center>
-        <v-flex xs8>
-          <div class="title">Request Status</div>
-        </v-flex>
-        <v-flex xs4>
-          <v-layout row wrap justify-end align-center>
-            <v-flex>
+      <v-row justify="end" align="center">
+        <v-col cols="8">
+          <div class="text-h6">Request Status</div>
+        </v-col>
+        <v-col cols="4">
+          <v-row justify="end" align="center">
+            <v-col>
               <v-select
                 label="Set state"
                 v-model="request_state"
                 :items="validStates"
-                item-text="display"
+                item-title="display"
                 item-value="value"
-                @change="updateRequest()"
+                @update:model-value="updateRequest()"
+                density="compact"
               >
               </v-select>
-            </v-flex>
-          </v-layout>
-        </v-flex>
-      </v-layout>
+            </v-col>
+          </v-row>
+        </v-col>
+      </v-row>
     </v-card-title>
-    <v-layout column>
-      <v-flex>
+    <v-row>
+      <v-col>
         <v-data-table
           v-if="request.requestStates && request.requestStates.length"
-          :headers="this.headers"
+          :headers="headers"
           :items="request.requestStates"
           class="elevation-1 mb-3"
           hide-default-footer
         >
-            <v-progress-linear slot="progress" color="blue" indeterminate></v-progress-linear>
-            <template slot="no-data">
+            <template v-slot:loading>
+              <v-progress-linear color="blue" indeterminate></v-progress-linear>
+            </template>
+            <template v-slot:no-data>
               <span class="no-data">No users returned</span>
             </template>
             <template v-slot:[`item.name`]="{ item }">
-                {% verbatim %}{{ item.name | stateDisplay }}{% endverbatim %}
+                {% verbatim %}{{ filters.stateDisplay(item.name) }}{% endverbatim %}
             </template>
             <template v-slot:[`item.created`]="{ item }">
-                {% verbatim %}{{ item.created | humanDatetime }}{% endverbatim %}
+                {% verbatim %}{{ filters.humanDatetime(item.created) }}{% endverbatim %}
             </template>
             <template v-slot:[`item.user`]="{ item }">
                 {% verbatim %}{{ item.user.full_name == default_approver ? '' : item.user.full_name }}{% endverbatim %}
@@ -89,8 +97,8 @@ export default {
                 {% verbatim %}{{ item.comment ?  item.comment : "&nbsp;" }}{% endverbatim %}
             </template>
         </v-data-table>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </v-card>
 </template>
 <style>

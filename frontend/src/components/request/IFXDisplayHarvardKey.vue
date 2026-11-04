@@ -7,14 +7,14 @@ export default {
 }
 </script>
 <template>
-  <v-layout column>
-    <v-flex v-if="data">
+  <v-row>
+    <v-col v-if="data">
       Got it
-    </v-flex>
-    <v-flex v-else>
+    </v-col>
+    <v-col v-else>
       Don't got it
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>
 <style scoped>
 

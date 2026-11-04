@@ -1,19 +1,11 @@
 <script>
 import moment from 'moment'
 import forEach from 'lodash/forEach'
-import { mapActions } from 'vuex'
-import IFXAccountRequestTrackDetail from './IFXAccountRequestTrackDetail'
-import IFXAccountRequestStateList from './IFXAccountRequestStateList'
-import IFXDisplayOnboardStep from './IFXDisplayOnboardStep'
-import IFXRequestCommentList from './IFXRequestCommentList'
-
-/* Tracks prop should be of the form:
-
-    tracks: {
-      general: 'General Information',
-      rc_approver: 'RC Approver'
-    }
-*/
+import { useFilters } from '@/composables/useFilters'
+import IFXAccountRequestTrackDetail from './IFXAccountRequestTrackDetail.vue'
+import IFXAccountRequestStateList from './IFXAccountRequestStateList.vue'
+import IFXDisplayOnboardStep from './IFXDisplayOnboardStep.vue'
+import IFXRequestCommentList from './IFXRequestCommentList.vue'
 
 export default {
   name: 'IFXAccountRequestDetail',
@@ -26,6 +18,10 @@ export default {
   props: {
     tracks: Object
   },
+  setup() {
+    const filters = useFilters()
+    return { filters }
+  },
   data() {
     return {
       request: null,
@@ -37,19 +33,13 @@ export default {
     }
   },
   methods: {
-    ...mapActions([
-      'showMessage'
-    ]),
     addEmptyComment() {
-      // Adds an empty comment to the requestComments list.
       if (this.refresh_timer) {
         clearInterval(this.refresh_timer)
       }
       this.request.requestComments.unshift(this.$requestApi.newRequestComment())
     },
     handleStepChange(step) {
-      // If a step has been made incomplete, make sure that the request data confirmed step
-      // is also incomplete so that the data will get updated.
       if (this.refresh_timer) {
         clearInterval(this.refresh_timer)
       }
@@ -130,23 +120,7 @@ export default {
           })
       }
     },
-    // getEmailList (data) {
-    //   let emails = []
-    //   if (data.contacts) {
-    //     forEach(data.contacts, function(contact){
-    //       if (contact.details && contact.type.toLowerCase().includes('email')) {
-    //         if (data.primary_email && data.primary_email === contact.details) {
-    //           emails.push(contact.details + ' (primary)')
-    //         } else {
-    //           emails.push(contact.details)
-    //         }
-    //       }
-    //     })
-    //   }
-    //   return emails.join(', ')
-    // },
     getRequest(id) {
-      // Return account request by id
       const me = this
       this.$requestApi.getRequest(id)
         .then((response) => {
@@ -159,7 +133,7 @@ export default {
           this.$requestApi.getValidProcessorStates(me.request.processor)
             .then((res) => {
               forEach(res.data, (state) => {
-                const display = me.$options.filters.stateDisplay(state)
+                const display = me.filters.stateDisplay(state)
                 me.valid_states.push({ display: display, value: state })
               })
             })
@@ -195,148 +169,145 @@ export default {
 }
 </script>
 <template>
-  <v-container grid-list-md>
-    <v-layout row>
-      <v-flex xs12>
+  <v-container>
+    <v-row>
+      <v-col cols="12">
         <v-card v-if="request">
           <v-card-title>
-            <v-layout row wrap justify-start align-center>
-              <v-flex>
-                <span class="headline">Account request from {% verbatim %}{{request.fullName}}{% endverbatim %}</span>
-              </v-flex>
-              <v-flex>
-                <span v-if="request.result == 'SUCCESS'"><v-icon color="success">thumb_up</v-icon>&nbsp;Success</span>
-                <span v-else-if="request.result == 'FAILED'"><v-icon color="error">error_outline</v-icon>&nbsp;Failed</span>
-                <span v-else-if="request.result == 'REJECTED'"><v-icon color="error">thumb_down</v-icon>&nbsp;Rejected</span>
-                <span v-else><v-icon color="grey">cached</v-icon>&nbsp;{% verbatim %}{{request.currentState | stateDisplay}}{% endverbatim %}</span>
-              </v-flex>
-              <v-flex shrink>
-                <v-tooltip top>
-                  <template v-slot:activator="{ on }">
-                    <v-btn v-on="on" fab small
+            <v-row justify="start" align="center">
+              <v-col>
+                <span class="text-h6">Account request from {% verbatim %}{{request.fullName}}{% endverbatim %}</span>
+              </v-col>
+              <v-col>
+                <span v-if="request.result == 'SUCCESS'"><v-icon color="success">mdi-thumb-up</v-icon>&nbsp;Success</span>
+                <span v-else-if="request.result == 'FAILED'"><v-icon color="error">mdi-alert-circle-outline</v-icon>&nbsp;Failed</span>
+                <span v-else-if="request.result == 'REJECTED'"><v-icon color="error">mdi-thumb-down</v-icon>&nbsp;Rejected</span>
+                <span v-else><v-icon color="grey">mdi-cached</v-icon>&nbsp;{% verbatim %}{{filters.stateDisplay(request.currentState)}}{% endverbatim %}</span>
+              </v-col>
+              <v-col cols="auto">
+                <v-tooltip location="top">
+                  <template v-slot:activator="{ props }">
+                    <v-btn v-bind="props" icon size="small"
                       class="item-add"
                       color="green"
                       @click="addEmptyComment()"
                     >
-                      <v-icon dark >playlist_add</v-icon>
+                      <v-icon>mdi-playlist-plus</v-icon>
                     </v-btn>
                   </template>
                   <span>Add comment to request</span>
                 </v-tooltip>
-              </v-flex>
-              <v-flex shrink>
-                <v-tooltip top>
-                  <template v-slot:activator="{ on }">
-                    <v-btn v-on="on" fab small color="info" v-show="isDjangoStaff()" :href="django_admin_url">
-                      <v-icon color="yellow">vpn_key</v-icon>
+              </v-col>
+              <v-col cols="auto">
+                <v-tooltip location="top">
+                  <template v-slot:activator="{ props }">
+                    <v-btn v-bind="props" icon size="small" color="info" v-show="isDjangoStaff()" :href="django_admin_url">
+                      <v-icon color="yellow">mdi-key</v-icon>
                     </v-btn>
                   </template>
                   <span>View request Django admin form</span>
                 </v-tooltip>
-              </v-flex>
-            </v-layout>
+              </v-col>
+            </v-row>
           </v-card-title>
           <v-container>
-            <v-layout row wrap>
-              <v-flex xs12 v-if="request.requestComments.length > 0">
+            <v-row>
+              <v-col cols="12" v-if="request.requestComments.length > 0">
                 <IFXRequestCommentList :request="request" @update="updateRequestComment"/>
-              </v-flex>
-              <v-flex xs6>
-                <v-layout row wrap justify-start align-center>
-                  <v-flex shrink  class="expiration-date-label">
+              </v-col>
+              <v-col cols="6">
+                <v-row justify="start" align="center">
+                  <v-col cols="auto" class="expiration-date-label">
                     Onboard request
                     <span v-if="requestExpired()">expired</span>
                     <span v-else>expires</span>
-                  </v-flex>
-                  <v-flex v-if="updating_expiration_date" shrink>
+                  </v-col>
+                  <v-col v-if="updating_expiration_date" cols="auto">
                     <v-menu
                       v-model="expiration_date_menu"
                       :close-on-content-click="false"
-                      full-width
                     >
-                      <template v-slot:activator="{ on }">
+                      <template v-slot:activator="{ props }">
                         <v-text-field
-                          :value="request.continuationKeyExpiration"
-                          v-on="on"
+                          :model-value="request.continuationKeyExpiration"
+                          v-bind="props"
                           readonly
+                          density="compact"
                         >
                         </v-text-field>
                       </template>
                       <v-date-picker
                         v-model="request.continuationKeyExpiration"
-                        reactive
-                        no-title
-                        scrollable
-                        @change="updateRequest()"
+                        @update:model-value="updateRequest()"
                       >
                      </v-date-picker>
                     </v-menu>
-                  </v-flex>
-                  <v-flex v-else shrink>
+                  </v-col>
+                  <v-col v-else cols="auto">
                     {% verbatim %}{{request.continuationKeyExpiration}}{% endverbatim %}
-                  </v-flex>
-                  <v-flex>
-                    <v-btn :disabled="updating_expiration_date" fab small color="info" @click="updatingExpirationDate()">
-                      <v-icon>calendar_today</v-icon>
+                  </v-col>
+                  <v-col>
+                    <v-btn :disabled="updating_expiration_date" icon size="small" color="info" @click="updatingExpirationDate()">
+                      <v-icon>mdi-calendar-today</v-icon>
                     </v-btn>
-                  </v-flex>
-                </v-layout>
-              </v-flex>
-              <v-flex xs6 v-if="canBeApproved()">
-                <v-layout row justify-end>
-                  <v-flex grow>
+                  </v-col>
+                </v-row>
+              </v-col>
+              <v-col cols="6" v-if="canBeApproved()">
+                <v-row justify="end">
+                  <v-col>
                     &nbsp;
-                  </v-flex>
-                  <v-flex shrink>
-                    <v-radio-group :column="false" v-model="approval" @change="updateRequestState()">
+                  </v-col>
+                  <v-col cols="auto">
+                    <v-radio-group inline v-model="approval" @update:model-value="updateRequestState()">
                       <v-radio label="Approve" value="approve"></v-radio>
                       <v-radio label="Reject" value="reject"></v-radio>
                     </v-radio-group>
-                  </v-flex>
-                </v-layout>
-              </v-flex>
-              <v-flex xs7>
-                <v-layout column>
-                  <v-flex v-for="track in request.tracks.order" :key="track">
+                  </v-col>
+                </v-row>
+              </v-col>
+              <v-col cols="7">
+                <v-row>
+                  <v-col v-for="track in request.tracks.order" :key="track">
                     <IFXAccountRequestTrackDetail v-if="request && isAppTrack(track)" :track="track" :trackTitle="getTrackDisplayName(track)" :accountRequestData="request.onBoardRequest.data"/>
-                  </v-flex>
-                </v-layout>
-              </v-flex>
-              <v-flex grow>
+                  </v-col>
+                </v-row>
+              </v-col>
+              <v-col>
                 <v-container>
-                  <v-layout column>
-                    <v-flex>
-                      <span class="title">Onboarding Steps</span>
-                    </v-flex>
-                    <v-flex v-for="track in request.tracks.order" :key="track">
-                      <v-layout v-if="isAppTrack(track)" column>
-                        <v-flex v-for="step in request.tracks[track].order" :key="step">
-                          <IFXDisplayOnboardStep v-if="step !== 'completed_request'" @update="handleStepChange" :step="request.tracks[track][step]" :stepName="step" :trackName="track"/>
-                        </v-flex>
-                      </v-layout>
-                    </v-flex>
-                    <v-flex justify-center>
-                      <div class="text-xs-center">
-                        <v-btn
-                          color="primary"
-                          @click="updateRequest('notify')"
-                        >Update Steps
-                        </v-btn>
+                  <v-row>
+                    <v-col>
+                      <span class="text-h6">Onboarding Steps</span>
+                    </v-col>
+                  </v-row>
+                  <v-row v-for="track in request.tracks.order" :key="track">
+                    <v-col v-if="isAppTrack(track)">
+                      <div v-for="step in request.tracks[track].order" :key="step">
+                        <IFXDisplayOnboardStep v-if="step !== 'completed_request'" @update="handleStepChange" :step="request.tracks[track][step]" :stepName="step" :trackName="track"/>
                       </div>
-                    </v-flex>
-                  </v-layout>
+                    </v-col>
+                  </v-row>
+                  <v-row justify="center">
+                    <v-col class="text-center">
+                      <v-btn
+                        color="primary"
+                        @click="updateRequest('notify')"
+                      >Update Steps
+                      </v-btn>
+                    </v-col>
+                  </v-row>
                 </v-container>
-              </v-flex>
-            </v-layout>
-            <v-layout column>
-              <v-flex v-if="request">
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col v-if="request">
                 <IFXAccountRequestStateList :request="request" :validStates="valid_states"/>
-              </v-flex>
-            </v-layout>
+              </v-col>
+            </v-row>
           </v-container>
         </v-card>
-      </v-flex>
-    </v-layout>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 <style scoped>

@@ -7,18 +7,18 @@ export default {
 }
 </script>
 <template>
-  <v-layout column>
-    <v-flex>
-      <v-layout row v-for="contact in data" :key="contact.contact.detail">
-        <v-flex xs4>
+  <v-row>
+    <v-col>
+      <v-row v-for="contact in data" :key="contact.contact.detail">
+        <v-col cols="4">
           {% verbatim %}{{contact.role}}{% endverbatim %}
-        </v-flex>
-        <v-flex>
+        </v-col>
+        <v-col>
           {% verbatim %}{{contact.contact.detail}}{% endverbatim %}
-        </v-flex>
-      </v-layout>
-    </v-flex>
-  </v-layout>
+        </v-col>
+      </v-row>
+    </v-col>
+  </v-row>
 </template>
 <style scoped>
 

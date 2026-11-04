@@ -1,10 +1,4 @@
 <script>
-/* eslint-disable vue/no-mutating-props */
-// const STEP_DISPLAY_NAMES = {
-//   'welcome': 'Welcome',
-//   'existing_email_checked': 'Existing email checked',
-//   'existing_full_name_checked': 'Existing full name checked'
-// }
 export default {
   name: 'IFXDisplayOnboardStep',
   props: {
@@ -27,45 +21,28 @@ export default {
 }
 </script>
 <template>
-  <v-layout row justify-space-between align-start>
-    <v-flex>
+  <v-row justify="space-between" align="start">
+    <v-col>
       {% verbatim %}{{getStepDisplayName()}}{% endverbatim %}
-    </v-flex>
-    <v-flex grow>
+    </v-col>
+    <v-col>
       &nbsp;
-    </v-flex>
-    <v-flex shrink>
+    </v-col>
+    <v-col cols="auto">
       <v-checkbox
-        indeterminate-icon="cached"
-        on-icon="done"
-        off-icon="close"
+        :indeterminate-icon="'mdi-cached'"
+        :true-icon="'mdi-check'"
+        :false-icon="'mdi-close'"
         v-model="step.value"
         true-value="complete"
         false-value="incomplete"
-        @click.native="emitUpdate()"
+        @click="emitUpdate()"
+        hide-details
+        density="compact"
       >
       </v-checkbox>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>
 <style scoped>
-  .v-input--selection-controls {
-    margin: 0;
-    padding: 0;
-  }
-  .v-input--selection-controls {
-    margin: 0;
-  }
-  .v-input--checkbox {
-    height: 5px;
-  }
-  .v-input__control {
-    height: 5px;
-  }
-  .v-messages {
-    display: none;
-  }
-  .application {
-    line-height: 1;
-  }
 </style>
