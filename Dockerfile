@@ -29,8 +29,7 @@ ENV PYTHONPATH /app:/app/djvocab:/app/ifxurls:/app/nanites.client:/app/ifxuser:/
 ENV DJANGO_SETTINGS_MODULE {{project_name}}.settings
 
 RUN mkdir -p /app/media/reports
-RUN mkdir -p /app/media/uploads/tool_thumbs
-RUN mkdir -p /app/media/uploads/tool_images
+RUN mkdir -p /app/media/uploads/
 RUN mkdir -p /app/static
 
 CMD ./wait-for-it.sh -t 120 {{project_name}}-db:3306 && \
