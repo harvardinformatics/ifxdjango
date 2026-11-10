@@ -2,7 +2,7 @@ import { createApp, reactive } from 'vue'
 import APIService from '@/API/API'
 import ifxvue from 'ifxvue'
 import APIStore from '@/API/APIStore'
-import pinia from '@/store'
+import store from '@/store'
 import { IFXRequestAPI } from '@/API/IFXRequestAPI'
 import vuetify from '@/plugins/vuetify'
 import DownloadCsv from '@/components/DownloadCsv.vue'
@@ -16,12 +16,12 @@ import '@mdi/font/css/materialdesignicons.css'
 
 const app = createApp(App)
 
-app.use(pinia)
+app.use(store)
 app.use(vuetify)
 app.use(router)
 app.component('downloadCsv', DownloadCsv)
 
-app.use(ifxvue, { pinia, APIStore })
+app.use(ifxvue, { vuexStore: store, APIStore })
 
 const api = reactive(new APIService(APIStore))
 api.auth.initAuthUser()
@@ -29,6 +29,7 @@ api.auth.initAuthUser()
 app.config.globalProperties.$api = api
 app.config.globalProperties.$axios = axios
 app.config.globalProperties.$eventBus = eventBus
+app.config.globalProperties.$store = store
 
 const filters = useFilters()
 app.config.globalProperties.$filters = filters

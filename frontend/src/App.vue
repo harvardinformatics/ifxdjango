@@ -5,6 +5,7 @@ import { mapActions } from 'vuex'
 import { IFXMessageDisplay } from 'ifxvue'
 import navData from './navData'
 import eventHub from '@/eventHub'
+import { pick } from 'lodash'
 
 export default {
   name: 'App',
@@ -54,7 +55,7 @@ export default {
       this.$router.push({ name: 'UserDetail', params: { id: this.$api.authUser.id } })
     },
     setAuthData() {
-      this.name = this.$api.auth.getFirstName() ? this.$api.auth.getFirstName() : this.$api.auth.getUsername()
+      this.name = this.$api.auth ? this.$api.auth.getFirstName() : this.$api.auth.getUsername()
     },
     getLoginLogoutString(lower) {
       const string = this.$api.authUser.isAuthenticated ? 'Logout' : 'Login'
@@ -96,12 +97,12 @@ export default {
       params['v-slot'] = 'activator'
       params['class'] = this.mini ? 'nav-link nav-link-mini' : 'nav-link nav-link-expanded'
       params['disabled'] = item.hasOwnProperty('disabled') && item.disabled
-      params['key'] = 10 * item.key
+      params['key'] = item.link
       if (item.link) {
         params['to'] = { name: item.link, params: item.params }
       }
       if (item.django) {
-        params['href'] = [DJANGO_ADMIN_ROOT, item.django].join('/')
+        params['href'] = this.getDjangoUrl(item.django)
       }
       return params
     },
@@ -161,7 +162,6 @@ export default {
     this.initializeOpenedGroups()
     if (me.isAuthenticated()) {
       me.setAuthData()
-      this.name = this.$api.auth.getFirstName() ? this.$api.auth.getFirstName() : this.$api.auth.getUsername()
       this.toolbarKey = true
     }
   },
@@ -193,10 +193,15 @@ export default {
     },
     auth: function () {
       // Make auth available to the template
-      return auth
+      return this.$api.auth
     },
     computedNav() {
-      return navData
+      const addedKeys = []
+      if (this.$api.authUser.isAuthenticated && this.$api.authUser.isAdmin) {
+        const adminKeys = ['admin', 'mailing']
+        addedKeys.push(...adminKeys)
+      }
+      return pick(navData, addedKeys)
     },
     fullPageComponents() {
       return ['Home', 'Login', 'Logout']
@@ -220,7 +225,7 @@ export default {
       ></v-app-bar-nav-icon>
       <router-link to="/">
         <v-toolbar-title class="app-title-text">
-          <span class="ml-3 mr-5">{{ title }}</span>
+          <span class="ml-3 mr-5"></span>
         </v-toolbar-title>
       </router-link>
       <v-tooltip location="bottom">
@@ -234,7 +239,8 @@ export default {
       <v-menu v-if="isAuthenticated()" location="bottom">
         <template #activator="{ props }">
           <v-chip v-bind="props" color="primary" variant="flat">
-            <span class="username">Welcome, {{ displayName }}</span>
+            <span class="username">Welcome, </span>
+            <span data-test="username" class="username">{{ displayName }}</span>
           </v-chip>
         </template>
 
@@ -298,36 +304,16 @@ export default {
             <v-list-item v-bind="props" :title="group.title" />
           </template>
 
-          <v-tooltip
+          <v-list-item
             v-for="item in group.items"
-            :key="item.key"
-            location="right"
-            :disabled="!mini"
-          >
-            <template #activator="{ props }">
-              <v-list-item
-                v-if="item.hasOwnProperty('django')"
-                link
-                v-bind="propsToPass(item)"
-                :href="getDjangoUrl(item.django)"
-                :disabled="item.hasOwnProperty('disabled') && item.disabled"
-                :prepend-icon="item.icon"
-                :title="item.title"
-                :exact="true"
-              />
-              <v-list-item
-                v-else
-                link
-                v-bind="propsToPass(item)"
-                :to="{ name: item.link, params: item.params }"
-                :disabled="item.hasOwnProperty('disabled') && item.disabled"
-                :prepend-icon="item.icon"
-                :title="item.title"
-                :exact="true"
-              />
-            </template>
-            <span>{{ item.title }}</span>
-          </v-tooltip>
+            :key="item.link || item.django || item.title"
+            link
+            :to="item.link ? { name: item.link, params: item.params } : undefined"
+            :href="item.django ? getDjangoUrl(item.django) : undefined"
+            :disabled="item.hasOwnProperty('disabled') && item.disabled"
+            :prepend-icon="item.icon"
+            :title="item.title"
+          />
         </v-list-group>
       </v-list>
     </v-navigation-drawer>
@@ -348,7 +334,7 @@ export default {
     </v-main>
 
     <v-footer color="secondary" app>
-      <span class="text-white text-caption">2025 The President and Fellows of Harvard College.</span>
+      <span class="text-white text-caption">2026 The President and Fellows of Harvard College.</span>
     </v-footer>
   </v-app>
 </template>

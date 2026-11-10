@@ -53,7 +53,7 @@ export default {
         <p>{{ message }}</p>
         <p>
           For more information, please contact
-          <a href="mailto:informatics@rc.fas.harvard.edu">.</a>
+          <a href="mailto:fads@rc.fas.harvard.edu">.</a>
         </p>
         <p>You are being routed...</p>
       </v-col>
